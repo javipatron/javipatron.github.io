@@ -1,15 +1,19 @@
 ---
-title: "javipatron.github.io"
+title: "Javier Patrón" 
+#image: images/javi.jpg 
+about: 
+  template: trestles 
+  image: images/javi.jpg
+  image-shape: rounded 
+  image-width: 15em 
+  links: 
+    - text: Github 
+      href: https://github.com/javipatron 
+    - text: Linkedin
+      href: https://www.linkedin.com/in/javier-patr%C3%B3n-b52235191/ 
+    - text: Email 
+      href: jpatron\@ucsb.edu
 ---
 
-This is a Quarto website.
-
-To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
-
-```{r}
-1 + 1
-
-plot(1,2)
-```
-
-New thing after render
+#### Data Science Master´s Student
+#### Environmentalist
