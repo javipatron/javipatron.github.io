@@ -1,5 +1,12 @@
 [
   {
+    "objectID": "SHARK.html",
+    "href": "SHARK.html",
+    "title": "Shark_tab",
+    "section": "",
+    "text": "SHARK"
+  },
+  {
     "objectID": "index.html",
     "href": "index.html",
     "title": "javipatron.github.io",
@@ -12,5 +19,12 @@
     "title": "About",
     "section": "",
     "text": "1 + 1\n\n[1] 2"
+  },
+  {
+    "objectID": "bio.html",
+    "href": "bio.html",
+    "title": "BIO",
+    "section": "",
+    "text": "Then in 2021, I shifted my career to become the team headman and navigator of a racing sailboat to cross the Pacific. During this time, I volunteered in a coral restoration project in Fiji, where the collection of data was proven to be key for effective restoration practices. This ocean crossing adventure was a life-changing experience and fueled my enthusiasm to apply for the Masters of Environmental Data Science at the Bren School UCSB.\nI´m an energetic and proactive individual. My vision as an Environmental Data Scientist is to empower high-end technology companies by improving their monitoring practices on data collection and drawing actionable insights to foster a positive environmental impact. Ultimately, I aspire to work on natural climate solutions, carbon offset, and MPA restoration and conservation."
   }
 ]

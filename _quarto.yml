@@ -4,12 +4,16 @@ project:
   
 
 website:
-  title: "javipatron.github.io"
+  title: "Javier Patrón"
   navbar:
     left:
       - href: index.qmd
         text: Home
-      - about.qmd
+      - href: bio.qmd
+        text: Bio
+      - href: images/Patron_Javier_InitialResume_8_20_22.pdf
+        text: Resume
+      - SHARK.qmd
 
 format:
   html:
