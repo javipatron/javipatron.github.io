@@ -2,7 +2,7 @@
 editor: visual
 ---
 
-# **Resume** 
+# **Resume**
 
 [Download PDF](images/Patron_Javier_FirstResume_9_12_22.pdf)
 
@@ -19,3 +19,51 @@ Bren School of Environmental Science & Management -- University of California, S
 ##### 3.6 GPA (December 2017)
 
 Universidad Iberoamericana, Mexico City Study Abroad: UNSW Sydney, Australia Highlighted Coursework: The Marine Environment, Global Finance, Sustainable and Renewable Energy, Process Technology and Automation
+
+# SKILLS & RECOGNITIONS
+
+#### *Programming, Coding, & Data Analysis:*
+
+R, Python, SQL, Git (+ GitHub); Familiar with C++, HTML.
+
+#### *Programming Environments:*
+
+RStudio, Spyder, Visual Studio Code, Jupyter Notebooks.
+
+#### *Technical Coding Skills:*
+
+Geospatial Analysis and Remote Sensing, Data Visualization, Machine Learning.
+
+#### *GE Company Award:*
+
+Nominated as "Best Digital Worker" who embraced the digital deployment in the region as an overachiever and a role model.
+
+# PROFESSIONAL DEVELOPMENT EXPERIENCE
+
+### *Collaboration with Center of Biodiversity and Conservation* 
+
+##### BCS, Mexico (6/22 -- Present)
+
+• Bridging data science and management: An open-source integrated workflow for MPAs.
+
+• Data-driven project mechanism to extract current MPA biodiversity health data from recreational divers
+
+### *Yachting* 
+
+##### Pacific Ocean (7/21 -- 7/22)
+
+• Sailed across the Pacific Ocean as Pro-Sailor in a 52ft racing boat
+
+• Roles: Team Manager, Tactician, and Watch captain
+
+• Competed in 3 international regattas (CaboRace, SoCal300, Transpac Regatta)
+
+### *Coral Farming Voluntary*
+
+##### Corals 4 Conservation. Mamanuca Islands, Fiji (9/21 -- 11/21)
+
+• Replanting over 500 corals.
+
+• Transects data practices.
+
+• Work along with the marine biologists in the coral nursery tables maintenance and mangrove reforestation

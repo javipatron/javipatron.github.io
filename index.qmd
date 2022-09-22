@@ -1,10 +1,10 @@
 ---
 title: "Javier Patrón" 
 image: images/javi.jpg
-#image: images/javi.jpg 
+page-layout: full
 about: 
   template: jolla
-  image-width: 10em
+  image-width: 18em
   image-shape: round
   links: 
     - icon: github
