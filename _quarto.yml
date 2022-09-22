@@ -2,22 +2,32 @@ project:
   type: website
   output-dir: docs
   
-
 website:
   title: "Javier Patrón"
   navbar:
+    background: dark
+    foreground: primary
     left:
       - href: index.qmd
         text: Home
       - href: bio.qmd
         text: Bio
-      - href: images/Patron_Javier_InitialResume_8_20_22.pdf
+      - href: resume.qmd
         text: Resume
-      - SHARK.qmd
-
+      - href: SHARK.qmd
+        text: shark
+        
+  page-footer: 
+    left: "Copyright 2022, Javier Patrón" 
+    right: 
+      - icon: github
+        href: https://github.com/javipatron 
+        
 format:
   html:
-    theme: cosmo
+    theme: 
+      light: Flatly
+      dark: Solar
     css: styles.css
     toc: true
 

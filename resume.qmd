@@ -1,0 +1,21 @@
+---
+editor: visual
+---
+
+# **Resume** 
+
+[Download PDF](images/Patron_Javier_FirstResume_9_12_22.pdf)
+
+# EDUCATION
+
+### *Master of Environmental Data Science*
+
+##### *(Expected June 2023)*
+
+Bren School of Environmental Science & Management -- University of California, Santa Barbara (UCSB) *Highlighted Coursework:* Geospatial Analysis and Remote Sensing, Machine Learning in Environmental Science, Data Visualization and Communication, Modeling Environmental Systems
+
+### *Bachelor of Mechanical and Electrical Engineering*
+
+##### 3.6 GPA (December 2017)
+
+Universidad Iberoamericana, Mexico City Study Abroad: UNSW Sydney, Australia Highlighted Coursework: The Marine Environment, Global Finance, Sustainable and Renewable Energy, Process Technology and Automation

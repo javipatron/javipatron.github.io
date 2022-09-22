@@ -1,17 +1,17 @@
 ---
 title: "Javier Patrón" 
+image: images/javi.jpg
 #image: images/javi.jpg 
 about: 
-  template: trestles 
-  image: images/javi.jpg
-  image-shape: rounded 
-  image-width: 15em 
+  template: jolla
+  image-width: 10em
+  image-shape: round
   links: 
-    - text: Github 
+    - icon: github
       href: https://github.com/javipatron 
-    - text: Linkedin
+    - icon: linkedin
       href: https://www.linkedin.com/in/javier-patr%C3%B3n-b52235191/ 
-    - text: Email 
+    - icon: envelope
       href: jpatron\@ucsb.edu
 ---
 
