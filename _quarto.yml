@@ -8,15 +8,15 @@ website:
     background: dark
     foreground: primary
     left:
-      - href: index.qmd
-        text: Home
-      - href: bio.qmd
-        text: Bio
-      - href: resume.qmd
-        text: Resume
-      - href: SHARK.qmd
-        text: shark
-        
+      - text: Home 
+        href: index.qmd
+      - text: Bio
+        href: bio.qmd
+      - text: Resume
+        href: resume.qmd
+      - text: shark
+        href: SHARK.qmd
+    
   page-footer: 
     left: "Copyright 2022, Javier Patrón" 
     right: 

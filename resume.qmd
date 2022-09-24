@@ -2,7 +2,7 @@
 editor: visual
 ---
 
-# **Resume**
+## Resume
 
 [Download PDF](images/Patron_Javier_FirstResume_9_12_22.pdf)
 
@@ -40,7 +40,7 @@ Nominated as "Best Digital Worker" who embraced the digital deployment in the re
 
 # PROFESSIONAL DEVELOPMENT EXPERIENCE
 
-### *Collaboration with Center of Biodiversity and Conservation* 
+### *Collaboration with Center of Biodiversity and Conservation*
 
 ##### BCS, Mexico (6/22 -- Present)
 
@@ -48,7 +48,7 @@ Nominated as "Best Digital Worker" who embraced the digital deployment in the re
 
 • Data-driven project mechanism to extract current MPA biodiversity health data from recreational divers
 
-### *Yachting* 
+### *Yachting*
 
 ##### Pacific Ocean (7/21 -- 7/22)
 
@@ -67,3 +67,69 @@ Nominated as "Best Digital Worker" who embraced the digital deployment in the re
 • Transects data practices.
 
 • Work along with the marine biologists in the coral nursery tables maintenance and mangrove reforestation
+
+# *WORKING EXPERIENCE*
+
+### *Customer Support Lead -- Current by GE*
+
+##### *Mexico City, Mexico (6/20 -- 7/21)*
+
+• Global commissioning and tech-support team leader for GE Current´s smart controls software
+
+• Manager of the global tech-support team (18 pax). Build and create all procedures needed for the new business strategy and increase their IoT and AI solutions capability.
+
+• \$5.8 USD in revenue recognition o Tech leader for GE Current´s largest gateway programming implementation for energy efficiency and IoT, AI software in over 1250 stores across Mexico.
+
+### *Digital Project Manager -- Current Powered by GE*
+
+##### *Mexico City, Mexico (1/18 -- 6/20)*
+
+• Lead as a consultant and project manager for all Latin America Turn-Key digital projects:
+
+• Sole LatAm digital resource for Daintree software implementation. Includes: Internal and external training, solutioning/ troubleshooting, and support for all current and completed projects.
+
+• Central POC. Lead coordination among third-party contractors.
+
+• Managing and reporting project status, budget and risks to GE leadership (LatAm, USA, AUS).
+
+### *Projects Intern -- General Electric*
+
+##### *Mexico City, Mexico (5/17 -- 6/20)*
+
+• Project Management Intern / Order to Remittance team
+
+• Hand out weekly reports with the installation contractor, and field quality checks for the installation process.
+
+• GE Lean Challenge competitor leveraging savings based on storage volume and shipment times
+
+# *MASTER´S CAPSTONE DATA SCIENCE PROJECT*
+
+### *NAME OF THE PROJECT (1/23 -- Present)*
+
+##### *Role: XXX \| Client: XXX*
+
+• XXX
+
+• XXX
+
+# *ADDITIONAL*
+
+### *Languages*
+
+Fluent in English and Spanish
+
+### *Certifications & Training*
+
+PADI Rescue Diver
+
+Mexican Yacht Skipper License
+
+Emergency First Response & CPR Certifications
+
+### *Citizenship*
+
+Mexican & Spanish
+
+### *Other*
+
+Authorized to work for any US employer (no sponsorship required)

@@ -4,7 +4,7 @@ image: images/javi.jpg
 page-layout: full
 about: 
   template: jolla
-  image-width: 18em
+  image-width: 16em
   image-shape: round
   links: 
     - icon: github
@@ -15,5 +15,6 @@ about:
       href: jpatron\@ucsb.edu
 ---
 
-#### Data Science Master´s Student
-#### Environmentalist
+Data Science Master´s Student
+
+Environmentalist
