@@ -1,0 +1,20 @@
+/*-- scss:defaults --*/
+
+// Colors
+$blue: #275fa8;
+$green: #406b65;
+
+// Fonts
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Quicksand&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible&family=Quicksand&display=swap');
+// Base Document Colors
+$nav-bar: $blue;
+
+/*-- scss:rules --*/
+
+.bi-linkedin::before {
+    content: "\f472";
+    font-size: 40px;
+}
+

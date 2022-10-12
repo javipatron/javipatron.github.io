@@ -26,10 +26,11 @@ website:
 format:
   html:
     theme: 
-      light: Flatly
+      light: 
+        - webstyle.scss
       dark: Solar
     css: styles.css
     toc: true
-
+    mainfont: Atkinson Hyperlegible
 editor: visual
 

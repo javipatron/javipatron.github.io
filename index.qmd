@@ -1,13 +1,14 @@
 ---
 title: "Javier Patrón" 
-image: images/javi.jpg
+image: images/javilighthouse.JPG
 page-layout: full
 about: 
-  template: jolla
-  image-width: 16em
+  template: trestles
+  image-width: 10em
   image-shape: round
   links: 
     - icon: github
+      text: test
       href: https://github.com/javipatron 
     - icon: linkedin
       href: https://www.linkedin.com/in/javier-patr%C3%B3n-b52235191/ 
@@ -15,6 +16,6 @@ about:
       href: jpatron\@ucsb.edu
 ---
 
-Data Science Master´s Student
+**Data Science Master´s Student**
 
-Environmentalist
+**Environmentalist**
