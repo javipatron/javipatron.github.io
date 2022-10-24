@@ -1,6 +1,6 @@
 ---
 title: "Javier Patrón" 
-image: images/javi.jpg
+image: images/javilighthouse3.jpg
 page-layout: full
 about: 
   template: jolla
