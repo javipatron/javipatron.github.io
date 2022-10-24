@@ -15,6 +15,5 @@ about:
       href: jpatron\@ucsb.edu
 ---
 
-**Data Science Master´s Student**
-
-**Environmentalist**
+#### Data Science Master´s Student
+#### Environmentalist
