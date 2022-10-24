@@ -1,0 +1,8 @@
+---
+title: "Blogs"
+listing:
+  type: grid
+  contents: posts
+  sort: "date desc"
+  categories: true
+---

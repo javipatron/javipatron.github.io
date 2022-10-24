@@ -12,6 +12,8 @@ website:
         href: index.qmd
       - text: Bio
         href: bio.qmd
+      - text: Posts
+        href: posts.qmd
       - text: Resume
         href: resume.qmd
       - text: shark
