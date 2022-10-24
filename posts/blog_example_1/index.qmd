@@ -1,0 +1,33 @@
+---
+title: "Blog Post Title"
+description: "Small description of my post"
+image: shark_fiji.jpg
+author: 
+  - name: Javier Patrón
+    url: https//javipatron.github.io
+    affiliation: MEDS
+    affiliation-url: https://ucsb-meds.github.io
+date: 2022-10-24
+categories: [MEDS, R, Python, Ocean] # Add the categories for you blog
+citation: 
+  url: https://javipatron.github.io/posts/blog_example_1/
+bibliography: references.bib
+---
+
+Hi this is my class example blog post
+
+In this page there are different ways to reference and cite your paper
+
+SHARKS #1[^1]
+
+SHARKS
+
+SHARKS #3[^3]
+
+[^1]: Here is my footnote
+
+[^3]: Here is my third paragraph
+
+Here is some more text. Cite: [@ref_id]
+
+When you want to reference stuff. Then in this same pager click in "Insert v", then click in citation... then copy and paste the url
