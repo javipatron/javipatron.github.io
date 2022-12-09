@@ -5,7 +5,7 @@ author:
   name: Javier Patrón
   affiliation: MEDS
   affiliation-url: http://ucsb-meds.github.io
-date: "'r Sys.Date()'"
+date: 2022-12-09
 always_allow_html: yes
 
 format:
@@ -165,11 +165,11 @@ The graph above shows a visual difference in carbon means between the 25m2 sampl
 
 **Analysis:** *Hypothesis Testing between 77m2 vs 154m2*
 
-The Null Hypothesis - The Total Carbon per Tree (mg/ha) mean in the Sample Size of 77m2 is no different from the 154m2.
+The Null Hypothesis - The Total Carbon per Tree (Mg/ha) mean in the Sample Size of 77m2 is no different from the 154m2.
 
 $$H_0: \mu_{77m2} - \mu_{154m2} = 0$$
 
-Alternative Hypothesis- The Total Carbon per Tree (mg/ha) in the sample size of 77m2 is different from the one the 154m2.
+Alternative Hypothesis- The Total Carbon per Tree (Mg/ha) in the sample size of 77m2 is different from the one the 154m2.
 
 $$H_0: \mu_{77m2} - \mu_{154m2} \neq 0$$
 
@@ -215,7 +215,7 @@ option2_ttest
 
 **With this results we can reject the null as the p-value is telling us there it exists a statistical significant difference between the means of carbon storage between the sample plot size of 77m2 to the sample size of 154m2.**
 
-We are 95% confident that the true value of the difference in tree carbon across the two plot sizes lies between 0.0262 - 0.0403 mg per hectare.
+We are 95% confident that the true value of the difference in tree carbon across the two plot sizes lies between 0.0262 - 0.0403 Mg per hectare.
 
 This graph summarizes all the important take away.
 
@@ -297,9 +297,9 @@ This Histogram shows how much variance we have between our plots.
 ggplot(plots_2017, aes(x=sd_tree_c_ha)) +
   geom_histogram(aes(y = stat(density)), color = "gray20", fill = "darkolivegreen", alpha = 0.7) +
   geom_density(col = "gray30", alpha = 0.15, fill = "green") +
-  labs(title = "Total Carbon per Tree (mg/ha)",
+  labs(title = "Total Carbon per Tree (Mg/ha)",
        subtitle = "All Plots",
-       x = "Tree Carbon Variance (mg/ha)",
+       x = "Tree Carbon Variance (Mg/ha)",
        y = "Denisity Plots")
 
 ```
@@ -312,9 +312,9 @@ histogram_plot <- plots_2017 |>
 ggplot(aes(x=sd_tree_c_ha)) +
   geom_histogram(aes(y = stat(density), fill = plot_size_m2),color = "gray30", alpha = 0.3) +
   geom_density(aes(fill = plot_size_m2), col = "gray30", alpha = 0.8) +
-  labs(title = "Total Carbon per Tree (mg/ha)",
+  labs(title = "Total Carbon per Tree (Mg/ha)",
        subtitle = "Per Plot",
-       x = "Tree Cabron Variance (mg/ha)",
+       x = "Tree Cabron Variance (Mg/ha)",
        y = "Density Plots")
 
 ggplotly(histogram_plot)
@@ -329,7 +329,7 @@ mangrove_2017 |>
 ggplot(aes(x=total_tree_mg_c_ha)) +
   geom_histogram(aes(y = stat(density)), fill = "red", color = "gray30", alpha = 0.6) +
   geom_density(col = "gray30", alpha = 0.3, fill = "gray10") +
-  labs(title = "Total Carbon per Tree (mg/ha)",
+  labs(title = "Total Carbon per Tree (Mg/ha)",
        subtitle = "25m2")
 ```
 
@@ -341,7 +341,7 @@ mangrove_2017 |>
 ggplot(aes(x=total_tree_mg_c_ha)) +
   geom_histogram(aes(y = stat(density)), fill = "lightgreen", color = "gray30") +
   geom_density(col = "gray30", alpha = 0.5, fill = "gray10") +
-  labs(title = "Total Carbon per Tree (mg/ha)",
+  labs(title = "Total Carbon per Tree (Mg/ha)",
        subtitle = "77m2")
 ```
 
@@ -353,7 +353,7 @@ mangrove_2017 |>
 ggplot(aes(x=total_tree_mg_c_ha)) +
   geom_histogram(aes(y = stat(density)), fill = "lightblue", color = "gray30") +
   geom_density(col = "gray30", alpha = 0.5, fill = "gray10") +
-  labs(title = "Total Carbon per Tree (mg/ha)",
+  labs(title = "Total Carbon per Tree (Mg/ha)",
        subtitle = "154m2")
 
 ```
@@ -411,7 +411,7 @@ ggplot(mangrove_2017, aes(x=total_tree_mg_c_ha, color = plot_size_m2)) +
   geom_freqpoly(aes(y = stat(density))) +
   labs(title = "Frequency Polygon",
     subtitle = "Invisible Histogram to see overlaps between Sample Size",
-       x = "Total Carbon per Tree (mg/ha)",
+       x = "Total Carbon per Tree (Mg/ha)",
        y = "Density")
 ```
 
@@ -546,11 +546,11 @@ ggplot(random_table_test, aes(x= plot_size_m2, y = total_tree_mg_c_ha, col = plo
                         guide = guide_legend(
                           override.aes = list(
                             color = c("gray50", "gray10")))) +
-  labs(title = "Total Cabron per Tree (mg/ha)",
+  labs(title = "Total Cabron per Tree (Mg/ha)",
        subtitle = "Random sample size",
        x = "Plot Type",
        y = "Total Tree Carbon (mg/ha)",
-       caption = paste("Difference between the real sample means is:",round(mean_difference_a,2),"(mg/ha)" ,"\nDifference between the randomly relected samples mean is:", round((random_mean_25m - random_mean_154m),2), "(mg/ha)"))
+       caption = paste("Difference between the real sample means is:",round(mean_difference_a,2),"(Mg/ha)" ,"\nDifference between the randomly relected samples mean is:", round((random_mean_25m - random_mean_154m),2), "(Mg/ha)"))
   
   
 ```
@@ -599,10 +599,10 @@ ggplot(random_table_test, aes(x= plot_size_m2, y = total_tree_mg_c_ha, col = plo
                         guide = guide_legend(
                           override.aes = list(
                             color = c("gray50", "gray10")))) +
-  labs(title = "Total Cabron per Tree (mg/ha)",
+  labs(title = "Total Cabron per Tree (Mg/ha)",
        subtitle = "Random sample size",
        x = "Plot Type",
        y = "Total Tree Carbon (mg/ha)",
-       caption = paste("Difference between the real sample means is:",round(mean_difference_b,2),"(mg/ha)" ,"\nDifference between the randomly relected samples mean is:", round((random_mean_77m - random_mean_154m),2), "(mg/ha)"))
+       caption = paste("Difference between the real sample means is:",round(mean_difference_b,2),"(Mg/ha)" ,"\nDifference between the randomly relected samples mean is:", round((random_mean_77m - random_mean_154m),2), "(Mg/ha)"))
 
 ```
