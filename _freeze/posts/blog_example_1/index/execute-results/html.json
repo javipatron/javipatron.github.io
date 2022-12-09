@@ -1,0 +1,16 @@
+{
+  "hash": "3f15c8196fe1a6608339a3e73a5a6dfb",
+  "result": {
+    "markdown": "---\ntitle: \"Blog Post Title\"\ndescription: \"Small description of my post\"\nimage: shark_fiji.jpg\nauthor: \n  - name: Javier Patrón\n    url: https//javipatron.github.io\n    affiliation: MEDS\n    affiliation-url: https://ucsb-meds.github.io\ndate: 2022-10-24\ncategories: [MEDS, R, Python, Ocean] # Add the categories for you blog\ncitation: \n  url: https://javipatron.github.io/posts/blog_example_1/\nbibliography: references.bib\n---\n\n\nHi this my first class blog post, and this is my first graph in R.\n\nSHARK\n\n\n::: {.cell}\n::: {.cell-output-display}\n![](index_files/figure-html/unnamed-chunk-1-1.png){width=672}\n:::\n:::\n\n\n\nIn this page will also help me visualize my references, cites, changes, and edits to official posts in my webpage.\n\nHere is some more text. Cite: [@ref_id]\n\nWhen you want to reference stuff. Then in this same pager click in \"Insert v\", then click in citation... then copy and paste the url\n",
+    "supporting": [
+      "index_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

@@ -14,19 +14,20 @@ citation:
 bibliography: references.bib
 ---
 
-Hi this is my class example blog post
+Hi this my first class blog post, and this is my first graph in R.
 
-In this page there are different ways to reference and cite your paper
+SHARK
 
-SHARKS #1[^1]
+```{r echo = FALSE}
 
-SHARKS
+shark_x <- c(1,1,2,5,6,6.5,6.5,10,12,11,12,10,7,6,5,1)
+shark_y <- c(0,1,2,2,5,5,2,2,5,1,-1,0,0,-2,0,0)
 
-SHARKS #3[^3]
+plot(shark_x,shark_y, type = "o", col= "blue")
+```
 
-[^1]: Here is my footnote
 
-[^3]: Here is my third paragraph
+In this page will also help me visualize my references, cites, changes, and edits to official posts in my webpage.
 
 Here is some more text. Cite: [@ref_id]
 

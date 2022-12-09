@@ -1,0 +1,1462 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.0.37">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Javier Patrón">
+<meta name="dcterms.date" content="2022-12-09">
+<meta name="description" content="A blue cabron analysis based on the skills learned from the course of Statistics for Environmental Data Science at the Bren School of Environmental Science &amp; Management">
+
+<title>Javier Patrón - An Statistical Mangrove Analysis Post</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+<script src="../../site_libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="../../site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Javier Patrón</span>
+  </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html">Home</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../bio.html">Bio</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../posts.html">Posts</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../resume.html">Resume</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../SHARK.html">Extra</a>
+  </li>  
+</ul>
+              <div class="quarto-toggle-container">
+                  <a href="" class="quarto-color-scheme-toggle nav-link" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+              </div>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">An Statistical Mangrove Analysis Post</h1>
+                  <div>
+        <div class="description">
+          A blue cabron analysis based on the skills learned from the course of Statistics for Environmental Data Science at the Bren School of Environmental Science &amp; Management
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">MEDS</div>
+                <div class="quarto-category">Statistics</div>
+                <div class="quarto-category">R</div>
+                <div class="quarto-category">Mangroves</div>
+              </div>
+                  </div>
+  </div>
+    
+  <div class="quarto-title-meta-author">
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-heading">Affiliation</div>
+    
+      <div class="quarto-title-meta-contents">
+      Javier Patrón 
+    </div>
+      <div class="quarto-title-meta-contents">
+          <p class="affiliation">
+              <a href="http://ucsb-meds.github.io">
+              MEDS
+              </a>
+            </p>
+        </div>
+      </div>
+
+  <div class="quarto-title-meta">
+
+        
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">December 9, 2022</p>
+      </div>
+    </div>
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data">Data</a></li>
+  <li><a href="#question-1" id="toc-question-1" class="nav-link" data-scroll-target="#question-1">Question 1</a>
+  <ul class="collapse">
+  <li><a href="#results" id="toc-results" class="nav-link" data-scroll-target="#results">Results:</a></li>
+  <li><a href="#important-take-away-from-question-1" id="toc-important-take-away-from-question-1" class="nav-link" data-scroll-target="#important-take-away-from-question-1">Important take away from Question 1</a></li>
+  </ul></li>
+  <li><a href="#question-2" id="toc-question-2" class="nav-link" data-scroll-target="#question-2"><strong>Question 2:</strong></a>
+  <ul class="collapse">
+  <li><a href="#important-take-away-from-question-2" id="toc-important-take-away-from-question-2" class="nav-link" data-scroll-target="#important-take-away-from-question-2">Important take away from Question 2:</a></li>
+  </ul></li>
+  <li><a href="#question-3" id="toc-question-3" class="nav-link" data-scroll-target="#question-3">Question 3:</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion"><strong>Conclusion</strong></a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a>
+  <ul class="collapse">
+  <li><a href="#supporting-figures" id="toc-supporting-figures" class="nav-link" data-scroll-target="#supporting-figures">Supporting Figures</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+<div class="cell">
+
+</div>
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>Blue carbon is attracting massive attention from governments, investors, and companies needing carbon accounting practices. Mangrove forests can sequester almost ten times more than boreal, temperate, or tropical forests, thanks to the mangrove biological characteristics. That is one of the main reasons they received the nickname of <em>“The Superheroes of Climate Change.”</em></p>
+<p>Carbon stocks are the total amount of organic carbon stored within a system and are comprised of carbon pools, which fall into different bins: living aboveground living (live plants, including epiphytes); dead aboveground biomass (e.g., fallen branches); living belowground biomass (e.g., roots); and belowground carbon (sediment organic matter).</p>
+<p>With that in mind, it is critical to understand the main factors to calculate the total mangrove carbon stocks’ in restoration practices. Additionally, to analyze and calculate an appropriate amount of tree samples and plot sizes to estimate the amount of carbon storage in the area.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="https://www.ripleyaquariums.com/canada/the-more-you-know-mangroves/"><img src="intro-mangrove.jpeg" class="img-fluid figure-img"></a></p>
+<p></p><figcaption class="figure-caption">The more you know: Mangroves (2020)</figcaption><p></p>
+</figure>
+</div>
+<section id="is-there-existing-evidence-for-this-question-if-so-why-is-it-inconclusive" class="level4">
+<h4 class="anchored" data-anchor-id="is-there-existing-evidence-for-this-question-if-so-why-is-it-inconclusive">Is there existing evidence for this question? If so, why is it inconclusive?</h4>
+<p>Blue carbon accounting is a new strategy with few practical examples and evidence worldwide. Some methodologies align with the Verra non-profit organization VCS (Verified Carbon Standard) that helps us describe and outline the correct procedures to quantify the net greenhouse gas emission reductions and removals resulting from project activities implemented to restore tidal wetlands. For this case, the provided data uses equations and formulas designed on the VCS0032 and VCS0033 methodologies, which are aligned with the VCS.</p>
+</section>
+</section>
+<section id="data" class="level2">
+<h2 class="anchored" data-anchor-id="data">Data</h2>
+<p>The data are real field measurements from mangrove tree´s over 4 different replantation sites (2010, 2016, 2017, 2020). This data was provided directly to me by Silvestrum Climate Associates ®. This data is confidential and there is limited access to the site.</p>
+<div class="cell">
+
+</div>
+<div class="cell">
+
+</div>
+<section id="limitations-spatial-and-temporal-features." class="level4">
+<h4 class="anchored" data-anchor-id="limitations-spatial-and-temporal-features.">Limitations, spatial and temporal features.</h4>
+<p>The dataset has a measurement record for each tree´s height and canopy.With those measurements, Silvestrum has calculated the total tree carbon in (kg) and the total tree carbon per hectare in (Mg/ha). In this analysis, we will assume that the correct protocols and equations were followed for this purpose, and this analysis is dependent from those results.</p>
+<p>Regarding the dataset, the above and below ground carbon storage was assessed using a nested sub-sampling protocol along the 25m2, 77m2, and 154m2 transect following the <a href="https://www.cifor.org/publications/pdf_files/WPapers/WP86CIFOR.pdf" title="Reference #4">Kauffman and Donato</a> procedure. The equations for above and below ground biomass are defined by <a href="https://www.researchgate.net/publication/248899546_Above-_and_below-ground_biomass_and_allometry_of_four_common_northern_Australian_mangroves" title="Reference #5">Comley and McGuiness.</a></p>
+<p>The mathematically calculations made my the owner of this dataset is a limitation, as we do not have actual carbon samples to analyze. Another limitation is the possible man errors from the field sampling and the natural growth and variability from the mangroves.</p>
+<p>To get you familiarized, the table below shows the first 5 rows of the data which this post will be studying. It has a total of 10,826 rows and 11 columns.</p>
+<div class="cell">
+<div class="cell-output-display">
+
+<table class=" lightable-paper lightable-hover" style="font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>Table 1. Full Mangrove Data Set (head)</caption>
+ <thead>
+  <tr>
+   <th style="text-align:center;"> plantation_year </th>
+   <th style="text-align:center;"> plot </th>
+   <th style="text-align:center;"> height_cm </th>
+   <th style="text-align:center;"> canopy_width_1_cm </th>
+   <th style="text-align:center;"> canopy_width_2_cm </th>
+   <th style="text-align:center;"> crown_area_m2 </th>
+   <th style="text-align:center;"> cd_chatting_m </th>
+   <th style="text-align:center;"> chatting_agb_kg </th>
+   <th style="text-align:center;"> chatting_agb_mg_ha </th>
+   <th style="text-align:center;"> comley_mc_guinness_planted_bgb_kg </th>
+   <th style="text-align:center;"> comley_mc_guinness_planted_bgb_mg_ha </th>
+   <th style="text-align:center;"> total_tree_kg </th>
+   <th style="text-align:center;"> total_tree_mg_ha </th>
+   <th style="text-align:center;"> chatting_agc_kg_c </th>
+   <th style="text-align:center;"> chatting_agc_mg_c_ha </th>
+   <th style="text-align:center;"> comley_mc_guinness_planted_bgc_kg_c </th>
+   <th style="text-align:center;"> comley_mc_guinness_planted_bgc_mg_c_ha </th>
+   <th style="text-align:center;"> total_tree_kg_c </th>
+   <th style="text-align:center;"> total_tree_mg_c_ha </th>
+   <th style="text-align:center;"> plot_size_m2 </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:center;"> 2017 </td>
+   <td style="text-align:center;"> 8 </td>
+   <td style="text-align:center;"> 112 </td>
+   <td style="text-align:center;"> 59 </td>
+   <td style="text-align:center;"> 57 </td>
+   <td style="text-align:center;"> 0.264 </td>
+   <td style="text-align:center;"> 0.58 </td>
+   <td style="text-align:center;"> 0.494 </td>
+   <td style="text-align:center;"> 0.032 </td>
+   <td style="text-align:center;"> 0.456 </td>
+   <td style="text-align:center;"> 0.030 </td>
+   <td style="text-align:center;"> 0.950 </td>
+   <td style="text-align:center;"> 0.062 </td>
+   <td style="text-align:center;"> 0.237 </td>
+   <td style="text-align:center;"> 0.015 </td>
+   <td style="text-align:center;"> 0.178 </td>
+   <td style="text-align:center;"> 0.012 </td>
+   <td style="text-align:center;"> 0.415 </td>
+   <td style="text-align:center;"> 0.027 </td>
+   <td style="text-align:center;"> 153.938 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 2017 </td>
+   <td style="text-align:center;"> 2_new </td>
+   <td style="text-align:center;"> 280 </td>
+   <td style="text-align:center;"> 90 </td>
+   <td style="text-align:center;"> 101 </td>
+   <td style="text-align:center;"> 0.716 </td>
+   <td style="text-align:center;"> 0.96 </td>
+   <td style="text-align:center;"> 1.436 </td>
+   <td style="text-align:center;"> 0.571 </td>
+   <td style="text-align:center;"> 1.326 </td>
+   <td style="text-align:center;"> 0.527 </td>
+   <td style="text-align:center;"> 2.762 </td>
+   <td style="text-align:center;"> 1.099 </td>
+   <td style="text-align:center;"> 0.689 </td>
+   <td style="text-align:center;"> 0.274 </td>
+   <td style="text-align:center;"> 0.517 </td>
+   <td style="text-align:center;"> 0.206 </td>
+   <td style="text-align:center;"> 1.206 </td>
+   <td style="text-align:center;"> 0.480 </td>
+   <td style="text-align:center;"> 25.133 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 2017 </td>
+   <td style="text-align:center;"> 2_new </td>
+   <td style="text-align:center;"> 275 </td>
+   <td style="text-align:center;"> 114 </td>
+   <td style="text-align:center;"> 119 </td>
+   <td style="text-align:center;"> 1.066 </td>
+   <td style="text-align:center;"> 1.17 </td>
+   <td style="text-align:center;"> 2.198 </td>
+   <td style="text-align:center;"> 0.874 </td>
+   <td style="text-align:center;"> 2.028 </td>
+   <td style="text-align:center;"> 0.807 </td>
+   <td style="text-align:center;"> 4.226 </td>
+   <td style="text-align:center;"> 1.681 </td>
+   <td style="text-align:center;"> 1.055 </td>
+   <td style="text-align:center;"> 0.420 </td>
+   <td style="text-align:center;"> 0.791 </td>
+   <td style="text-align:center;"> 0.315 </td>
+   <td style="text-align:center;"> 1.846 </td>
+   <td style="text-align:center;"> 0.734 </td>
+   <td style="text-align:center;"> 25.133 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 2017 </td>
+   <td style="text-align:center;"> 2_new </td>
+   <td style="text-align:center;"> 274 </td>
+   <td style="text-align:center;"> 95 </td>
+   <td style="text-align:center;"> 102 </td>
+   <td style="text-align:center;"> 0.762 </td>
+   <td style="text-align:center;"> 0.99 </td>
+   <td style="text-align:center;"> 1.534 </td>
+   <td style="text-align:center;"> 0.611 </td>
+   <td style="text-align:center;"> 1.416 </td>
+   <td style="text-align:center;"> 0.564 </td>
+   <td style="text-align:center;"> 2.951 </td>
+   <td style="text-align:center;"> 1.174 </td>
+   <td style="text-align:center;"> 0.737 </td>
+   <td style="text-align:center;"> 0.293 </td>
+   <td style="text-align:center;"> 0.552 </td>
+   <td style="text-align:center;"> 0.220 </td>
+   <td style="text-align:center;"> 1.289 </td>
+   <td style="text-align:center;"> 0.513 </td>
+   <td style="text-align:center;"> 25.133 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 2017 </td>
+   <td style="text-align:center;"> 2_new </td>
+   <td style="text-align:center;"> 264 </td>
+   <td style="text-align:center;"> 133 </td>
+   <td style="text-align:center;"> 104 </td>
+   <td style="text-align:center;"> 1.103 </td>
+   <td style="text-align:center;"> 1.19 </td>
+   <td style="text-align:center;"> 2.279 </td>
+   <td style="text-align:center;"> 0.907 </td>
+   <td style="text-align:center;"> 2.104 </td>
+   <td style="text-align:center;"> 0.837 </td>
+   <td style="text-align:center;"> 4.383 </td>
+   <td style="text-align:center;"> 1.744 </td>
+   <td style="text-align:center;"> 1.094 </td>
+   <td style="text-align:center;"> 0.435 </td>
+   <td style="text-align:center;"> 0.820 </td>
+   <td style="text-align:center;"> 0.326 </td>
+   <td style="text-align:center;"> 1.914 </td>
+   <td style="text-align:center;"> 0.762 </td>
+   <td style="text-align:center;"> 25.133 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 2017 </td>
+   <td style="text-align:center;"> 2_new </td>
+   <td style="text-align:center;"> 264 </td>
+   <td style="text-align:center;"> 133 </td>
+   <td style="text-align:center;"> 104 </td>
+   <td style="text-align:center;"> 1.103 </td>
+   <td style="text-align:center;"> 1.19 </td>
+   <td style="text-align:center;"> 2.279 </td>
+   <td style="text-align:center;"> 0.907 </td>
+   <td style="text-align:center;"> 2.104 </td>
+   <td style="text-align:center;"> 0.837 </td>
+   <td style="text-align:center;"> 4.383 </td>
+   <td style="text-align:center;"> 1.744 </td>
+   <td style="text-align:center;"> 1.094 </td>
+   <td style="text-align:center;"> 0.435 </td>
+   <td style="text-align:center;"> 0.820 </td>
+   <td style="text-align:center;"> 0.326 </td>
+   <td style="text-align:center;"> 1.914 </td>
+   <td style="text-align:center;"> 0.762 </td>
+   <td style="text-align:center;"> 25.133 </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+
+<table class=" lightable-paper lightable-hover" style="font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>Table 2. Total mangrove Dataset summary</caption>
+ <thead>
+  <tr>
+   <th style="text-align:center;"> plantation_year </th>
+   <th style="text-align:center;"> Plot Count </th>
+   <th style="text-align:center;"> Sample Count </th>
+   <th style="text-align:center;"> Total Carbon (mg/ha) </th>
+   <th style="text-align:center;"> Total Carbon Variance (mg/ha) </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:center;"> 2010 </td>
+   <td style="text-align:center;"> 7 </td>
+   <td style="text-align:center;"> 746 </td>
+   <td style="text-align:center;"> 45.725 </td>
+   <td style="text-align:center;"> 0.1072349 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;font-weight: bold;color: gray10 !important;background-color: lightblue !important;"> 2017 </td>
+   <td style="text-align:center;font-weight: bold;color: gray10 !important;background-color: lightblue !important;"> 27 </td>
+   <td style="text-align:center;font-weight: bold;color: gray10 !important;background-color: lightblue !important;"> 4126 </td>
+   <td style="text-align:center;font-weight: bold;color: gray10 !important;background-color: lightblue !important;"> 242.993 </td>
+   <td style="text-align:center;font-weight: bold;color: gray10 !important;background-color: lightblue !important;"> 0.1302739 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 2019 </td>
+   <td style="text-align:center;"> 8 </td>
+   <td style="text-align:center;"> 998 </td>
+   <td style="text-align:center;"> 22.994 </td>
+   <td style="text-align:center;"> 0.0185163 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 2020 </td>
+   <td style="text-align:center;"> 46 </td>
+   <td style="text-align:center;"> 4956 </td>
+   <td style="text-align:center;"> 87.824 </td>
+   <td style="text-align:center;"> 0.0159968 </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+</div>
+<p>As we can see in the table above, the 2017 plantation year has an exciting number of samples, different sample plot sizes, and high variation of total carbon in mg per hectare. We will focus on this year to answer our questions.</p>
+<p>The table #3 contains only information from the 2017 plantation year. We will use this filter to analyse the different questions, and interpret our results.</p>
+<div class="cell">
+<details>
+<summary>Show code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>mangrove_2017 <span class="ot">&lt;-</span> mangrove_df <span class="sc">|&gt;</span> </span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(plantation_year <span class="sc">==</span> <span class="dv">2017</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(height_cm,plot, plot_size_m2, cd_chatting_m,total_tree_kg_c,total_tree_mg_c_ha)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>mangrove_2017 <span class="ot">&lt;-</span> mangrove_2017[<span class="sc">!</span>(mangrove_2017<span class="sc">$</span>total_tree_mg_c_ha<span class="sc">==</span> <span class="fl">1.224</span>),]</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co">#Statistical Table with the selected variables for question #1</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>mangrove_plots_2017 <span class="ot">&lt;-</span> mangrove_2017 <span class="sc">|&gt;</span> </span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(plot_size_m2) <span class="sc">|&gt;</span> </span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">tot_samples =</span> <span class="fu">n</span>(),</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>            <span class="at">tot_plot_count =</span> <span class="fu">length</span>(<span class="fu">unique</span>(plot)),</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>            <span class="at">mean_tree_c_ha =</span> <span class="fu">mean</span>(total_tree_mg_c_ha),</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd_tree_c_ha =</span> <span class="fu">sd</span>(total_tree_mg_c_ha)) <span class="sc">|&gt;</span> </span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">plot_size_m2 =</span> <span class="fu">c</span>(<span class="st">"25m2"</span>, <span class="st">"77m2"</span>, <span class="st">"154m2"</span>))</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>mangrove_plots_2017 <span class="sc">%&gt;%</span> </span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kbl</span>(<span class="at">align=</span><span class="fu">rep</span>(<span class="st">'c'</span>, <span class="dv">5</span>),</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>      <span class="at">caption =</span><span class="st">"Table 3. Plot summary of the 2017 plantation year"</span>,</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>      <span class="at">position =</span> <span class="st">"left"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_paper</span>(<span class="st">"hover"</span>, <span class="at">full_width =</span> F)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+
+<table class=" lightable-paper lightable-hover" style="font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>Table 3. Plot summary of the 2017 plantation year</caption>
+ <thead>
+  <tr>
+   <th style="text-align:center;"> plot_size_m2 </th>
+   <th style="text-align:center;"> tot_samples </th>
+   <th style="text-align:center;"> tot_plot_count </th>
+   <th style="text-align:center;"> mean_tree_c_ha </th>
+   <th style="text-align:center;"> sd_tree_c_ha </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:center;"> 25m2 </td>
+   <td style="text-align:center;"> 323 </td>
+   <td style="text-align:center;"> 4 </td>
+   <td style="text-align:center;"> 0.3708173 </td>
+   <td style="text-align:center;"> 0.3035103 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 77m2 </td>
+   <td style="text-align:center;"> 336 </td>
+   <td style="text-align:center;"> 5 </td>
+   <td style="text-align:center;"> 0.0624196 </td>
+   <td style="text-align:center;"> 0.0651300 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 154m2 </td>
+   <td style="text-align:center;"> 3466 </td>
+   <td style="text-align:center;"> 18 </td>
+   <td style="text-align:center;"> 0.0291466 </td>
+   <td style="text-align:center;"> 0.0297558 </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+<details>
+<summary>Show code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Statistical table of each unique plot to analyse variability in the question #2</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>plots_2017 <span class="ot">&lt;-</span> mangrove_2017 <span class="sc">|&gt;</span> </span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(plot, plot_size_m2) <span class="sc">|&gt;</span> </span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">sample_count =</span> <span class="fu">n</span>(),</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">mean_tree_c =</span> <span class="fu">mean</span>(total_tree_kg_c),</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">mean_carbon_mg_ha =</span> <span class="fu">mean</span>(total_tree_mg_c_ha),</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd_tree_c =</span> <span class="fu">sd</span>(total_tree_kg_c),</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd_tree_c_ha =</span> <span class="fu">sd</span>(total_tree_mg_c_ha))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Now let us take a look at the effect of sample plot size and the total tree carbon (Mg/ha).</p>
+<div class="cell">
+<details>
+<summary>Show code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Boxplot</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>mangrove_2017 <span class="sc">|&gt;</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>plot_size_m2, <span class="at">y =</span> total_tree_mg_c_ha,<span class="at">color =</span> plot_size_m2)) <span class="sc">+</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Tree Carbon vs Plot Type"</span>,</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">subititle =</span> <span class="st">"Plantation Year - 2017"</span>,</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Plot Size (m2)"</span>,</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Total Tree Carbon (Mg/ha)"</span>) <span class="sc">+</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_brewer</span>(<span class="at">palette =</span> <span class="st">"Dark2"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="final_paper_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+</section>
+<section id="question-1" class="level2">
+<h2 class="anchored" data-anchor-id="question-1">Question 1</h2>
+<p>The graph above shows a visual difference in carbon means between the 25m2 sample plot and the other two sample plots. So let us analyze the relationship between the 77m2 and the 154m2, with a hypothesis test and see if the means in the total carbon per tree (Mg/ha) are different.&nbsp;<em>Why this two?</em> Because visually they look more similar and the seems to be the outlier 25m2.</p>
+<p><strong>Analysis:</strong> <em>Hypothesis Testing between 77m2 vs 154m2</em></p>
+<p>The Null Hypothesis -&nbsp;The Total Carbon per Tree (mg/ha) mean in the Sample Size of 77m2 is no different from the 154m2.</p>
+<p><span class="math display">\[H_0: \mu_{77m2} - \mu_{154m2} = 0\]</span></p>
+<p>Alternative Hypothesis-&nbsp;The Total Carbon per Tree (mg/ha) in the sample size of 77m2 is different from the one the 154m2.</p>
+<p><span class="math display">\[H_0: \mu_{77m2} - \mu_{154m2} \neq 0\]</span></p>
+<p>Calculate the Point Estimate and the Standard Error</p>
+<p><span class="math display">\[SE = \sqrt{\frac{s_1^2}{n_1} + \frac{s^2_2}{n_2}}\]</span></p>
+<div class="cell">
+<details>
+<summary>Show code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Calculate Point Estimate</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>point_est_2 <span class="ot">=</span> (mangrove_plots_2017<span class="sc">$</span>mean_tree_c_ha[<span class="dv">2</span>] <span class="sc">-</span> mangrove_plots_2017<span class="sc">$</span>mean_tree_c_ha[<span class="dv">3</span>])</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co">#Define the Standard Error</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>n_77m <span class="ot">=</span> mangrove_plots_2017<span class="sc">$</span>tot_samples[<span class="dv">2</span>]</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>s_77m <span class="ot">=</span>  mangrove_plots_2017<span class="sc">$</span>sd_tree_c_ha[<span class="dv">2</span>]</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>n_154m <span class="ot">=</span> mangrove_plots_2017<span class="sc">$</span>tot_samples[<span class="dv">3</span>]</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>s_154m <span class="ot">=</span>  mangrove_plots_2017<span class="sc">$</span>sd_tree_c_ha[<span class="dv">3</span>]</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">"Point Estimate:"</span>, <span class="fu">round</span>(point_est_2,<span class="dv">5</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Point Estimate: 0.03327"</code></pre>
+</div>
+<details>
+<summary>Show code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>SE_2 <span class="ot">=</span> <span class="fu">as.numeric</span>(<span class="fu">sqrt</span>(s_77m<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span>n_77m <span class="sc">+</span> s_154m<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span>n_154m))</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">"Standard Error:"</span>, <span class="fu">round</span>(SE_2,<span class="dv">5</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Standard Error: 0.00359"</code></pre>
+</div>
+</div>
+<p>Calculate the Z-Score <span class="math display">\[z_{score}=\frac{\text { point estimate }-\text { null value }}{S E}\]</span></p>
+<div class="cell">
+<details>
+<summary>Show code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>z_score_2 <span class="ot">&lt;-</span> (point_est_2 <span class="sc">-</span> <span class="dv">0</span>) <span class="sc">/</span> SE_2</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>z_score_2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 9.271106</code></pre>
+</div>
+</div>
+<p>The Z-Score will tell us that the the observed difference between a sample plot of 77m2 and 154m2 is 9.3 standard deviations above our null hypothesis of “zero difference” of our dependent variable in Tree Carbon (Mg/ha).</p>
+<p>Calculate the p-value and run a t - test</p>
+<div class="cell">
+<details>
+<summary>Show code</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>option2_ttest <span class="ot">&lt;-</span> <span class="fu">t.test</span>(mangrove_2017<span class="sc">$</span>total_tree_mg_c_ha[mangrove_2017<span class="sc">$</span>plot_size_m2 <span class="sc">==</span> <span class="fl">76.969</span>], mangrove_2017<span class="sc">$</span>total_tree_mg_c_ha[mangrove_2017<span class="sc">$</span>plot_size_m2 <span class="sc">==</span> <span class="fl">153.938</span>])</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>option2_ttest</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Welch Two Sample t-test
+
+data:  mangrove_2017$total_tree_mg_c_ha[mangrove_2017$plot_size_m2 == 76.969] and mangrove_2017$total_tree_mg_c_ha[mangrove_2017$plot_size_m2 == 153.938]
+t = 9.2711, df = 348.68, p-value &lt; 2.2e-16
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ 0.02621446 0.04033169
+sample estimates:
+ mean of x  mean of y 
+0.06241964 0.02914657 </code></pre>
+</div>
+</div>
+<section id="results" class="level3">
+<h3 class="anchored" data-anchor-id="results">Results:</h3>
+<p><strong>With this results we can reject the null as the p-value is very small, meaning there is a significant difference between the means on carbon storage in each tree per hectare between the sample plot size of 77m2 to the sample size of 154m2.</strong></p>
+<p>We are 95% confident that the true value of the difference in tree carbon across the two plot sizes lies between 0.0262 - 0.0403 mg per hectare.</p>
+<p>This graph summarizes all the important take away.</p>
+<div class="cell">
+<details>
+<summary>Show code</summary>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>crit_val_2 <span class="ot">=</span> <span class="fu">qnorm</span>(<span class="fl">0.025</span>, <span class="at">lower.tail =</span> F)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>ci_lower_2 <span class="ot">=</span> <span class="fu">round</span>(point_est_2 <span class="sc">-</span> crit_val_2<span class="sc">*</span>SE_2, <span class="dv">3</span>)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>ci_upper_2 <span class="ot">=</span> <span class="fu">round</span>(point_est_2 <span class="sc">+</span> crit_val_2<span class="sc">*</span>SE_2, <span class="dv">2</span>)</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>mangrove_2017 <span class="sc">|&gt;</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(plot_size_m2 <span class="sc">%in%</span> <span class="fu">c</span>(<span class="fl">76.969</span>, <span class="fl">153.938</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>plot_size_m2, <span class="at">y =</span> total_tree_mg_c_ha,<span class="at">color =</span> plot_size_m2)) <span class="sc">+</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun=</span> <span class="st">"mean"</span>, <span class="fu">aes</span>(<span class="at">shape=</span> <span class="st">"mean"</span>),<span class="at">color =</span> <span class="st">"darkblue"</span>, <span class="at">geom =</span> <span class="st">"pointrange"</span>,<span class="at">size =</span> <span class="fl">1.5</span>) <span class="sc">+</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Tree mg C vs Plot Type"</span>,</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Plot Size"</span>,</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Total Tree Carbon (Mg/ha)"</span>) <span class="sc">+</span></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_brewer</span>(<span class="at">palette =</span> <span class="st">"Dark2"</span>) <span class="sc">+</span></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="fu">aes</span>(<span class="at">yintercept =</span> <span class="fl">0.026</span>, <span class="at">linetype =</span> <span class="st">"Lower CI"</span>), <span class="at">color =</span> <span class="st">"gray50"</span>, <span class="at">size =</span> .<span class="dv">5</span>) <span class="sc">+</span></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="fu">aes</span>(<span class="at">yintercept =</span> <span class="fl">0.04</span>, <span class="at">linetype =</span> <span class="st">"Upper CI"</span>), <span class="at">color =</span> <span class="st">"gray10"</span>, <span class="at">size =</span> .<span class="dv">5</span>) <span class="sc">+</span></span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_shape_manual</span>(<span class="st">""</span>, <span class="at">values=</span> <span class="fu">c</span>(<span class="st">"mean"</span> <span class="ot">=</span> <span class="st">"+"</span>)) <span class="sc">+</span></span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_linetype_manual</span>(<span class="at">name =</span> <span class="st">"Confidence Intervals"</span>, <span class="at">values =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>), </span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>                        <span class="at">guide =</span> <span class="fu">guide_legend</span>(<span class="at">override.aes =</span> <span class="fu">list</span>(<span class="at">color =</span> <span class="fu">c</span>(<span class="st">"gray50"</span>, <span class="st">"gray10"</span>))))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="final_paper_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="important-take-away-from-question-1" class="level3">
+<h3 class="anchored" data-anchor-id="important-take-away-from-question-1">Important take away from Question 1</h3>
+<p>As we can see in the graph, both means are close to each other, but they are statistically significantly different.&nbsp;<strong>With this data analysis and results, we can help the actual client better understand their plot sampling sizes, concluding that smaller plot sizes are getting a larger carbon estimate.</strong></p>
+</section>
+</section>
+<section id="question-2" class="level2">
+<h2 class="anchored" data-anchor-id="question-2"><strong>Question 2:</strong></h2>
+<p>Let analyze why the smaller plot is getting a larger estimate of total carbon per hectare.</p>
+<p>For this purpose, we will create a new table and graph to easily visualize what the density per plot type (Number of trees per m2) is</p>
+<div class="cell">
+<details>
+<summary>Show code</summary>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Changing the column to numeric</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>mangrove_df<span class="sc">$</span>plot_size_m2_num <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(mangrove_df<span class="sc">$</span>plot_size_m2)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>density_df <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"/Users/javipatron/Documents/MEDS/Courses/eds222/homework/eds222-finalproject/data/clean_monitoring_data_javier.csv"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clean_names</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(plantation_year <span class="sc">==</span> <span class="dv">2017</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(height_cm,plot, plot_size_m2, cd_chatting_m,total_tree_kg_c,total_tree_mg_c_ha) <span class="sc">|&gt;</span> </span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(plot, plot_size_m2) <span class="sc">|&gt;</span> </span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">sample_count =</span> <span class="fu">n</span>(),</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>            <span class="at">mean_hight =</span> <span class="fu">mean</span>(height_cm),</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>            <span class="at">mean_tree_c =</span> <span class="fu">mean</span>(total_tree_kg_c),</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>            <span class="at">mean_carbon_mg_ha =</span> <span class="fu">mean</span>(total_tree_mg_c_ha),</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd_tree_c =</span> <span class="fu">sd</span>(total_tree_kg_c),</span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd_tree_c_ha =</span> <span class="fu">sd</span>(total_tree_mg_c_ha)) <span class="sc">|&gt;</span> </span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">density =</span> sample_count<span class="sc">/</span>plot_size_m2)</span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(density_df) <span class="sc">%&gt;%</span> </span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kbl</span>(<span class="at">align=</span><span class="fu">rep</span>(<span class="st">'c'</span>, <span class="dv">5</span>),</span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>      <span class="at">caption =</span><span class="st">"Table 4. Density Table per Plot"</span>,</span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>      <span class="at">position =</span> <span class="st">"left"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_paper</span>(<span class="st">"hover"</span>, <span class="at">full_width =</span> F) <span class="sc">%&gt;%</span></span>
+<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>(<span class="at">position =</span> <span class="st">"left"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+
+<table class=" lightable-paper lightable-hover table" style="font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto; ">
+<caption>Table 4. Density Table per Plot</caption>
+ <thead>
+  <tr>
+   <th style="text-align:center;"> plot </th>
+   <th style="text-align:center;"> plot_size_m2 </th>
+   <th style="text-align:center;"> sample_count </th>
+   <th style="text-align:center;"> mean_hight </th>
+   <th style="text-align:center;"> mean_tree_c </th>
+   <th style="text-align:center;"> mean_carbon_mg_ha </th>
+   <th style="text-align:center;"> sd_tree_c </th>
+   <th style="text-align:center;"> sd_tree_c_ha </th>
+   <th style="text-align:center;"> density </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:center;"> 1_new </td>
+   <td style="text-align:center;"> 25.133 </td>
+   <td style="text-align:center;"> 95 </td>
+   <td style="text-align:center;"> 154.35789 </td>
+   <td style="text-align:center;"> 0.8619895 </td>
+   <td style="text-align:center;"> 0.3429368 </td>
+   <td style="text-align:center;"> 0.9612535 </td>
+   <td style="text-align:center;"> 0.3824683 </td>
+   <td style="text-align:center;"> 3.779891 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 12 </td>
+   <td style="text-align:center;"> 153.938 </td>
+   <td style="text-align:center;"> 298 </td>
+   <td style="text-align:center;"> 96.80872 </td>
+   <td style="text-align:center;"> 0.3211477 </td>
+   <td style="text-align:center;"> 0.0208591 </td>
+   <td style="text-align:center;"> 0.2032983 </td>
+   <td style="text-align:center;"> 0.0132004 </td>
+   <td style="text-align:center;"> 1.935844 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 13 </td>
+   <td style="text-align:center;"> 153.938 </td>
+   <td style="text-align:center;"> 183 </td>
+   <td style="text-align:center;"> 84.13115 </td>
+   <td style="text-align:center;"> 0.3955847 </td>
+   <td style="text-align:center;"> 0.0257268 </td>
+   <td style="text-align:center;"> 0.2680318 </td>
+   <td style="text-align:center;"> 0.0174041 </td>
+   <td style="text-align:center;"> 1.188790 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 14 </td>
+   <td style="text-align:center;"> 153.938 </td>
+   <td style="text-align:center;"> 160 </td>
+   <td style="text-align:center;"> 108.31875 </td>
+   <td style="text-align:center;"> 0.5805625 </td>
+   <td style="text-align:center;"> 0.0377312 </td>
+   <td style="text-align:center;"> 0.3058017 </td>
+   <td style="text-align:center;"> 0.0198459 </td>
+   <td style="text-align:center;"> 1.039379 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 16 </td>
+   <td style="text-align:center;"> 153.938 </td>
+   <td style="text-align:center;"> 288 </td>
+   <td style="text-align:center;"> 107.60069 </td>
+   <td style="text-align:center;"> 0.3394236 </td>
+   <td style="text-align:center;"> 0.0220590 </td>
+   <td style="text-align:center;"> 0.3061588 </td>
+   <td style="text-align:center;"> 0.0198987 </td>
+   <td style="text-align:center;"> 1.870883 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 17 </td>
+   <td style="text-align:center;"> 153.938 </td>
+   <td style="text-align:center;"> 223 </td>
+   <td style="text-align:center;"> 105.67265 </td>
+   <td style="text-align:center;"> 0.3120404 </td>
+   <td style="text-align:center;"> 0.0202825 </td>
+   <td style="text-align:center;"> 0.2867950 </td>
+   <td style="text-align:center;"> 0.0186237 </td>
+   <td style="text-align:center;"> 1.448635 </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+<details>
+<summary>Show code</summary>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(density_df, <span class="fu">aes</span>(<span class="at">x=</span> <span class="fu">as.factor</span>(plot_size_m2), <span class="at">y=</span> density, <span class="at">fill =</span> <span class="fu">as.factor</span>(plot_size_m2))) <span class="sc">+</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">alpha =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Density of trees per plot size"</span>,</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">x=</span> <span class="st">"Plot Size (m2)"</span>,</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Density (Tree/m2)"</span>,</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">col =</span> <span class="st">"Plot Size (m2)"</span>) <span class="sc">+</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_discrete</span>(<span class="at">name =</span> <span class="st">"Plot Type"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="final_paper_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>As we can see in this graph, the plot sizes significantly differ in density (Number of trees per m2). Plots of 25 m2 have a density of 3.2 trees per m2, and plots of 77 m2 have a density of 0.873 trees per m2. To avoid possible bias, this is a point to highlight for future projects.</p>
+<p>Now, to visually show the effect of plot sizes on the total carbon per tree, let us take a deeper look at these two histograms.</p>
+<p>This Histogram shows how much variance we have between our plots.</p>
+<div class="cell">
+<details>
+<summary>Show code</summary>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(plots_2017, <span class="fu">aes</span>(<span class="at">x=</span>sd_tree_c_ha)) <span class="sc">+</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y =</span> <span class="fu">stat</span>(density)), <span class="at">color =</span> <span class="st">"gray20"</span>, <span class="at">fill =</span> <span class="st">"darkolivegreen"</span>, <span class="at">alpha =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">col =</span> <span class="st">"gray30"</span>, <span class="at">alpha =</span> <span class="fl">0.15</span>, <span class="at">fill =</span> <span class="st">"green"</span>) <span class="sc">+</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Total Carbon per Tree (mg/ha)"</span>,</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"All Plots"</span>,</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Tree Carbon Variance (mg/ha)"</span>,</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Denisity Plots"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="final_paper_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>We have a skew right histogram with a long tail. Now let us analyze this same plot, but separating per plot type, to see who is responsible for those outliers.</p>
+<div class="cell">
+<details>
+<summary>Show code</summary>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>plots_2017 <span class="sc">|&gt;</span> </span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(plot_size_m2 <span class="sc">%in%</span> <span class="fu">c</span>(<span class="fl">25.133</span>, <span class="fl">76.969</span>, <span class="fl">153.938</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>sd_tree_c_ha)) <span class="sc">+</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y =</span> <span class="fu">stat</span>(density), <span class="at">fill =</span> plot_size_m2),<span class="at">color =</span> <span class="st">"gray30"</span>, <span class="at">alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="fu">aes</span>(<span class="at">fill =</span> plot_size_m2), <span class="at">col =</span> <span class="st">"gray30"</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Total Carbon per Tree (mg/ha)"</span>,</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"Per Plot"</span>,</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Tree Cabron Variance (mg/ha)"</span>,</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Density Plots"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="final_paper_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<details>
+<summary>Show code</summary>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Total Tree Carbon (mg/ha)</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Just the 25m2</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>mangrove_2017 <span class="sc">|&gt;</span> </span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(plot_size_m2 <span class="sc">==</span> <span class="fl">25.133</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>total_tree_mg_c_ha)) <span class="sc">+</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y =</span> <span class="fu">stat</span>(density)), <span class="at">fill =</span> <span class="st">"red"</span>, <span class="at">color =</span> <span class="st">"gray30"</span>, <span class="at">alpha =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">col =</span> <span class="st">"gray30"</span>, <span class="at">alpha =</span> <span class="fl">0.3</span>, <span class="at">fill =</span> <span class="st">"gray10"</span>) <span class="sc">+</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Total Carbon per Tree (mg/ha)"</span>,</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"25m2"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="final_paper_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<details>
+<summary>Show code</summary>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Total Tree Carbon (mg/ha)</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Just the 77m2</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>mangrove_2017 <span class="sc">|&gt;</span> </span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(plot_size_m2 <span class="sc">==</span> <span class="fl">76.969</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>total_tree_mg_c_ha)) <span class="sc">+</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y =</span> <span class="fu">stat</span>(density)), <span class="at">fill =</span> <span class="st">"lightgreen"</span>, <span class="at">color =</span> <span class="st">"gray30"</span>) <span class="sc">+</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">col =</span> <span class="st">"gray30"</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>, <span class="at">fill =</span> <span class="st">"gray10"</span>) <span class="sc">+</span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Total Carbon per Tree (mg/ha)"</span>,</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"77m2"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="final_paper_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<details>
+<summary>Show code</summary>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Total Tree Carbon (mg/ha)</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Just the 154m2</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>mangrove_2017 <span class="sc">|&gt;</span> </span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(plot_size_m2 <span class="sc">==</span> <span class="fl">153.938</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>total_tree_mg_c_ha)) <span class="sc">+</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y =</span> <span class="fu">stat</span>(density)), <span class="at">fill =</span> <span class="st">"lightblue"</span>, <span class="at">color =</span> <span class="st">"gray30"</span>) <span class="sc">+</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">col =</span> <span class="st">"gray30"</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>, <span class="at">fill =</span> <span class="st">"gray10"</span>) <span class="sc">+</span></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Total Carbon per Tree (mg/ha)"</span>,</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"154m2"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="final_paper_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<section id="important-take-away-from-question-2" class="level3">
+<h3 class="anchored" data-anchor-id="important-take-away-from-question-2">Important take away from Question 2:</h3>
+<p>The 25m2 plots have the highest carbon per hectare, a higher density of trees per m2, and a higher variance in their calculations. Overall, the plot of 25m2 has a more considerable amount of carbon stock per hectare, however, with high variability, which is not very confident for the methodologies and the Verified Carbon Standard protocols.</p>
+<p>An important take away to ask and further analyse with Silvestrum, is why the 25m2 samples are having the highest trees records and the highest tree density in comparison to the 77m2 and 154m2.</p>
+</section>
+</section>
+<section id="question-3" class="level2">
+<h2 class="anchored" data-anchor-id="question-3">Question 3:</h2>
+<p>As we can see a significant effect of sample plot size in the calculated Total Carbon per Tree, it would be helpful to put our shoes in the field, and estimate an appropriate sample size to determine the amount of carbon storage in this same area.</p>
+<p>First, does a larger number of samples decrease the variance in our calculations?</p>
+<div class="cell">
+<details>
+<summary>Show code</summary>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(plots_2017, <span class="fu">aes</span>(<span class="at">x=</span> sample_count, <span class="at">y =</span> sd_tree_c_ha)) <span class="sc">+</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">color =</span> plot_size_m2)) <span class="sc">+</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> lm,</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">color =</span> <span class="st">"cyan4"</span>,</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>              <span class="at">se =</span> F) <span class="sc">+</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Tree Carbon variance per Sample plot"</span>,</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Number of samples per Plot"</span>,</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Variance of Carbon in each plot"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="final_paper_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>This graph shows that a larger number of samples decrease the variance in our calculations. But is there a way we can define our “sweet spot” of sample sizes? In the case of the 154m2 the 3,466 did lower the variance, but it sounds like a lot of work!.</p>
+<p>Secondly, to correctly create a statistical approach, define an “ideal” sample count, and help guide sample sizes in future projects. We will use this data, and the pwr() package to estimate the number of samples needed to obtain a high power of confidentiality. In other words, depending on the means overlaps for each plot size, we will need more or less samples to get the 95% confidence that we are looking for.</p>
+<p>First, we need to understand and visualize the overlaps that we currently have between our sample plots.</p>
+<div class="cell">
+<details>
+<summary>Show code</summary>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Total Tree Carbon (mg/ha)</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>mangrove_2017 <span class="sc">|&gt;</span> </span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(plot_size_m2 <span class="sc">%in%</span> <span class="fu">c</span>(<span class="fl">25.133</span>, <span class="fl">76.969</span>, <span class="fl">153.938</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>total_tree_mg_c_ha)) <span class="sc">+</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y =</span> <span class="fu">stat</span>(density), <span class="at">fill =</span> plot_size_m2),<span class="at">color =</span> <span class="st">"gray30"</span>, <span class="at">alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="fu">aes</span>(<span class="at">fill =</span> plot_size_m2), <span class="at">col =</span> <span class="st">"gray30"</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Histogram of Carbon per Tree (Mg/ha)"</span>,</span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"2017"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="final_paper_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>The histogram above shows the density between all tree measurements per plot size. The important part is to see the overlap between the sample types to calculate the power.</p>
+<p>Another way to visualize this distribution of a single continuous variable of total tree carbon (Mg/ha) is by dividing the plot sizes into bins and using the frequency polygons <code>geom_freqpoly()</code>` function to display the counts with lines. Frequency polygons are more suitable when you want to compare the distribution across the levels of a categorical variable.</p>
+<div class="cell">
+<details>
+<summary>Show code</summary>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Plotting just the lines</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mangrove_2017, <span class="fu">aes</span>(<span class="at">x=</span>total_tree_mg_c_ha, <span class="at">color =</span> plot_size_m2)) <span class="sc">+</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_freqpoly</span>(<span class="fu">aes</span>(<span class="at">y =</span> <span class="fu">stat</span>(density))) <span class="sc">+</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Frequency Polygon"</span>,</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Invisible Histogram to see overlaps between Sample Size"</span>,</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Total Carbon per Tree (mg/ha)"</span>,</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Density"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="final_paper_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Thanks to the Frequency polygon graph, we can see clearly the overlap between 77m2 and 154m2 plot types, which are way more correlated than the overlap with 25m2.</p>
+<p>Thirdly, we will use the pwr.t.test function to estimate the number of counts we need from each sample plot to have a power of 90%.</p>
+<div class="cell">
+<details>
+<summary>Show code</summary>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the objects with the sd of each group</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>sd_25m <span class="ot">=</span> mangrove_plots_2017[[<span class="dv">1</span>,<span class="dv">5</span>]]</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>sd_77m <span class="ot">=</span> mangrove_plots_2017[[<span class="dv">2</span>,<span class="dv">5</span>]]</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>sd_154m <span class="ot">=</span>  mangrove_plots_2017[[<span class="dv">3</span>,<span class="dv">5</span>]]</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>mean_25m <span class="ot">=</span> mangrove_plots_2017[[<span class="dv">1</span>,<span class="dv">4</span>]]</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>mean_77m <span class="ot">=</span> mangrove_plots_2017[[<span class="dv">2</span>,<span class="dv">4</span>]]</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>mean_154m <span class="ot">=</span> mangrove_plots_2017[[<span class="dv">3</span>,<span class="dv">4</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<section id="a-power-between-25m2-and-154m2." class="level4">
+<h4 class="anchored" data-anchor-id="a-power-between-25m2-and-154m2.">A) Power between 25m2 and 154m2.</h4>
+<div class="cell">
+<details>
+<summary>Show code</summary>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>mean_difference_a <span class="ot">=</span> mean_25m <span class="sc">-</span> mean_154m</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>d25_154 <span class="ot">=</span> <span class="fu">as.numeric</span>(<span class="fu">sqrt</span>(sd_25m<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span><span class="dv">2</span> <span class="sc">+</span> sd_154m<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span><span class="dv">2</span>))</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>effect_size_a <span class="ot">=</span> mean_difference_a <span class="sc">/</span> d25_154</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>power_test_1 <span class="ot">&lt;-</span> <span class="fu">pwr.t.test</span>(<span class="at">d =</span> <span class="fu">round</span>(effect_size_a,<span class="dv">2</span>), </span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>                           <span class="at">power =</span> <span class="fl">0.95</span>, </span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>                           <span class="at">sig.level =</span> <span class="fl">0.05</span>,</span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>                           <span class="at">type=</span><span class="st">"two.sample"</span>,</span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>                           <span class="at">alternative=</span><span class="st">"two.sided"</span>)</span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(power_test_1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+     Two-sample t test power calculation 
+
+              n = 11.46789
+              d = 1.58
+      sig.level = 0.05
+          power = 0.95
+    alternative = two.sided
+
+NOTE: n is number in *each* group</code></pre>
+</div>
+</div>
+<p>Because the means between 25m2 and 154m2 are so different, we will only need <strong>twelve samples</strong> to have a power of 95%.</p>
+</section>
+<section id="b-power-between-77m2-and-154m2" class="level4">
+<h4 class="anchored" data-anchor-id="b-power-between-77m2-and-154m2">B) Power between 77m2 and 154m2</h4>
+<div class="cell">
+<details>
+<summary>Show code</summary>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>mean_difference_b <span class="ot">=</span> mean_77m <span class="sc">-</span> mean_154m</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>d77_154 <span class="ot">=</span> <span class="fu">as.numeric</span>(<span class="fu">sqrt</span>(sd_77m<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span><span class="dv">2</span> <span class="sc">+</span> sd_154m<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span><span class="dv">2</span>))</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>effect_size_b <span class="ot">=</span> mean_difference_b <span class="sc">/</span> d77_154</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>power_test_2 <span class="ot">&lt;-</span> <span class="fu">pwr.t.test</span>(<span class="at">d =</span> <span class="fu">round</span>(effect_size_b,<span class="dv">2</span>), </span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>                           <span class="at">power =</span> <span class="fl">0.95</span>, </span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>                           <span class="at">sig.level =</span> <span class="fl">0.05</span>,</span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>                           <span class="at">type=</span><span class="st">"two.sample"</span>,</span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>                           <span class="at">alternative=</span><span class="st">"two.sided"</span>)</span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(power_test_2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+     Two-sample t test power calculation 
+
+              n = 60.64108
+              d = 0.66
+      sig.level = 0.05
+          power = 0.95
+    alternative = two.sided
+
+NOTE: n is number in *each* group</code></pre>
+</div>
+<details>
+<summary>Show code</summary>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(power_test_2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="final_paper_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>In this case, as the means between 77m2 and 154m2 are closer together, we can estimate that with <strong>Sixty samples</strong>, we could have a power of 95%.</p>
+</section>
+</section>
+<section id="conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion"><strong>Conclusion</strong></h2>
+<p>Further research needs to be conducted with other mangrove reforestation sites to increase our confidentiality regarding the correct selection of plot sizes and tree measurements.</p>
+<p>In order to increase our probabilities and reduce possible bias for future projects, its important to follow the VCS methodologies regarding uncertainty. A random stratified sampling could be a better approach than measuring every single tree in the reforestation. Nevertheless, this study supports the efforts put in place with the 77m2 and 154m2 sample plots as they show a general low variance in their calculations, and a significant lower amount of total measurement specially for the 77m2 plot, saving valuable time in the field. Assuming that all calculation are right in the initial provided data, this study successfully supports the initial question of what is an “ideal” number of samples to reduce extra effort, and still be certain of your estimates (see results of Question 3). &nbsp;</p>
+<p>Overall, Mangrove forests are an incredible biological ecosystem; this type of small analysis and efforts definitely help the nature-based solutions get closer to unimaginable changes in future projects. As this analysis has proved there are some questions being answered, but there are still some other important opportunities to be discovered regarding the structure of sampling according to the methodologies, which they seem to be the key factor for certain results.</p>
+<p>PS. Thanks Silvestrum Climate Associates for sharing this collection of data samples data from one of your real reforestation sites.</p>
+</section>
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references">References</h2>
+<ol type="1">
+<li><p>Verraadmin (2020) First Blue Carbon Conservation Methodology expected to scale up finance for Coastal Restoration &amp; Conservation Activities, Verra. Available at: https://verra.org/first-blue-carbon-conservation-methodology-expected-to-scale-up-finance-for-coastal-restoration-conservation-activities (Accessed: December 8, 2022).&nbsp;</p></li>
+<li><p>VM0033 methodology for tidal wetland and Seagrass Restoration, v2.0 (2022) Verra. Available at: https://verra.org/methodologies/vm0033-methodology-for-tidal-wetland-and-seagrass-restoration-v2-0/ (Accessed: December 8, 2022).&nbsp;</p></li>
+<li><p>VM0032 methodology for the adoption of sustainable grasslands through adjustment of fire and grazing, v1.0 (2022) Verra. Available at: https://verra.org/methodologies/vm0032-methodology-for-the-adoption-of-sustainable-grasslands-through-adjustment-of-fire-and-grazing-v1-0/ (Accessed: December 8, 2022).&nbsp;</p></li>
+<li><p>McGuinness, K. (2005) <em>Above- and below-ground biomass, and allometry, of four common northern ...</em>, <em>Research Gate</em>. Available at: https://www.researchgate.net/publication/248899546_Above-_and_below-ground_biomass_and_allometry_of_four_common_northern_Australian_mangroves (Accessed: December 9, 2022).</p></li>
+<li><p>Kauffman, and Donato, (2012) <em>Center for International Forestry Research - CIFOR</em>, <em>Cifor</em>. Available at: https://www.cifor.org/publications/pdf_files/WPapers/WP86CIFOR.pdf (Accessed: December 9, 2022).</p></li>
+<li><p>Center for International Forestry Research - CIFOR (no date). Available at: https://www.cifor.org/publications/pdf_files/WPapers/WP86CIFOR.pdf (Accessed: December 9, 2022).</p></li>
+<li><p><em>The more you know: Mangroves</em> (2020) <em>Ripley’s Aquarium of Canada</em>. Available at: https://www.ripleyaquariums.com/canada/the-more-you-know-mangroves/ (Accessed: December 8, 2022).</p></li>
+</ol>
+<section id="supporting-figures" class="level3">
+<h3 class="anchored" data-anchor-id="supporting-figures">Supporting Figures</h3>
+<section id="test-the-power-results-with-random-samples" class="level4">
+<h4 class="anchored" data-anchor-id="test-the-power-results-with-random-samples">Test the power results with random samples</h4>
+<p>Here, we have created a power table with the means and SD of your random table and run a power analysis with the selected random samples to test my results</p>
+<p>Test your results 25m2 vs 154m2 by changing the number of samples!</p>
+<div class="cell">
+<details>
+<summary>Show code</summary>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>samples <span class="ot">=</span> <span class="dv">12</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>random_table_test <span class="ot">&lt;-</span> mangrove_2017 <span class="sc">|&gt;</span> </span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(plot_size_m2) <span class="sc">|&gt;</span> </span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_sample</span>(<span class="at">n =</span> samples)</span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>power_table_test <span class="ot">&lt;-</span> random_table_test <span class="sc">|&gt;</span> </span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(plot_size_m2) <span class="sc">|&gt;</span> </span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">tot_samples =</span> <span class="fu">n</span>(),</span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>            <span class="at">tot_plot_count =</span> <span class="fu">length</span>(<span class="fu">unique</span>(plot)),</span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a>            <span class="at">mean_tree_c_ha_mg =</span> <span class="fu">mean</span>(total_tree_mg_c_ha),</span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd_tree_c_ha_mg =</span> <span class="fu">sd</span>(total_tree_mg_c_ha)) <span class="sc">|&gt;</span> </span>
+<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">plot_size_m2 =</span> <span class="fu">c</span>(<span class="st">"25m2"</span>, <span class="st">"77m2"</span>, <span class="st">"154m2"</span>))</span>
+<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a>random_mean_25m <span class="ot">=</span> power_table_test[[<span class="dv">1</span>,<span class="dv">4</span>]]</span>
+<span id="cb29-15"><a href="#cb29-15" aria-hidden="true" tabindex="-1"></a>random_mean_154m <span class="ot">=</span> power_table_test[[<span class="dv">3</span>,<span class="dv">4</span>]]</span>
+<span id="cb29-16"><a href="#cb29-16" aria-hidden="true" tabindex="-1"></a>random_sd_25m <span class="ot">=</span> power_table_test[[<span class="dv">1</span>,<span class="dv">5</span>]]</span>
+<span id="cb29-17"><a href="#cb29-17" aria-hidden="true" tabindex="-1"></a>random_sd_154m <span class="ot">=</span> power_table_test[[<span class="dv">3</span>,<span class="dv">5</span>]]</span>
+<span id="cb29-18"><a href="#cb29-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-19"><a href="#cb29-19" aria-hidden="true" tabindex="-1"></a><span class="co">#Using all the samples</span></span>
+<span id="cb29-20"><a href="#cb29-20" aria-hidden="true" tabindex="-1"></a><span class="co">#Real Difference </span></span>
+<span id="cb29-21"><a href="#cb29-21" aria-hidden="true" tabindex="-1"></a>random_effect_size_a <span class="ot">=</span> (random_mean_25m <span class="sc">-</span> random_mean_154m) <span class="sc">/</span> (<span class="fu">as.numeric</span>(<span class="fu">sqrt</span>(random_sd_25m<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span><span class="dv">2</span> <span class="sc">+</span> random_sd_154m<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span><span class="dv">2</span>)))</span>
+<span id="cb29-22"><a href="#cb29-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-23"><a href="#cb29-23" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(effect_size_a)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.584427</code></pre>
+</div>
+<details>
+<summary>Show code</summary>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(random_effect_size_a)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.918169</code></pre>
+</div>
+<details>
+<summary>Show code</summary>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(random_table_test, <span class="fu">aes</span>(<span class="at">x=</span> plot_size_m2, <span class="at">y =</span> total_tree_mg_c_ha, <span class="at">col =</span> plot_size_m2)) <span class="sc">+</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="fu">aes</span>(<span class="at">yintercept =</span> mean_difference_a, </span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">linetype =</span> <span class="st">"real"</span>), </span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">color =</span> <span class="st">"gray50"</span>, </span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>             <span class="at">size =</span> .<span class="dv">5</span>) <span class="sc">+</span></span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="fu">aes</span>(<span class="at">yintercept =</span> (random_mean_25m <span class="sc">-</span> random_mean_154m), </span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>                 <span class="at">linetype =</span> <span class="st">"random"</span>), </span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a>             <span class="at">color =</span> <span class="st">"gray10"</span>, </span>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a>             <span class="at">size =</span> .<span class="dv">5</span>) <span class="sc">+</span></span>
+<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_shape_manual</span>(<span class="st">""</span>, <span class="at">values=</span> <span class="fu">c</span>(<span class="st">"mean"</span> <span class="ot">=</span> <span class="st">"+"</span>)) <span class="sc">+</span></span>
+<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_linetype_manual</span>(<span class="at">name =</span> <span class="st">"Means difference"</span>, </span>
+<span id="cb33-13"><a href="#cb33-13" aria-hidden="true" tabindex="-1"></a>                        <span class="at">values =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>), </span>
+<span id="cb33-14"><a href="#cb33-14" aria-hidden="true" tabindex="-1"></a>                        <span class="at">guide =</span> <span class="fu">guide_legend</span>(</span>
+<span id="cb33-15"><a href="#cb33-15" aria-hidden="true" tabindex="-1"></a>                          <span class="at">override.aes =</span> <span class="fu">list</span>(</span>
+<span id="cb33-16"><a href="#cb33-16" aria-hidden="true" tabindex="-1"></a>                            <span class="at">color =</span> <span class="fu">c</span>(<span class="st">"gray50"</span>, <span class="st">"gray10"</span>)))) <span class="sc">+</span></span>
+<span id="cb33-17"><a href="#cb33-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Total Cabron per Tree (mg/ha)"</span>,</span>
+<span id="cb33-18"><a href="#cb33-18" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"Random sample size"</span>,</span>
+<span id="cb33-19"><a href="#cb33-19" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Plot Type"</span>,</span>
+<span id="cb33-20"><a href="#cb33-20" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Total Tree Carbon (mg/ha)"</span>,</span>
+<span id="cb33-21"><a href="#cb33-21" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="fu">paste</span>(<span class="st">"Difference between the real sample means is:"</span>,<span class="fu">round</span>(mean_difference_a,<span class="dv">2</span>),<span class="st">"(mg/ha)"</span> ,<span class="st">"</span><span class="sc">\n</span><span class="st">Difference between the randomly relected samples mean is:"</span>, <span class="fu">round</span>((random_mean_25m <span class="sc">-</span> random_mean_154m),<span class="dv">2</span>), <span class="st">"(mg/ha)"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="final_paper_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Test your results 77m2 vs 154m2 with 50 samples</p>
+<div class="cell">
+<details>
+<summary>Show code</summary>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>samples <span class="ot">=</span> <span class="dv">60</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>random_table_test <span class="ot">&lt;-</span> mangrove_2017 <span class="sc">|&gt;</span> </span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(plot_size_m2) <span class="sc">|&gt;</span> </span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_sample</span>(<span class="at">n =</span> samples)</span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>power_table_test <span class="ot">&lt;-</span> random_table_test <span class="sc">|&gt;</span> </span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(plot_size_m2) <span class="sc">|&gt;</span> </span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">tot_samples =</span> <span class="fu">n</span>(),</span>
+<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a>            <span class="at">tot_plot_count =</span> <span class="fu">length</span>(<span class="fu">unique</span>(plot)),</span>
+<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a>            <span class="at">mean_tree_c_ha_mg =</span> <span class="fu">mean</span>(total_tree_mg_c_ha),</span>
+<span id="cb34-11"><a href="#cb34-11" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd_tree_c_ha_mg =</span> <span class="fu">sd</span>(total_tree_mg_c_ha)) <span class="sc">|&gt;</span> </span>
+<span id="cb34-12"><a href="#cb34-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">plot_size_m2 =</span> <span class="fu">c</span>(<span class="st">"25m2"</span>, <span class="st">"77m2"</span>, <span class="st">"154m2"</span>))</span>
+<span id="cb34-13"><a href="#cb34-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-14"><a href="#cb34-14" aria-hidden="true" tabindex="-1"></a>random_mean_77m <span class="ot">=</span> power_table_test[[<span class="dv">2</span>,<span class="dv">4</span>]]</span>
+<span id="cb34-15"><a href="#cb34-15" aria-hidden="true" tabindex="-1"></a>random_mean_154m <span class="ot">=</span> power_table_test[[<span class="dv">3</span>,<span class="dv">4</span>]]</span>
+<span id="cb34-16"><a href="#cb34-16" aria-hidden="true" tabindex="-1"></a>random_sd_77m <span class="ot">=</span> power_table_test[[<span class="dv">2</span>,<span class="dv">5</span>]]</span>
+<span id="cb34-17"><a href="#cb34-17" aria-hidden="true" tabindex="-1"></a>random_sd_154m <span class="ot">=</span> power_table_test[[<span class="dv">3</span>,<span class="dv">5</span>]]</span>
+<span id="cb34-18"><a href="#cb34-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-19"><a href="#cb34-19" aria-hidden="true" tabindex="-1"></a><span class="co">#Using all the samples</span></span>
+<span id="cb34-20"><a href="#cb34-20" aria-hidden="true" tabindex="-1"></a><span class="co">#Real Difference </span></span>
+<span id="cb34-21"><a href="#cb34-21" aria-hidden="true" tabindex="-1"></a>random_effect_size_b <span class="ot">=</span> (random_mean_77m <span class="sc">-</span> random_mean_154m) <span class="sc">/</span> (<span class="fu">as.numeric</span>(<span class="fu">sqrt</span>(random_sd_77m<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span><span class="dv">2</span> <span class="sc">+</span> random_sd_154m<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span><span class="dv">2</span>)))</span>
+<span id="cb34-22"><a href="#cb34-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-23"><a href="#cb34-23" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(effect_size_b)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.6571471</code></pre>
+</div>
+<details>
+<summary>Show code</summary>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(random_effect_size_b)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.842961</code></pre>
+</div>
+<details>
+<summary>Show code</summary>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(random_table_test, <span class="fu">aes</span>(<span class="at">x=</span> plot_size_m2, <span class="at">y =</span> total_tree_mg_c_ha, <span class="at">col =</span> plot_size_m2)) <span class="sc">+</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="fu">aes</span>(<span class="at">yintercept =</span> effect_size_b, </span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">linetype =</span> <span class="st">"real"</span>), </span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">color =</span> <span class="st">"gray50"</span>, </span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>             <span class="at">size =</span> .<span class="dv">5</span>) <span class="sc">+</span></span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="fu">aes</span>(<span class="at">yintercept =</span> random_effect_size_b, </span>
+<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a>                 <span class="at">linetype =</span> <span class="st">"random"</span>), </span>
+<span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a>             <span class="at">color =</span> <span class="st">"gray10"</span>, </span>
+<span id="cb38-10"><a href="#cb38-10" aria-hidden="true" tabindex="-1"></a>             <span class="at">size =</span> .<span class="dv">5</span>) <span class="sc">+</span></span>
+<span id="cb38-11"><a href="#cb38-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_shape_manual</span>(<span class="st">""</span>, <span class="at">values=</span> <span class="fu">c</span>(<span class="st">"mean"</span> <span class="ot">=</span> <span class="st">"+"</span>)) <span class="sc">+</span></span>
+<span id="cb38-12"><a href="#cb38-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_linetype_manual</span>(<span class="at">name =</span> <span class="st">"Means Difference"</span>, </span>
+<span id="cb38-13"><a href="#cb38-13" aria-hidden="true" tabindex="-1"></a>                        <span class="at">values =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>), </span>
+<span id="cb38-14"><a href="#cb38-14" aria-hidden="true" tabindex="-1"></a>                        <span class="at">guide =</span> <span class="fu">guide_legend</span>(</span>
+<span id="cb38-15"><a href="#cb38-15" aria-hidden="true" tabindex="-1"></a>                          <span class="at">override.aes =</span> <span class="fu">list</span>(</span>
+<span id="cb38-16"><a href="#cb38-16" aria-hidden="true" tabindex="-1"></a>                            <span class="at">color =</span> <span class="fu">c</span>(<span class="st">"gray50"</span>, <span class="st">"gray10"</span>)))) <span class="sc">+</span></span>
+<span id="cb38-17"><a href="#cb38-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Total Cabron per Tree (mg/ha)"</span>,</span>
+<span id="cb38-18"><a href="#cb38-18" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"Random sample size"</span>,</span>
+<span id="cb38-19"><a href="#cb38-19" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Plot Type"</span>,</span>
+<span id="cb38-20"><a href="#cb38-20" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Total Tree Carbon (mg/ha)"</span>,</span>
+<span id="cb38-21"><a href="#cb38-21" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="fu">paste</span>(<span class="st">"Difference between the real sample means is:"</span>,<span class="fu">round</span>(mean_difference_b,<span class="dv">2</span>),<span class="st">"(mg/ha)"</span> ,<span class="st">"</span><span class="sc">\n</span><span class="st">Difference between the randomly relected samples mean is:"</span>, <span class="fu">round</span>((random_mean_77m <span class="sc">-</span> random_mean_154m),<span class="dv">2</span>), <span class="st">"(mg/ha)"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="final_paper_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+
+
+</section>
+</section>
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{patrón,
+  author = {Javier Patrón},
+  title = {An {Statistical} {Mangrove} {Analysis} {Post}},
+  date = {},
+  url = {https://github.com/javipatron},
+  langid = {en}
+}
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-patrón" class="csl-entry quarto-appendix-citeas" role="doc-biblioentry">
+Javier Patrón. n.d. <span>“An Statistical Mangrove Analysis
+Post.”</span> <a href="https://github.com/javipatron">https://github.com/javipatron</a>.
+</div></div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } 
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">Copyright 2022, Javier Patrón</div>   
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/javipatron">
+      <i class="bi bi-github" role="img">
+</i> 
+    </a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+
+
+
+</body></html>

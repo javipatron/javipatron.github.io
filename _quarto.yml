@@ -16,7 +16,7 @@ website:
         href: posts.qmd
       - text: Resume
         href: resume.qmd
-      - text: shark
+      - text: Extra
         href: SHARK.qmd
     
   page-footer: 
