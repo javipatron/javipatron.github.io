@@ -527,6 +527,13 @@ random_sd_154m = power_table_test[[3,5]]
 #Real Difference 
 random_effect_size_a = (random_mean_25m - random_mean_154m) / (as.numeric(sqrt(random_sd_25m^2/2 + random_sd_154m^2/2)))
 
+
+random_power_test <- pwr.t.test(d = random_effect_size_a, 
+                           n = samples, 
+                           sig.level = 0.05,
+                           type="two.sample",
+                           alternative="two.sided")
+
 print(effect_size_a)
 print(random_effect_size_a)
 
@@ -550,7 +557,7 @@ ggplot(random_table_test, aes(x= plot_size_m2, y = total_tree_mg_c_ha, col = plo
        subtitle = "Random sample size",
        x = "Plot Type",
        y = "Total Tree Carbon (mg/ha)",
-       caption = paste("Difference between the real sample means is:",round(mean_difference_a,2),"(Mg/ha)" ,"\nDifference between the randomly relected samples mean is:", round((random_mean_25m - random_mean_154m),2), "(Mg/ha)"))
+       caption = paste("Difference between the real sample means is:",round(mean_difference_a,2),"(Mg/ha)" ,"\nDifference between the randomly relected samples mean is:", round((random_mean_25m - random_mean_154m),2), "(Mg/ha)", "\nPower:", round(random_power_test$power,2)))
   
   
 ```
@@ -580,6 +587,13 @@ random_sd_154m = power_table_test[[3,5]]
 #Real Difference 
 random_effect_size_b = (random_mean_77m - random_mean_154m) / (as.numeric(sqrt(random_sd_77m^2/2 + random_sd_154m^2/2)))
 
+random_power_test_b <- pwr.t.test(d = random_effect_size_b, 
+                           n = samples, 
+                           sig.level = 0.05,
+                           type="two.sample",
+                           alternative="two.sided")
+
+
 print(effect_size_b)
 print(random_effect_size_b)
 
@@ -603,6 +617,6 @@ ggplot(random_table_test, aes(x= plot_size_m2, y = total_tree_mg_c_ha, col = plo
        subtitle = "Random sample size",
        x = "Plot Type",
        y = "Total Tree Carbon (mg/ha)",
-       caption = paste("Difference between the real sample means is:",round(mean_difference_b,2),"(Mg/ha)" ,"\nDifference between the randomly relected samples mean is:", round((random_mean_77m - random_mean_154m),2), "(Mg/ha)"))
+       caption = paste("Difference between the real sample means is:",round(mean_difference_b,2),"(Mg/ha)" ,"\nDifference between the randomly relected samples mean is:", round((random_mean_77m - random_mean_154m),2), "(Mg/ha)","\nPower:", round(random_power_test_b$power,2)))
 
 ```
