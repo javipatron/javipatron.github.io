@@ -81,10 +81,9 @@ To get you familiarized, the table below shows the first 5 rows of the data whic
 
 ```{r, echo =F, message = F, warning= F}
 
-head(mangrove_df) |> 
+head(mangrove_df) %>% 
   kbl(align=rep('c', 5),
-      caption ="Table 1. Full Mangrove Data Set (head)",
-      position = "left") %>%
+      caption = "Table 1. Full Mangrove Data Set (head)") %>%
   kable_paper("hover", full_width = F)
 ```
 
@@ -274,8 +273,7 @@ head(density_df) %>%
   kbl(align=rep('c', 5),
       caption ="Table 4. Density Table per Plot",
       position = "left") %>%
-  kable_paper("hover", full_width = F) %>%
-  kable_styling(position = "left")
+  kable_paper("hover", full_width = F)
 
 density_graph <- ggplot(density_df, aes(x= as.factor(plot_size_m2), y= density, fill = as.factor(plot_size_m2))) +
   geom_boxplot(alpha = 0.7) +
