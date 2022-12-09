@@ -1,6 +1,6 @@
 ---
 title: "Blog Post Title"
-description: "Small description of my post"
+description: "What my first post looks like"
 image: shark_fiji.jpg
 author: 
   - name: Javier Patrón

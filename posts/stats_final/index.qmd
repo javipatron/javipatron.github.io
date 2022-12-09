@@ -5,7 +5,7 @@ author:
   name: Javier Patrón
   affiliation: MEDS
   affiliation-url: http://ucsb-meds.github.io
-date: "`r Sys.Date()`"
+date: "r Sys.Date()"
 always_allow_html: yes
 
 format:
