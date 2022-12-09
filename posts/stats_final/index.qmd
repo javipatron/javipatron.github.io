@@ -5,7 +5,7 @@ author:
   name: Javier Patrón
   affiliation: MEDS
   affiliation-url: http://ucsb-meds.github.io
-date: "r Sys.Date()"
+date: "'r Sys.Date()'"
 always_allow_html: yes
 
 format:
@@ -29,6 +29,7 @@ library(pwr)
 library(xtable)
 library(kableExtra)
 library(broom)
+library(plotly)
 ```
 
 ## Introduction
@@ -70,7 +71,7 @@ mangrove_df$plot_size_m2 <- as.factor(mangrove_df$plot_size_m2)
 
 #### Limitations, spatial and temporal features.
 
-The dataset has a measurement record for each tree´s height and canopy.With those measurements, Silvestrum has calculated the total tree carbon in (kg) and the total tree carbon per hectare in (Mg/ha). In this analysis, we will assume that the correct protocols and equations were followed for this purpose, and this analysis is dependent from those results.
+The dataset has a measurement record for each tree´s height and canopy. With those measurements, Silvestrum has calculated the total tree carbon in (kg) and the total tree carbon per hectare in (Mg/ha). In this analysis, we will assume that the correct protocols and equations were followed for this purpose, and this analysis is dependent from those results.
 
 Regarding the dataset, the above and below ground carbon storage was assessed using a nested sub-sampling protocol along the 25m2, 77m2, and 154m2 transect following the [Kauffman and Donato](https://www.cifor.org/publications/pdf_files/WPapers/WP86CIFOR.pdf "Reference #4") procedure. The equations for above and below ground biomass are defined by [Comley and McGuiness.](https://www.researchgate.net/publication/248899546_Above-_and_below-ground_biomass_and_allometry_of_four_common_northern_Australian_mangroves "Reference #5")
 
@@ -105,7 +106,7 @@ mangrove_summary %>%
   row_spec(2, bold = T, color = "gray10", background = "lightblue")
 ```
 
-As we can see in the table above, the 2017 plantation year has an exciting number of samples, different sample plot sizes, and high variation of total carbon in mg per hectare. We will focus on this year to answer our questions.
+As we can see in the table above, the 2017 plantation year has an exciting number of samples, different sample plot sizes, and high variation of total carbon in Mg per hectare. We will focus on this year to answer our questions.
 
 The table #3 contains only information from the 2017 plantation year. We will use this filter to analyse the different questions, and interpret our results.
 
@@ -142,11 +143,11 @@ plots_2017 <- mangrove_2017 |>
 
 ```
 
-Now let us take a look at the effect of sample plot size and the total tree carbon (Mg/ha).
+Now let us take a closer look at the effect of sample plot size and the total tree carbon (Mg/ha).
 
 ```{r}
 #Boxplot
-mangrove_2017 |>
+boxplot_2017 <- mangrove_2017 |>
   ggplot(aes(x=plot_size_m2, y = total_tree_mg_c_ha,color = plot_size_m2)) +
   geom_boxplot() +
   labs(title = "Tree Carbon vs Plot Type",
@@ -155,11 +156,13 @@ mangrove_2017 |>
        y = "Total Tree Carbon (Mg/ha)") +
   scale_color_brewer(palette = "Dark2") 
 
+ggplotly(boxplot_2017)
+
 ```
 
 ## Question 1
 
-The graph above shows a visual difference in carbon means between the 25m2 sample plot and the other two sample plots. So let us analyze the relationship between the 77m2 and the 154m2, with a hypothesis test and see if the means in the total carbon per tree (Mg/ha) are different. *Why this two?* Because visually they look more similar and the seems to be the outlier 25m2.
+The graph above shows a visual difference in carbon means between the 25m2 sample plot and the other two sample plots. So let us analyze the relationship between the 77m2 and the 154m2, with a hypothesis test and see if the means in the total carbon per tree (Mg/ha) are different.
 
 **Analysis:** *Hypothesis Testing between 77m2 vs 154m2*
 
@@ -211,7 +214,7 @@ option2_ttest
 
 ### Results:
 
-**With this results we can reject the null as the p-value is very small, meaning there is a significant difference between the means on carbon storage in each tree per hectare between the sample plot size of 77m2 to the sample size of 154m2.**
+**With this results we can reject the null as the p-value is telling us there it exists a statistical significant difference between the means of carbon storage between the sample plot size of 77m2 to the sample size of 154m2.**
 
 We are 95% confident that the true value of the difference in tree carbon across the two plot sizes lies between 0.0262 - 0.0403 mg per hectare.
 
@@ -246,9 +249,9 @@ As we can see in the graph, both means are close to each other, but they are sta
 
 ## **Question 2:**
 
-Let analyze why the smaller plot is getting a larger estimate of total carbon per hectare.
+Let analyze why the smaller plots are getting a larger estimate of total carbon per hectare.
 
-For this purpose, we will create a new table and graph to easily visualize what the density per plot type (Number of trees per m2) is
+For this purpose, we will create a new table and graph to easily visualize what the density per plot type (Number of trees per m2) looks like:
 
 ```{r, message=F, warning=F}
 #Changing the column to numeric
@@ -274,13 +277,15 @@ head(density_df) %>%
   kable_paper("hover", full_width = F) %>%
   kable_styling(position = "left")
 
-ggplot(density_df, aes(x= as.factor(plot_size_m2), y= density, fill = as.factor(plot_size_m2))) +
+density_graph <- ggplot(density_df, aes(x= as.factor(plot_size_m2), y= density, fill = as.factor(plot_size_m2))) +
   geom_boxplot(alpha = 0.7) +
   labs(title = "Density of trees per plot size",
        x= "Plot Size (m2)",
        y = "Density (Tree/m2)",
        col = "Plot Size (m2)") +
   scale_fill_discrete(name = "Plot Type")
+
+ggplotly(density_graph)
 
 ```
 
@@ -304,7 +309,7 @@ ggplot(plots_2017, aes(x=sd_tree_c_ha)) +
 We have a skew right histogram with a long tail. Now let us analyze this same plot, but separating per plot type, to see who is responsible for those outliers.
 
 ```{r, message=F, warning=F}
-plots_2017 |> 
+histogram_plot <- plots_2017 |> 
   filter(plot_size_m2 %in% c(25.133, 76.969, 153.938)) |> 
 ggplot(aes(x=sd_tree_c_ha)) +
   geom_histogram(aes(y = stat(density), fill = plot_size_m2),color = "gray30", alpha = 0.3) +
@@ -313,6 +318,8 @@ ggplot(aes(x=sd_tree_c_ha)) +
        subtitle = "Per Plot",
        x = "Tree Cabron Variance (mg/ha)",
        y = "Density Plots")
+
+ggplotly(histogram_plot)
 
 ```
 
@@ -384,13 +391,15 @@ First, we need to understand and visualize the overlaps that we currently have b
 
 ```{r, message=F, warning=F}
 #Total Tree Carbon (mg/ha)
-mangrove_2017 |> 
+histogram_all <- mangrove_2017 |> 
   filter(plot_size_m2 %in% c(25.133, 76.969, 153.938)) |> 
 ggplot(aes(x=total_tree_mg_c_ha)) +
   geom_histogram(aes(y = stat(density), fill = plot_size_m2),color = "gray30", alpha = 0.3) +
   geom_density(aes(fill = plot_size_m2), col = "gray30", alpha = 0.8) +
   labs(title = "Histogram of Carbon per Tree (Mg/ha)",
        subtitle = "2017")
+
+ggplotly(histogram_all)
   
 ```
 
