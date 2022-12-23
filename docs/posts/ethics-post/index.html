@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.0.37">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Javier Patrón">
+<meta name="dcterms.date" content="2022-12-19">
+<meta name="description" content="An Ethics and Bias thought">
+
+<title>Javier Patrón - Project Chaac Dives into the Pool of Ethical Sense</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Javier Patrón</span>
+  </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html">Home</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../bio.html">Bio</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../posts.html">Posts</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../resume.html">Resume</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../SHARK.html">Extra</a>
+  </li>  
+</ul>
+              <div class="quarto-toggle-container">
+                  <a href="" class="quarto-color-scheme-toggle nav-link" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+              </div>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Project Chaac Dives into the Pool of Ethical Sense</h1>
+                  <div>
+        <div class="description">
+          An Ethics and Bias thought
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">MEDS</div>
+                <div class="quarto-category">Mangroves</div>
+              </div>
+                  </div>
+  </div>
+    
+  <div class="quarto-title-meta-author">
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-heading">Affiliation</div>
+    
+      <div class="quarto-title-meta-contents">
+      Javier Patrón 
+    </div>
+      <div class="quarto-title-meta-contents">
+          <p class="affiliation">
+              <a href="http://ucsb-meds.github.io">
+              MEDS
+              </a>
+            </p>
+        </div>
+      </div>
+
+  <div class="quarto-title-meta">
+
+        
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">December 19, 2022</p>
+      </div>
+    </div>
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block page-columns page-full" id="quarto-document-content">
+
+
+
+
+<p>Data is a new language in which we read, write, and transform the figures our eyes cannot naturally see, hidden in our surrounding reality. However, thanks to the technological revolution, those “natural numbers” can now be deciphered and manipulated by people who are fortunate and deft enough to speak and understand such language.&nbsp;</p>
+<p>Rephrasing a definition of data coined by <a href="https://www.tandfonline.com/doi/full/10.1080/1369118X.2019.1606268">Stefania Milan</a> <em>“Data is seen as an avenue to revert or challenge our dominant understandings of the world, (re)creating conditions of possibility for counter-imaginaries and social justice claims to emerge.”</em> With that in mind, In this blog post, I will discuss how data experts would be able to generate more consciousness on ethics and bias while developing a more sensitive touch in their daily work as environmental data scientists. To help express these thoughts on paper, I will use an actual environmental project held in the Yucatán Peninsula of Mexico and discuss how responsible and equitable data scientists should behave when exercising the power of data to design a world case example out of this project.&nbsp;</p>
+<p>My musings expressed in this post are meant to awaken present and future “data evangelists”, motivating them to nourish a better sense of community within their field, and understanding the substantial change that both environment and society will experience through Project Chaac. This reflection will be based on the skills and foundations I have acquired throughout the course of Ethics and Bias in Environmental Data Science at the Bren School of Environmental Science &amp; Management.&nbsp;</p>
+<p>At its core, Project Chaac seeks to protect, conserve, and restore a territory of 42,676 hectares of degraded mangroves in the southern Mexican state of Yucatán. The project involves a significant amount of team management that must be aligned with overall environmental impact. Worldwide, most of the lands and territories targeted for greenhouse gas (GHG) mitigation action overlap with areas customarily held by indigenous groups, local communities, and Afro-descendant peoples.&nbsp;</p>
+<p>Moreover, most of the lands and forests targeted for nature-based greenhouse gas removal and offset, like Project Chaac, are located within areas where the State’s customary rights of communities have yet to be recognized (<em>Reference two).</em> Therefore, I will briefly describe some difficulties and potential roadblocks involving ethics and bias that the project might face in Mexico, since its complexity resides in the entangled path of multiple factors and circumstances at constant play. Metaphorically speaking, this project is a living, growing vine, in which the roots are essential; biodiversity stands for the open minds involved; key nutrients represent human values, and the environment as a whole is the high frequency vibe of all the passionate individuals that will provide a firm and rich soil to plant the seed of change. Finally, we will analyze how this tiny seed can become a fully grown, jade-green turquoise plant, as astonishing as the <a href="https://en.wikipedia.org/wiki/Strongylodon_macrobotrys">Strongylodon Macrobotrys</a>.</p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><a href="https://www.vermontpublic.org/programs/2017-03-17/how-do-big-plants-grow-from-such-small-seeds"><img src="seed.jpeg" class="img-fluid figure-img" style="width:60.0%"></a></p>
+<p></p><figcaption class="figure-caption margin-caption">Image 1: How does a seed germinate?</figcaption><p></p>
+</figure>
+</div>
+<p>As with all plants, a careful assessment of the seed germination and the creation of concise strategies will have an exponential impact on the growth and direction of the project. Here are the three axes on which I foresee true potential for building solid bridges between ethics and bias resides:</p>
+<ul>
+<li><p><strong>Data Justice.-</strong> Satellite images are used to select the pieces of land with the highest potential for mangrove restoration in the area. Therefore an equitable allocation of carbon credits rights, land use, and business strategy must be well cemented among all players involved: Federal and local authorities, as well as the private sector, along with the rural communities called ejidos, as well as the territories inhabited by Afro-descendants. <em>(Reference four)</em></p></li>
+<li><p><strong>Project Development.-</strong> The actual value of the land comes when you dip your hands in the dirt while sweating big fat droplets on the rich soil, learning and adapting to your surroundings. In this case, the project implies complicated engineering analysis to build an efficient network of hydrological channels in the near future, in order to embrace a healthy and protected ecosystem in the restored mangrove lands.</p></li>
+</ul>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="channels.png" class="img-fluid figure-img" alt="The photos shown are property of the Primary Production Laboratory (CINVESTAV- IPN), except for those where reference is made to its author." style="width:55.0%"></p>
+<p></p><figcaption class="figure-caption margin-caption">Image 2: Hydrological construction and rehabilitation of canals.</figcaption><p></p>
+</figure>
+</div>
+<ul>
+<li><strong>Legal Feasibility.-</strong> Carbon accounting in developing countries is facing difficult but also exciting times. Agreements regarding carbon rights will encounter critical roadblocks, and hence need to be exceptionally well-planned. Additionally, with climate change hot on our heels and the Paris Agreement goals swiftly approaching, countries and corporations are increasing their participation to meet their emission reduction targets and net-zero commitments 5. Keeping that in mind, embracing and understanding Mexican laws will become a crucial element for the success of the project.</li>
+</ul>
+<p>Now, I would like to define what Blue Carbon is and why it is so important. A newly developed concept, it refers to the carbon stocks sequestered in any coastal ecosystem, like mangroves, seagrasses, and salt marshes. Mangroves are considered one of the most productive and biologically complex ecosystems on earth; that is why they are also regarded as Nature’s “superheroes” fighting against climate change.&nbsp;</p>
+<p>However, over the last few years, mangroves have been deforested at an alarming rate, due to increased coastal development and other anthropogenic factors. Thus, conservation and restoration of these coastal ecosystems are essential both to sustain the natural environment and to assure their decisive impact on our world. As with coral reefs, mangrove forests allow the development of true environmental health by fostering fisheries and healthy coastal ecosystems, as well as by providing significant protection from natural disasters.</p>
+<p>Next, I will introduce the topic of <strong>Data Justice</strong> and why it is relevant to this project and blog post. Data Justice happens whenever data relies on insufficient recognition to understand real community needs. It is an approach that addresses new ways of data collection and dissemination of crucial facts which have been invisibilized in the past, thus harming marginalized communities (<em>Reference six).</em> Therefore, it plays an essential role in carbon-credit adjudications. In environmental science, carbon stocks represent the total amount of organic carbon stored within an environmental system, so <strong>the correct manipulation of data is key to quantifying such processes.</strong> Hence, data scientists play a vital role in elegant calculations in the pursuit of data justice.</p>
+<p>Regarding carbon rights in Mexico, I am presenting two tables to describe some general carbon trade legal agreements. Carbon rights are used to describe a number of different tradeable GHG prerogatives. In other words, it is the given right to benefit from sequestered carbon and/or reduced greenhouse gas emissions.” (Reference two)</p>
+<div class="cell">
+<details>
+<summary>Show code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Add the tables in a nice format</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<table class="table">
+<caption><strong>Table 1.</strong> Legal frameworks to support carbon-linked transactions.</caption>
+<colgroup>
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Country</th>
+<th style="text-align: center;"><strong>Laws for securing community tenure to forests?</strong></th>
+<th style="text-align: center;"><strong>Established a national legal framework for carbon trade?</strong></th>
+<th style="text-align: center;"><strong>Defined carbon rights?</strong></th>
+<th style="text-align: center;"><strong>Are carbon rights linked to tenure?</strong></th>
+<th style="text-align: center;"><strong>Do communities have carbon rights?</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">Mexico</td>
+<td style="text-align: center;">Yes</td>
+<td style="text-align: center;">Partial</td>
+<td style="text-align: center;">Inconclusive or undefined</td>
+<td style="text-align: center;">Inconclusive or undefined</td>
+<td style="text-align: center;">Carbon rights are inconclusive or undefined</td>
+</tr>
+</tbody>
+</table>
+<table class="table">
+<caption><strong>Table 2.</strong> Legal recognition of community land.</caption>
+<colgroup>
+<col style="width: 23%">
+<col style="width: 26%">
+<col style="width: 26%">
+<col style="width: 23%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;"><strong>Country</strong></th>
+<th style="text-align: center;"><strong>Country area where rights of Indigenous&nbsp; peoples, local communities, and Afro-descendants are legally recognized</strong></th>
+<th style="text-align: center;"><strong>Country area where rights of Indigenous peoples, local communities, and Afro-descendants are not legally recognized</strong></th>
+<th style="text-align: center;"><strong>Total percent of land held by Indigenous peoples, local communities, and Afro-descendants</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">Mexico</td>
+<td style="text-align: center;">52 %</td>
+<td style="text-align: center;">0.50%</td>
+<td style="text-align: center;">52.5 %</td>
+</tr>
+</tbody>
+</table>
+<p>As the tables clearly depict, Mexico has an inconclusive law on carbon rights. However, almost half of its territory is legally recognized when referring to its indigenous peoples, local communities, and Afro-descendants, which is today a leading example among developing countries.</p>
+<p>So now we have an overview of the project’s objectives. However, how and where does data manipulation impact its success?&nbsp;</p>
+<p>Currently, the CINVESTAV (The Center for Research and Advanced Studies of the National Polytechnic Institute), a non-governmental Mexican research institution, has settled and defined the actual conditions of the mangroves by using satellite imagery. After collecting images from the Sentinel-2A 7 from March 2021 to June 2022, and by using a powerful environmental data science tool called NDVI (Normalized Difference Vegetation Index), they were able to quantify and define the areas with higher and lower vegetation density health. In other words, they designated the patches of land in specific areas of interest, where vegetation reflects green back to space (meaning healthy mangroves), comparing such areas against those showing degraded or deforested vegetation, (which reflected longer color wavelengths).<br>
+</p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><a href="https://forums.autodesk.com/t5/autocad-raster-design-forum/ndvi-calculation/td-p/6939932?profile.language=es"><img src="ndvi.png" class="img-fluid figure-img" style="width:60.0%"></a></p>
+<p></p><figcaption class="figure-caption margin-caption">Image 3: NDVI Formula</figcaption><p></p>
+</figure>
+</div>
+<p>By using the NDVI tool, a language that only a few people know about (remember “potential bias”?), the CINVESTAV team defined those sections of land with a higher probability of mangrove reforestation along with the potential for the development of a potential carbon accounting business. As you can imagine, such results designate an important plant tutor, which sets the standard for launching critical collaborative agreements with land owners, state governments, private companies, and ejidos.</p>
+<p>Nowadays, technology has become a potent influential tool across the globe, but it can also be scary and threatening to those who do not understand it. Consequently, I invite all involved parties, especially data scientists, to think outside the box from the very beginning and bring the terminology of Data Justice into play.&nbsp;</p>
+<p>In contrast, if a project lacks a strategy of environmental data justice or fails to recognize an equitable carbon right among indigenous people and/or local communities, it will surely generate a negative domino effect with huge implications, leaving long-lasting scars for all future environmental nature-based initiatives.</p>
+<p>Throughout the course of Ethics and Bias, I learned the importance of becoming data-sensitive. I am one of those scientists who are fortunate enough to speak the language of data, having developed a sense for reading and hearing his surroundings in order to find a deeper connection with their heart and soul, ensuring that the local wisdom moves from one generation to the next, honoring its ancient knowledge as an invaluable heritage. I wish to become a key player in communicating the importance of this work, quickly generating new allies within the communities. Undoubtedly, data sensitivity is the vital foundation for building a solid ethical environment.</p>
+<p>Unfortunately, only some countries explicitly recognize community carbon rights, and even fewer have tested established rules’ operational and political feasibility. However, Project Chaac has all the tools to become a world case example of a well-organized project, although a topnotch level of data sensitivity, knowledge on carbon rights, data justice, and firm management must be assured to bring all the pieces together.</p>
+<p>Overall, the success of this mangrove restoration project depends heavily on a vigorous commitment between all players involved: Collaborators, government agents, lawyers, field engineers, data scientists, and ejido leaders, among others. These 40,000 hectares of land are heavily threatened by tourism and pressure from the governmental instances. Yet, I am certain that Project Chaac represents a golden opportunity to show the world how a nature-based solution with a well-cemented ethical culture is definitely possible. All of the aforementioned factors will empower our incipient vine to evolve into an emerald wonder that will make the world’s eyes widen in awe, aiming to the skies.</p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><a href="https://www.tropical-plants-and-flowers-guide.com/blue-jade-vine.html"><img src="blue-vine.jpeg" class="img-fluid figure-img" style="width:60.0%"></a></p>
+<p></p><figcaption class="figure-caption margin-caption">Image 4: The beautiful blue jade vine (Strongylodon Macrobotrys)</figcaption><p></p>
+</figure>
+</div>
+<p><strong>References:</strong></p>
+<p>1. Stefania, S. (2019) Full article: Exploring Data Justice: Conceptions, applications and ..., Exploring Data Justice: Available at: https://www.tandfonline.com/doi/full/10.1080/1369118X.2019.1606268 (Accessed: December 8, 2022).</p>
+<p>2. Initiative, A.R.and R. (2020) Rights-based conservation: The path to preserving Earth’s biological and cultural diversity?, Rights + Resources. Available at: https://rightsandresources.org/publication/rights-based-conservation/ (Accessed: December 7, 2022).</p>
+<p>3. Strongylodon macrobotrys (2022) Wikipedia. Wikimedia Foundation. Available at: https://en.wikipedia.org/wiki/Strongylodon_macrobotrys (Accessed: December 7, 2022).</p>
+<p>4. Ejido (2022) Wikipedia. Wikimedia Foundation. Available at: https://en.wikipedia.org/wiki/Ejido (Accessed: December 7, 2022).</p>
+<p>5. Hood, C. (2020) Completing the Paris ‘rulebook’: Key article 6 issues, Center for Climate and Energy Solutions. Available at: https://www.c2es.org/document/completing-the-paris-rulebook-key-article-6-issues/ (Accessed: December 7, 2022).</p>
+<p>6. Taylor, L. (2017). What is Data Justice? The case for connecting digital rights and freedoms globally. Big Data &amp; Society.<a href="https://doi.org/10.1177/2053951717736335" class="uri">https://doi.org/10.1177/2053951717736335</a>.</p>
+<p>7. Home (no date) Sentinel. Available at: https://sentinels.copernicus.eu/web/sentinel/user-guides/sentinel-2-msi/product-types/level-2a (Accessed: December 7, 2022).</p>
+<p><br>
+</p>
+
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{patrón2022,
+  author = {Javier Patrón},
+  title = {Project {Chaac} {Dives} into the {Pool} of {Ethical} {Sense}},
+  date = {2022-12-19},
+  url = {https://github.com/javipatron},
+  langid = {en}
+}
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-patrón2022" class="csl-entry quarto-appendix-citeas" role="doc-biblioentry">
+Javier Patrón. 2022. <span>“Project Chaac Dives into the Pool of Ethical
+Sense.”</span> December 19, 2022. <a href="https://github.com/javipatron">https://github.com/javipatron</a>.
+</div></div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } 
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">Copyright 2022, Javier Patrón</div>   
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/javipatron">
+      <i class="bi bi-github" role="img">
+</i> 
+    </a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+
+
+
+</body></html>

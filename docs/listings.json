@@ -2,6 +2,7 @@
   {
     "listing": "/posts.html",
     "items": [
+      "/posts/ethics-post/index.html",
       "/posts/eez_spatial/index.html",
       "/posts/stats_final/index.html",
       "/posts/blog_example_1/index.html"
