@@ -1,6 +1,6 @@
 ---
 title: "Marine Aquaculture"
-description: "Determining which Exclusive Economic Zones (EEZ) on the US West Coast are best suited to developing marine aquaculture for several species."
+description: "Determining which Exclusive Economic Zones (EEZ) on the US West Coast are best suited to developing marine aquaculture for ocean species like Oysters."
 
 author:
   name: Javier Patrón
@@ -371,7 +371,7 @@ find_my_happy_place <- function(species = "NAME", min_temp = 5, max_temp = 30, m
 
 ```
 
-#### Now Test your function 
+#### Now Test your function
 
 *REMEMBER:*
 

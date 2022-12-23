@@ -1,6 +1,6 @@
 ---
 title: "An Statistical Mangrove Analysis Post"
-description: "A blue cabron analysis based on the skills learned from the course of Statistics for Environmental Data Science at the Bren School of Environmental Science & Management"
+description: "A blue carbon analysis based on the skills learned from the course of Statistics for Environmental Data Science at the Bren School of Environmental Science & Management"
 author:
   name: Javier Patrón
   affiliation: MEDS
@@ -314,7 +314,7 @@ ggplot(aes(x=sd_tree_c_ha)) +
   geom_density(aes(fill = plot_size_m2), col = "gray30", alpha = 0.8) +
   labs(title = "Total Carbon per Tree (Mg/ha)",
        subtitle = "Per Plot",
-       x = "Tree Cabron Variance (Mg/ha)",
+       x = "Tree Carbon Variance (Mg/ha)",
        y = "Density Plots")
 
 ggplotly(histogram_plot)
@@ -555,7 +555,7 @@ ggplot(random_table_test, aes(x= plot_size_m2, y = total_tree_mg_c_ha, col = plo
                         guide = guide_legend(
                           override.aes = list(
                             color = c("gray50", "gray10")))) +
-  labs(title = "Total Cabron per Tree (Mg/ha)",
+  labs(title = "Total Carbon per Tree (Mg/ha)",
        subtitle = "Random sample size",
        x = "Plot Type",
        y = "Total Tree Carbon (mg/ha)",
@@ -615,7 +615,7 @@ ggplot(random_table_test, aes(x= plot_size_m2, y = total_tree_mg_c_ha, col = plo
                         guide = guide_legend(
                           override.aes = list(
                             color = c("gray50", "gray10")))) +
-  labs(title = "Total Cabron per Tree (Mg/ha)",
+  labs(title = "Total Carbon per Tree (Mg/ha)",
        subtitle = "Random sample size",
        x = "Plot Type",
        y = "Total Tree Carbon (mg/ha)",
