@@ -40,11 +40,11 @@ As with all plants, a careful assessment of the seed germination and the creatio
 
 -   **Project Development.-** The actual value of the land comes when you dip your hands in the dirt while sweating big fat droplets on the rich soil, learning and adapting to your surroundings. In this case, the project implies complicated engineering analysis to build an efficient network of hydrological channels in the near future, in order to embrace a healthy and protected ecosystem in the restored mangrove lands.
 
-![Image 2: Hydrological construction and rehabilitation of canals.](channels.png){fig-alt="The photos shown are property of the Primary Production Laboratory (CINVESTAV- IPN), except for those where reference is made to its author." fig-align="center" width="55%"}
+![Image 2: Hydrological construction and rehabilitation of canals. Photo: Primary Production Laboratory (CINVESTAV- IPN)](channels.png){fig-alt="The photos shown are property of the Primary Production Laboratory (CINVESTAV- IPN), except for those where reference is made to its author." fig-align="center" width="55%"}
 
 -   **Legal Feasibility.-** Carbon accounting in developing countries is facing difficult but also exciting times. Agreements regarding carbon rights will encounter critical roadblocks, and hence need to be exceptionally well-planned. Additionally, with climate change hot on our heels and the Paris Agreement goals swiftly approaching, countries and corporations are increasing their participation to meet their emission reduction targets and net-zero commitments 5. Keeping that in mind, embracing and understanding Mexican laws will become a crucial element for the success of the project.
 
-Now, I would like to define what Blue Carbon is and why it is so important. A newly developed concept, it refers to the carbon stocks sequestered in any coastal ecosystem, like mangroves, seagrasses, and salt marshes. Mangroves are considered one of the most productive and biologically complex ecosystems on earth; that is why they are also regarded as Nature's "superheroes" fighting against climate change. 
+Now, I would like to define what Blue Carbon is and why it is so important. A newly developed concept, it refers to the carbon stocks sequestered in any coastal ecosystem, like mangroves, sea grasses, and salt marshes. Mangroves are considered one of the most productive and biologically complex ecosystems on earth; that is why they are also regarded as Nature's "superheroes" fighting against climate change. 
 
 However, over the last few years, mangroves have been deforested at an alarming rate, due to increased coastal development and other anthropogenic factors. Thus, conservation and restoration of these coastal ecosystems are essential both to sustain the natural environment and to assure their decisive impact on our world. As with coral reefs, mangrove forests allow the development of true environmental health by fostering fisheries and healthy coastal ecosystems, as well as by providing significant protection from natural disasters.
 
@@ -57,14 +57,14 @@ Regarding carbon rights in Mexico, I am presenting two tables to describe some g
 # Add the tables in a nice format
 ```
 
-| Country | **Laws for securing community tenure to forests?** | **Established a national legal framework for carbon trade?** | **Defined carbon rights?** | **Are carbon rights linked to tenure?** |   **Do communities have carbon rights?**    |
+| Country | **Laws for securing community tenure to forests?** | **Established a national legal framework for carbon trade?** | **Defined carbon rights?** | **Are carbon rights linked to tenure?** | **Do communities have carbon rights?** |
 |:----------:|:----------:|:----------:|:----------:|:----------:|:----------:|
-| Mexico  |                        Yes                         |                           Partial                            | Inconclusive or undefined  |        Inconclusive or undefined        | Carbon rights are inconclusive or undefined |
+| Mexico  |                        Yes                         |                           Partial                            | Inconclusive or undefined  |        Inconclusive or undefined        |       Inconclusive or undefined        |
 
 : **Table 1.** Legal frameworks to support carbon-linked transactions.
 
 | **Country** | **Country area where rights of Indigenous  peoples, local communities, and Afro-descendants are legally recognized** | **Country area where rights of Indigenous peoples, local communities, and Afro-descendants are not legally recognized** | **Total percent of land held by Indigenous peoples, local communities, and Afro-descendants** |
-|:---------------:|:-----------------:|:-----------------:|:---------------:|
+|:----------------:|:-----------------:|:-----------------:|:----------------:|
 |   Mexico    |                                                         52 %                                                         |                                                          0.50%                                                          |                                            52.5 %                                             |
 
 : **Table 2.** Legal recognition of community land.

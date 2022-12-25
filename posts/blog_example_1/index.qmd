@@ -26,7 +26,6 @@ shark_y <- c(0,1,2,2,5,5,2,2,5,1,-1,0,0,-2,0,0)
 plot(shark_x,shark_y, type = "o", col= "blue")
 ```
 
-
 In this page will also help me visualize my references, cites, changes, and edits to official posts in my webpage.
 
 Here is some more text. Cite: [@ref_id]
