@@ -4,7 +4,7 @@ editor: visual
 
 ## Resume
 
-[Download PDF](images/Patron_Javier_FirstResume_9_12_22.pdf)
+[Download PDF](images/patron_javier_resume.pdf)
 
 # EDUCATION
 
@@ -12,13 +12,19 @@ editor: visual
 
 ##### *(Expected June 2023)*
 
-Bren School of Environmental Science & Management -- University of California, Santa Barbara (UCSB) *Highlighted Coursework:* Geospatial Analysis and Remote Sensing, Machine Learning in Environmental Science, Data Visualization and Communication, Modeling Environmental Systems
+Bren School of Environmental Science & Management -- UC, Santa Barbara (UCSB).
+
+*Highlighted Coursework:* Geospatial Analysis and Remote Sensing, Machine Learning in Environmental Science, Data Visualization and Communication, Carbon Footprint & Accounting, Environmental Policy Evaluation, Modeling Environmental Systems.
 
 ### *Bachelor of Mechanical and Electrical Engineering*
 
 ##### 3.6 GPA (December 2017)
 
-Universidad Iberoamericana, Mexico City Study Abroad: UNSW Sydney, Australia Highlighted Coursework: The Marine Environment, Global Finance, Sustainable and Renewable Energy, Process Technology and Automation
+Universidad Iberoamericana, Mexico City
+
+Study Abroad: UNSW Sydney, Australia
+
+Highlighted Coursework: Sustainability and Energy Efficiency, Computerized Innovation and Design, The Marine Environment, Global Finance, Sustainable and Renewable Energy, Process Technology and Automation.
 
 # SKILLS & RECOGNITIONS
 
@@ -28,7 +34,7 @@ R, Python, SQL, Git (+ GitHub); Familiar with C++, HTML.
 
 #### *Programming Environments:*
 
-RStudio, Spyder, Visual Studio Code, Jupyter Notebooks.
+RStudio, Google Earth Engine, Visual Studio Code, Jupyter Notebooks.
 
 #### *Technical Coding Skills:*
 
@@ -36,95 +42,85 @@ Geospatial Analysis and Remote Sensing, Data Visualization, Machine Learning.
 
 #### *GE Company Award:*
 
-Nominated as "Best Digital Worker" who embraced the digital deployment in the region as an overachiever and a role model.
+Nominated as "Best Digital Worker" who embraced digital deployment in the region as an overachiever and a role model.
 
-# PROFESSIONAL DEVELOPMENT EXPERIENCE
+# MASTER´S CAPSTONE DATA SCIENCE PROJECT
 
-### *Collaboration with Center of Biodiversity and Conservation*
+### *Developing a Geospatial Model for Kelp Forest Management and Restoration*
 
-##### BCS, Mexico (6/22 -- Present)
+##### Santa Barbara, CA (1/23 -- Present)
+
+Role: Research and Data Scientist **\|** Client: [Ocean Rainforest](https://www.oceanrainforest.com/)
+
+• Synthesize existing data sets from the Santa Barbara Channel to analyze spatial and temporal patterns of kelp variables.
+
+• Generate a dynamic, interactive, open-source, geospatial model to identify locations where kelp productivity and growth are optimized with the goal of identifying sites for kelp restoration in the future.
+
+# EXPERIENCE
+
+### *Intern, Collaboration with Center for Marine Biodiversity and Conservation: [CMBC](https://cmbc.ucsd.edu/)*
+
+##### BCS, Mexico (4/22 -- 8/22)
 
 • Bridging data science and management: An open-source integrated workflow for MPAs.
 
-• Data-driven project mechanism to extract current MPA biodiversity health data from recreational divers
+• Data-driven project mechanism to extract current MPA biodiversity health data from recreational divers.
 
-### *Yachting*
-
-##### Pacific Ocean (7/21 -- 7/22)
-
-• Sailed across the Pacific Ocean as Pro-Sailor in a 52ft racing boat
-
-• Roles: Team Manager, Tactician, and Watch captain
-
-• Competed in 3 international regattas (CaboRace, SoCal300, Transpac Regatta)
-
-### *Coral Farming Voluntary*
-
-##### Corals 4 Conservation. Mamanuca Islands, Fiji (9/21 -- 11/21)
-
-• Replanting over 500 corals.
-
-• Transects data practices.
-
-• Work along with the marine biologists in the coral nursery tables maintenance and mangrove reforestation
-
-# *WORKING EXPERIENCE*
-
-### *Customer Support Lead -- Current by GE*
+### *Customer Support Lead -- Current powered by GE*
 
 ##### *Mexico City, Mexico (6/20 -- 7/21)*
 
-• Global commissioning and tech-support team leader for GE Current´s smart controls software
+Global commissioning and tech-support team leader for GE Current´s smart controls software.
 
 • Manager of the global tech-support team (18 pax). Build and create all procedures needed for the new business strategy and increase their IoT and AI solutions capability.
 
 • \$5.8 USD in revenue recognition o Tech leader for GE Current´s largest gateway programming implementation for energy efficiency and IoT, AI software in over 1250 stores across Mexico.
 
-### *Digital Project Manager -- Current Powered by GE*
+• Technical leader for GE Current´s largest gateway programming implementation for energy efficiency and IoT, AI software in over 1250 stores across Mexico.
+
+### *Digital Project Manager -- Current powered by GE*
 
 ##### *Mexico City, Mexico (1/18 -- 6/20)*
 
-• Lead as a consultant and project manager for all Latin America Turn-Key digital projects:
+Lead as a consultant and project manager for all Latin America Turn-Key digital projects.
 
 • Sole LatAm digital resource for Daintree software implementation. Includes: Internal and external training, solutioning/ troubleshooting, and support for all current and completed projects.
 
-• Central POC. Lead coordination among third-party contractors.
-
-• Managing and reporting project status, budget and risks to GE leadership (LatAm, USA, AUS).
+• Client´s POC and project coordinator for third-party contractors, report project status, budget, and risks to GE leadership (LatAm, USA, AUS). Central POC. Lead coordination among third-party contractors.
 
 ### *Projects Intern -- General Electric*
 
 ##### *Mexico City, Mexico (5/17 -- 6/20)*
 
-• Project Management Intern / Order to Remittance team
+Project Management Intern / Order to Remittance team.
 
 • Hand out weekly reports with the installation contractor, and field quality checks for the installation process.
 
-• GE Lean Challenge competitor leveraging savings based on storage volume and shipment times
+• GE Lean Challenge competitor leveraging savings based on storage volume and shipment times.
 
-# *MASTER´S CAPSTONE DATA SCIENCE PROJECT*
+# *ADDITIONAL EXPERIENCE*
 
-### *NAME OF THE PROJECT (1/23 -- Present)*
+### *Coral Farming Voluntary*
 
-##### *Role: XXX \| Client: XXX*
+##### Corals 4 Conservation. Mamanuca Islands, Fiji (9/21 -- 11/21)
 
-• XXX
+Volunteering program to maintain, analyze and grow the coral nursery tables and mangrove reforestation programs with local marine biologists. Replanted over 500 corals with transects data practices.
 
-• XXX
+### *Yachting*
 
-# *ADDITIONAL*
+##### Pacific Ocean (7/21 -- 7/22)
+
+Sailed across the Pacific Ocean as Pro-Sailor in a 52ft racing boat, as a Team Manager, Tactician, and Watch captain. Participated in 3 international regattas (CaboRace, SoCal300, Transpac Regatta).
+
+# *ADDITIONAL SKILLS AND CERTIFICATIONS*
 
 ### *Languages*
 
 Fluent in English and Spanish
 
-### *Certifications & Training*
+### *Certifications*
 
-PADI Rescue Diver
-
-Mexican Yacht Skipper License
-
-Emergency First Response & CPR Certifications
+PADI Rescue Diver, Mexican Yacht Skipper License, Emergency First Response & CPR Certifications
 
 ### *Citizenship*
 
