@@ -5,7 +5,6 @@ author:
   - name: Javier Patrón
     url: https//javipatron.github.io
 date: 12-20-2022
-preview: img/monthly_fishing.gif
 categories: [MEDS, Python, Ocean]
 
 format: 
@@ -42,6 +41,8 @@ The purpose of this notebook is to explore Global Fishing Watch's dataset showin
 
 The Global Fishing Watch (GFW) provides an open platform to access Automatic Identification System (AIS) data from commercial fishing activities. The AIS is a tracking system that uses transceivers on ships to broadcast vessel information such as unique identification, position, course, and speed. AIS is integrated into all classes of vessels as a collision avoidance tool. However, the GFW collects and processes raw AIS data related to fishing activities to improve records and assign additional information, such as the distance from shore, depth, etc. Then, with the use of machine learning models, they characterize vessels and fishing activities, which constitute some of the products available in their API.
 
+![](img/img3.png){fig-align="center" width="70%"}
+
 One of the most interesting products that the GFW API offers is estimates of fishing effort derived from AIS data. GFW uses machine learning models to classify fishing vessels and predict when they are fishing. First, they identify fishing vessels in the AIS system. Then the vessel is characterized using the best available information and their fleet registry data combined with a characterization model trained on 45,441 marine vessels (both fishing and non-fishing) matched to official fleet registries. Then, GFW estimates the vessel's fishing time and location based on its movement patterns. To do so, a fishing detection model was trained on AIS data from 503 ships and identified fishing activity with \>90% accuracy. The model predicts a score for every AIS position in their database to distinguish fishing positions from non-fishing positions (i.e., navigation time). When the model identifies fishing activity, the time associated with that AIS position is registered as apparent fishing activity. More details about the model can be found on the following GitHub repository ([link)](https://github.com/GlobalFishingWatch/vessel-scoring/blob/master/notebooks/Model-Descriptions.ipynb).
 
 ![](img/img1.png){fig-align="center" width="40%"}
@@ -50,8 +51,6 @@ One of the most interesting products that the GFW API offers is estimates of fis
 
 Once the fishing vessels are identified and their AIS positions have been assigned as fishing positions, the apparent fishing effort can be calculated for any area by summarizing the fishing hours for all fishing vessels in that area. The resulting maps of apparent fishing effort are created by rasterizing all AIS positions into a grid and calculating the total fishing activity in each grid cell. For the present project we will access this type processed data.
 
-![](img/img3.png){fig-align="center" width="80%"}
-
 Pre-processed AIS data can be accessed from their [R package "gfwr"](https://github.com/GlobalFishingWatch/gfwr) or downloaded from their [website](https://globalfishingwatch.org/data-download/) as .cvs files. For this project, we will use some of their existing products related to fishing effort. The data can be accessed from [Google Big Query](https://globalfishingwatch.org/data/our-data-in-bigquery/) in a less processed format and through Google Earth Engine (GEE) for two data subproducts [daily fishing hours](https://developers.google.com/earth-engine/datasets/catalog/GFW_GFF_V1_fishing_hours) and [daily vessel hours](https://developers.google.com/earth-engine/datasets/catalog/GFW_GFF_V1_vessel_hours#image-properties). For accessibility reasons, we will focus on the GEE data related to fishing hours.
 
 Each image in the collection contains daily rasters of fishing effort measured in hours of inferred fishing activity per square kilometer. Data is available for a given flag state and day, over a 5 years period (2012-2017), where each band represent a fishing gear type. The following figure summarizes the image resolution and the available bands.
@@ -59,9 +58,11 @@ Each image in the collection contains daily rasters of fishing effort measured i
 The data used belongs to the [first global assessment of commercial fishing activity](https://www.science.org/doi/full/10.1126/science.aao5646), published in Science by GFW (2018).
 
 ## Dataset Input/Output
-Load in necessary packages.
+
+Load necessary packages.
 
 ```{python}
+#1
 # Import packages
 import ee
 import geemap
@@ -77,6 +78,7 @@ import os
 Authenticate and initialize google earth engine.
 
 ```{python}
+#2
 # Authenticate google earth engine
 #ee.Authenticate()
 # Initialize google earth engine 
@@ -87,6 +89,7 @@ ee.Initialize()
 # Read in the data on fishing hours from google earth engine
 
 ```{python}
+#3
 dataset = ee.ImageCollection('GFW/GFF/V1/fishing_hours')
 # Filter by "WLD" to get all global fishing vessel hours. This includes all countries in the dataset. 
 fishing_effort_ImgCollection = dataset.filterMetadata('country', 'equals', 'WLD')
@@ -97,6 +100,7 @@ SRTM=ee.Image("USGS/GTOPO30")
 We define two areas of interest (AOI) for the time series analysis. The first one relative to the EEZ of Peru stored data/eez_peru/geojson/eez_peru.geojson. The second AOI is a square area comprizing the EEZ and the neigboring waters in the west. We chose to focus on the area of Peru's coast that includes two of the largest fishing ports, Paita and Callao.
 
 ```{python}
+#4
 # Read in EEZ geometry of Peru 
 with open('data/eez_peru/geojson/eez_peru.geojson') as f:
   geojson = json.load(f)
@@ -106,6 +110,7 @@ aoi_1 = ee.Geometry.Polygon([i for i in chain.from_iterable(coords)])
 ```
 
 ```{python}
+#5
 # Defining new AOI including areas beyond the EEZ
 geojson = {
   "type": "FeatureCollection",
@@ -148,8 +153,8 @@ aoi_2 = ee.Geometry.Polygon(coords)
 ```
 
 Define visualization parameters.
-
 ```{python}
+#6
 # Define color palette for visualizations
 trawlersVis = {
   'palette': ['0C276C', '3B9088', 'EEFF00', 'ffffff']
@@ -172,6 +177,7 @@ videoArgs = {
 We can look at the metadata and bands in a couple different ways. The code below is a little overwhelming and difficult to search through.
 
 ```{python}
+#7
 # Extract the first image so we can look at info about the data in general. 
 image_test = dataset.first()
 info = image_test.getInfo()
@@ -181,6 +187,7 @@ print(info)
 This code allows you to see only the band names and numbers in a more readable format.
 
 ```{python}
+#8
 def get_image_ids(gee_snipet):
   x = ee.ImageCollection(gee_snipet)
   first_image = x.first()
@@ -196,6 +203,7 @@ print(get_image_ids('GFW/GFF/V1/fishing_hours'))
 To read on the metadata we will first create an object image from the collection and index their properties. To built this first image we will create and use simple methods over the original data set of GEE.
 
 ```{python}
+#9
 # Creating an image with some filters on time and space
 fishing_image = dataset \
     .filterBounds(aoi_2) \
@@ -219,6 +227,7 @@ print('Metadata properties:' , properties.getInfo())
 The GFW [website](https://globalfishingwatch.org/data-download/datasets/public-fishing-effort) allows us to access individual data sets of AIS-based fishing effort and vessel presence. These data sets are provided in daily `.csv` file format and include the same data that is available through the GFW's Google Earth Engine (GEE) API. By examining these files, we can gain insight into the GEE API metadata, such as the number of fishing hours per cell and day, the fishing state flag, and the type of gear used. This information can help us understand how the data is structured on the GEE fishing hours data set.
 
 ```{python}
+#10
 #Reading the CSV file with the attributes of the metadata
 raw_fishing_vessels = pd.read_csv('2016-01-01.csv')
 raw_fishing_vessels.head()
@@ -228,6 +237,7 @@ raw_fishing_vessels.head()
 From that file, we can group, count, and sort the data to see which countries and gear types are most highly represented for that day.
 
 ```{python}
+#11
 # Check for even representation of vessels
 print(raw_fishing_vessels['flag'].value_counts().sort_values(ascending=False).head())
 print(raw_fishing_vessels['geartype'].value_counts().sort_values(ascending=False).head())
@@ -247,6 +257,7 @@ In addition to providing insights into the importance of the EEZ, our analysis w
 This Visualization map allows us to understand the significance of Exclusive Economic Zones, particularly in the case of Peru where the fishing industry contributes significantly to the country's GDP. By using this map, we can compare the total fishing hours within and outside of Peru's EEZ without considering the flag or gear type. This information is crucial for understanding the impact Peru's EEZ for managing and regulating this sector.
 
 ```{python}
+#12
 # Global fishing effort:
 ## Aggregate 2016 collection to single image of global fishing effort
 effort_all = fishing_effort_ImgCollection.sum()
@@ -285,6 +296,7 @@ map_comparison
 Another aspect worth exploring is the evolution of the fishing effort across the years. The following code allows us to create an animated image of fishing activity in front of Peru. To do this, we will first aggregate the daily data into monthly fishing hour estimates. Then, we will sum up all band values to obtain information about total fishing. With the resulting images, we will create a `.gif` to visualize the temporal and spatial evolution of the fisheries.
 
 ```{python}
+#13
 # monthly sum of fishing effort
 def monthly_Sum (collection, years, months):
   effort_sum = []
@@ -315,12 +327,14 @@ def monthly_images (collection, years, months):
 ```
 
 ```{python}
+#14
 # create list years and months for use in the function
 years = range(2012, 2017)
 months = range(1, 13)
 ```
 
 ```{python}
+#15
 # Create an image collection of fishing effort where each image is a sum of the fishing effort for that month. 
 effort_collection = monthly_Sum(fishing_effort_ImgCollection, years, months)
 # Creates a list of the images from the image collection. 
@@ -341,15 +355,18 @@ len(date_list)
 ```
 
 ```{python}
+#16
 saved_gif = os.path.join(os.path.expanduser('~'), "".join([os.getcwd(),"/img/monthly_fishing.gif"]))
 geemap.download_ee_video(effort_collection, videoArgs, saved_gif)
 ```
 
 ```{python}
+#17
 out_gif = os.path.join(os.path.expanduser('~'), "".join([os.getcwd(),"/img/montly_fishing.gif"]))
 ```
 
 ```{python}
+#18
 geemap.add_text_to_gif(
     saved_gif,
     out_gif,
@@ -362,6 +379,7 @@ geemap.add_text_to_gif(
 ```
 
 ```{python}
+#19
 geemap.show_image(out_gif)
 ```
 
@@ -374,6 +392,7 @@ In order to further analyze the observed fishing differences between the Exclusi
 Since the GEE dataset exceeds the allowed extraction size, we have created a function that calls for the data of interest in order to work with it in `pandas`. The following function allow us to agregate all daily fishing hours values per month. With it we get first a dataset with monthly data instead of daily. Once we have temporarilly aggregated the data, we apply a `reducer` to sum up all fishing gears in one band and get a unique value representing the total fishing hours.
 
 ```{python}
+#20
 # Loop ranges already defined for the gif. 
 # Function to extract data of interest:
 ## .sum() Aggregates collections to single monthly image of global fishing effort
@@ -394,6 +413,7 @@ def monthly_Sum (collection, years, months):
 ```
 
 ```{python}
+#21
 byMonth = monthly_Sum(fishing_effort_ImgCollection,years,months)
 type(byMonth)
 ```
@@ -405,6 +425,7 @@ Our updated image collection now includes monthly fishing data for all gears com
 The following time series correspond to the fishing data contained inside the EEZ. previously saved as `aoi_1`.
 
 ```{python}
+#22
 # Function to summarize fishing monthly data:
 ## Extracting all image values in the collection by the AOI relative to the EEZ
 def aoi_sum(img):
@@ -417,6 +438,7 @@ nested_list = aoi_reduced_imgs.reduceColumns(ee.Reducer.toList(2), ['time','sum'
 ```
 
 ```{python}
+#23
 # Converting GEE data to Pandas and rearranging it for its representation
 df = pd.DataFrame(nested_list.getInfo(), columns=['time','sum'])
 df['sum'] = df['sum'].apply(lambda x: x.get('sum'))
@@ -432,6 +454,7 @@ df['datetime'] = pd.to_datetime(df['datetime'],format="%Y%m%d")
 ```
 
 ```{python}
+#24
 plt.figure(figsize=(10, 6), dpi=300)   # create a new figure, set size and resolution (dpi)
 plt.fill_between(df['datetime'],df['total_fishing_hours'])   # add data to the plot
 plt.title("Fishing hours inside Peru's EEZ", fontsize=16)
@@ -446,6 +469,7 @@ To characterize the fishing activity outside of the EEZ, we need to define a new
 The map below shows the new area of interest and the data across a the 5-year time period that will be included in the time series analysis.
 
 ```{python}
+#25
 # Fishing effort in Peru's EEZ
 effort_AOI2 = fishing_effort_ImgCollection.filterBounds(aoi_2).map(lambda image: image.clip(aoi_2))
 ## Aggregate 2016 collection to single image of global fishing effort
@@ -465,6 +489,7 @@ Map
 ```
 
 ```{python}
+#26
 # Function to summarize fishing monthly data inside and outside the EEZ
 def aoi_sum(img):
     sum = img.reduceRegion(reducer=ee.Reducer.sum(), geometry=aoi_2, 
@@ -495,6 +520,7 @@ plt.ylabel('Total hours', fontsize=14)
 To compare fishing efforts within and outside, we can subtract the total fishing hours from the previous data frames. This will give us the actual fishing effort outside the EEZ, which we can then represent alongside fishing within the EEZ in an area chart for easy visualization and comparison.
 
 ```{python}
+#27
 # Combining both df
 df["total_fishing_hours_outside"] = abs(df["total_fishing_hours"] - df2["total_fishing_hours"])
 df.rename(columns = {'total_fishing_hours':'total_fishing_hours_inside'}, inplace = True) 
@@ -503,6 +529,7 @@ total_fishing_df.head()
 ```
 
 ```{python}
+#28
 plt.figure(figsize=(10, 6), dpi=300)   
 plt.stackplot(total_fishing_df['datetime'],
               [total_fishing_df['total_fishing_hours_inside'], total_fishing_df['total_fishing_hours_outside']],
