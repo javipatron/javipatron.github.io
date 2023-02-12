@@ -58,13 +58,13 @@ Regarding carbon rights in Mexico, I am presenting two tables to describe some g
 ```
 
 | Country | **Laws for securing community tenure to forests?** | **Established a national legal framework for carbon trade?** | **Defined carbon rights?** | **Are carbon rights linked to tenure?** | **Do communities have carbon rights?** |
-|:----------:|:----------:|:----------:|:----------:|:----------:|:----------:|
+|:-------:|:--------------------------------------------------:|:------------------------------------------------------------:|:--------------------------:|:---------------------------------------:|:--------------------------------------:|
 | Mexico  |                        Yes                         |                           Partial                            | Inconclusive or undefined  |        Inconclusive or undefined        |       Inconclusive or undefined        |
 
 : **Table 1.** Legal frameworks to support carbon-linked transactions.
 
 | **Country** | **Country area where rights of Indigenous  peoples, local communities, and Afro-descendants are legally recognized** | **Country area where rights of Indigenous peoples, local communities, and Afro-descendants are not legally recognized** | **Total percent of land held by Indigenous peoples, local communities, and Afro-descendants** |
-|:----------------:|:-----------------:|:-----------------:|:----------------:|
+|:-----------:|:--------------------------------------------------------------------------------------------------------------------:|:-----------------------------------------------------------------------------------------------------------------------:|:---------------------------------------------------------------------------------------------:|
 |   Mexico    |                                                         52 %                                                         |                                                          0.50%                                                          |                                            52.5 %                                             |
 
 : **Table 2.** Legal recognition of community land.
