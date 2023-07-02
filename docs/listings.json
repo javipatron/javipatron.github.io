@@ -2,12 +2,14 @@
   {
     "listing": "/posts.html",
     "items": [
-      "/posts/machine_learning/index.html",
+      "/posts/env-modeling/index.html",
+      "/posts/text-analysis/index.html",
+      "/posts/machine-learning/index.html",
       "/posts/ethics-post/index.html",
-      "/posts/eez_spatial/index.html",
-      "/posts/stats_final/index.html",
-      "/posts/texas_outage/index.html",
-      "/posts/blog_example_1/index.html"
+      "/posts/eez-spatial/index.html",
+      "/posts/stats-final/index.html",
+      "/posts/texas-outage/index.html",
+      "/posts/blog-example/index.html"
     ]
   }
 ]

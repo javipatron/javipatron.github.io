@@ -4,13 +4,13 @@ editor: visual
 
 ## Resume
 
-[Download PDF](images/patron_javier_resume.pdf)
+[Download PDF](images/patron-javier-resume.pdf)
 
 # EDUCATION
 
 ### *Master of Environmental Data Science*
 
-##### *(Expected June 2023)*
+##### June 2023
 
 Bren School of Environmental Science & Management -- UC, Santa Barbara (UCSB).
 
@@ -18,7 +18,7 @@ Bren School of Environmental Science & Management -- UC, Santa Barbara (UCSB).
 
 ### *Bachelor of Mechanical and Electrical Engineering*
 
-##### 3.6 GPA (December 2017)
+##### December 2017
 
 Universidad Iberoamericana, Mexico City
 
@@ -46,9 +46,9 @@ Nominated as "Best Digital Worker" who embraced digital deployment in the region
 
 # MASTER´S CAPSTONE DATA SCIENCE PROJECT
 
-### *Developing a Geospatial Model for Kelp Forest Management and Restoration*
+### *Developing a Data Pipeline for Kelp Forest Management and Cultivation*
 
-##### Santa Barbara, CA (1/23 -- Present)
+##### Santa Barbara, CA (1/23 -- 6/23)
 
 Role: Research and Data Scientist **\|** Client: [Ocean Rainforest](https://www.oceanrainforest.com/)
 
@@ -58,6 +58,18 @@ Role: Research and Data Scientist **\|** Client: [Ocean Rainforest](https://www.
 
 # EXPERIENCE
 
+### **Environmental Data Analyst -- Silvestrum Climate Associates,** remote (7/23 -- Present)
+
+-   Specialized in carbon finance and environmental carbon accountability, responsible for promoting global carbon finance initiatives through the strategic utilization of methodologies and techniques.
+
+-   Collaborating with scientists, stakeholders, and government officials to enhance Silvestrum's environmental data analysis capabilities while actively participating in fieldwork, worldwide projects, and international workshops.
+
+### **Intern, Data Project Manager -- Silvestrum Climate Associates,** remote (1/23 -- 6/23)
+
+-   Focusing on carbon accounting methodologies, statistical modeling, and empirical analysis for blue carbon ecosystems and carbon initiatives.
+
+-   Collaborating with a diverse team of experts in carbon science, land use management, and remote sensing, contributing to analysis, report writing, and project development and implementation.
+
 ### *Intern, Collaboration with Center for Marine Biodiversity and Conservation: [CMBC](https://cmbc.ucsd.edu/)*
 
 ##### BCS, Mexico (4/22 -- 8/22)
@@ -66,7 +78,7 @@ Role: Research and Data Scientist **\|** Client: [Ocean Rainforest](https://www.
 
 • Data-driven project mechanism to extract current MPA biodiversity health data from recreational divers.
 
-### *Customer Support Lead -- Current powered by GE*
+### *Customer Support Lead -- [Current powered by GE](https://www.gecurrent.com/)*
 
 ##### *Mexico City, Mexico (6/20 -- 7/21)*
 
@@ -98,11 +110,11 @@ Project Management Intern / Order to Remittance team.
 
 • GE Lean Challenge competitor leveraging savings based on storage volume and shipment times.
 
-# *ADDITIONAL EXPERIENCE*
+# ADDITIONAL EXPERIENCE
 
 ### *Coral Farming Voluntary*
 
-##### Corals 4 Conservation. Mamanuca Islands, Fiji (9/21 -- 11/21)
+##### [Corals 4 Conservation](https://corals4conservation.org/). Mamanuca Islands, Fiji (9/21 -- 11/21)
 
 Volunteering program to maintain, analyze and grow the coral nursery tables and mangrove reforestation programs with local marine biologists. Replanted over 500 corals with transects data practices.
 
@@ -112,7 +124,7 @@ Volunteering program to maintain, analyze and grow the coral nursery tables and 
 
 Sailed across the Pacific Ocean as Pro-Sailor in a 52ft racing boat, as a Team Manager, Tactician, and Watch captain. Participated in 3 international regattas (CaboRace, SoCal300, Transpac Regatta).
 
-# *ADDITIONAL SKILLS AND CERTIFICATIONS*
+# ADDITIONAL SKILLS AND CERTIFICATIONS
 
 ### *Languages*
 

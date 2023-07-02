@@ -1,6 +1,6 @@
 ---
 title: "Javier Patrón" 
-image: images/javilighthouse3.jpg
+image: images/kelp-javi.jpg
 page-layout: full
 about: 
   template: jolla
@@ -15,6 +15,6 @@ about:
       href: jpatron\@ucsb.edu
 ---
 
-#### Data Science Master´s Student
+#### Engineer &
 
-#### Environmental Engineer
+#### Environmental Data Scientist

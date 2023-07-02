@@ -1,0 +1,328 @@
+---
+title: "Sentiment Analysis of Blue Carbon Discourse"
+description: "An investigation of the articles from the New York Times and the libraries of the University of California to examine the emotional tone associated with blue carbon trends, specifically investigating the impact on perceptions of environmental policies and government initiatives."
+
+author:
+  name: Javier Patrón
+  affiliation: MEDS
+  affiliation-url: http://ucsb-meds.github.io
+date: 2023-04-18
+
+format:
+  html:
+    code-fold: true
+    code-summary: "Show code"
+code-overflow: wrap
+code-block-bg: true
+code-block-border-left: "#6B5A75"
+categories: [MEDS, Machine Learning, R]
+citation: 
+  url: https://github.com/javipatron
+image: newspaper.jpg
+---
+
+Sentiment analysis is a tool for assessing the mood of a piece of text. For example, we can use sentiment analysis to understand public perceptions of topics in environmental policy like energy, climate, and conservation. In this post we will access the Nexis Uni Database through the UCSB library <https://www.library.ucsb.edu/research/db/211>. Then we will choose a key search term or terms to define a set of articles.
+
+In this lab, I will be exploring the words *'blue cabron'* and *'mangrove'*. I am particularly interested in investigating the relationship between positivism and negativism as they relate to political and government initiatives in the environment.
+
+[Here](https://search.library.ucsb.edu/discovery/search?query=any,contains,blue%20carbon&tab=Everything&search_scope=DN_and_CI&vid=01UCSB_INST:UCSB&lang=en&offset=0) is a link that takes you to the related articles from the University of California data base.
+
+Use your search term along with appropriate filters to obtain and download a batch of at least 100 full text search results (.docx)
+
+### Part 1: Load the data
+
+Read your Nexis article document into RStudio.
+
+```{r setup, include=FALSE}
+library(LexisNexisTools)
+library(dplyr)
+library(readr)
+library(stringr)
+library(here)
+library(tidytext)
+library(tidyr)
+library(ggplot2)
+library(scales)
+library(kableExtra)
+```
+
+```{r, include =F}
+
+# Set my working directory
+#setwd(here("lab2_files"))
+
+
+# Get the 148 articles that I previously downloaded from the UCSB Library Portal using the Nexis Uni Tool
+my_files <- list.files(pattern = ".docx", 
+                       path = "/Users/javipatron/Documents/MEDS/Courses/eds231/text_modeling-lab2/lab2_files",
+                       full.names = TRUE, 
+                       recursive = TRUE, 
+                       ignore.case = TRUE)
+
+# We'll use the {LexisNexisTools} package to handle the documents from our Nexis search.
+
+
+```
+
+```{r, include = F}
+text_dat <- lnt_read(my_files)
+```
+
+Now we will use the full text of the articles for the analysis. First clean any artifacts of the data collection process (hint: this type of thing should be removed: "Apr 04, 2022 (Biofuels Digest: <http://www.biofuelsdigest.com/> Delivered by Newstex"))
+
+It appears that the composition of the text is not being impacted by any artifacts in this particular section, so im going to leave the tibbles as they come.
+
+### Part 2: Explore and Clean
+
+Lets explore your data a bit and replicate the analyses above presented in class (Lab2)
+
+```{r}
+# The @ is for indexing within tibbles
+meta_df <- text_dat@meta
+articles_df <- text_dat@articles
+paragraphs_df <- text_dat@paragraphs
+
+dat2 <- tibble(Date = meta_df$Date, 
+              Headline = meta_df$Headline, 
+              id = text_dat@articles$ID, 
+              text = text_dat@articles$Article)
+
+```
+
+```{r, echo = F}
+# create a list of all the words in the dictionary and if they have a sentiment word attached like "positive" or "negative". download that information from the "bing" data set.
+
+bing_sent <- get_sentiments('bing') #grab the bing sentiment lexicon from tidytext
+
+# Create a new data frame that has a row for each word
+text_words <- dat2 |> 
+  unnest_tokens(output = word, 
+                input = text,
+                token = 'words')
+
+# Create a new data frame of all the words of the articles but cleaned and organized. 
+sentiment_words <- text_words |> 
+  anti_join(stop_words) |> # Removing the useless words. (From 95.8k to 60.8k words)
+  inner_join(bing_sent)  |> # Adding the sentiment related column. (From 60.8k to 2.8k words)
+  mutate(sent_num = case_when(sentiment == "negative" ~ -1,
+                              sentiment == "positive" ~ 1))# Adding a number of sentiment
+```
+
+### Part 3: Score
+
+Next, we will calculate the average sentiment score of words in the filtered articles using the stop_words and bing_sentiment datasets.
+
+```{r}
+mean(sentiment_words$sent_num)
+```
+
+### Part 4: Statistic Analysis
+
+Now lets calculate mean sentiment (by word polarity) across articles
+
+```{r}
+sentiment_article <- sentiment_words |> 
+  group_by(Headline) |> 
+  count(id, sentiment) |> 
+  pivot_wider(names_from = sentiment, 
+              values_from = n,
+              values_fill = 0) |> 
+  mutate(polarity = positive - negative)
+
+mean(sentiment_article$polarity)
+
+```
+
+Upon this analysis, it is evident that the average sentiment score per article (9.63) is considerably higher than that of words (0.43).
+
+### Part 5: Examination
+
+Now, let's examine the sentiment distribution of articles by plotting a graph, in order to visualize the proportion of positive and negative articles.
+
+```{r}
+ggplot(sentiment_article, aes(x = id)) +
+  geom_col(aes(y = positive, fill = "Positive"), alpha = 0.8) +
+  geom_col(aes(y = negative, fill = "Negative"), alpha = 0.8) +
+  labs(title = "Sentiment Analysis",
+       subtitle = "Positive vs. negative articles",
+       caption = "Articles related words: Blue Carbon/ Mangrove", 
+       y = "Sentiment Score",
+       x = "ID of the Article",
+       fill = "Sentiment") +
+  scale_fill_manual(values = c("darkorange", "darkblue"), 
+                    labels = c("Negative", "Positive"), 
+                    name = "Sentiment") 
+
+```
+
+### Part 6: Plots on emotions
+
+Now, lets look at the nrc contribution to emotion by word plots. Identify and reclassify or remove at least one term that gives misleading results in your context.
+
+```{r}
+# Create a new data frame with the sentiments per word.
+word_sentiment <- get_sentiments("nrc") |> 
+  filter(word != "blue") #Remove the word blue because is misleading
+```
+
+```{r, include = F}
+#str_replace(text, "blue", "joy") |> 
+#add_row(word = "blue", sentiment = "positive")
+
+# Create a new data frame that has the text_words with the column of nrc sentiment
+nrc_word_count <- text_words |> 
+  anti_join(stop_words, by= "word") |> # Removing the useless words. (From 95.8k to 60.8k words)
+  inner_join(word_sentiment) |> # Adding the sentiment related column. (From 60.8k to 19k words)
+  count(word, sentiment, sort = T) #Grouping by word and adding the count value. (From 19k to 1.8k words)
+
+```
+
+```{r, echo=FALSE}
+
+sentiment_group_counts <- text_words |> 
+  anti_join(stop_words, by = "word") |> 
+  group_by(id) |> 
+  inner_join(word_sentiment) |> 
+  group_by(sentiment) |> 
+  count(word, sentiment, sort = T)
+
+sentiment_group_counts |> 
+  group_by(sentiment) |> 
+  slice_max(n,n= 5) |> 
+  ungroup() |> 
+  mutate(word = reorder(word,n)) |> 
+  ggplot(aes(n, word,fill = sentiment)) +
+  geom_col(show.legend = F) +
+  facet_wrap(~sentiment, scales = "free_y") +
+  labs(x= "Contribution to Sentiment", 
+       y = NULL)
+  
+```
+
+### Part 7: Plots over time
+
+Plot the amount of nrc emotion words as a percentage of all the emotion words used each day (aggregate text from articles published on the same day).
+
+How does the distribution of emotion words change over time? Can you think of any reason this would be the case? Plot all the emotion word from the article. What percentage is for the emotion and how it changes over time.
+
+**Fun Fact:** The NRC lexicon was created by selecting 10,000 words from a thesaurus and asking a set of five questions about each word to reveal associated emotions and polarity. Over 50,000 questions were asked to over 2,000 people on Amazon's Mechanical Turk website, resulting in a comprehensive word-emotion lexicon for over 10,000 words. The Turkers were paid 4 cents for each set of properly answered questions.
+
+```{r}
+words_time <- text_words |>
+  select(id , date = Date, word) |> 
+  mutate(date = as.Date(date, format = "%B %d, %Y")) |> 
+  anti_join(stop_words, by= "word") |> 
+  inner_join(bing_sent) |> 
+  rename(bing = sentiment) |> 
+  mutate(bing_num = case_when(bing == "negative" ~ -1,
+                              bing == "positive" ~ 1)) |> 
+  inner_join(word_sentiment) |> 
+  rename(nrc = sentiment)
+```
+
+```{r}
+colors <- c("positive" = "green", 
+            "anticipation" = "cyan2", 
+            "joy" = "pink", 
+            "trust" = "coral",
+            "negative" = "red", 
+            "sadness" = "gray30", 
+            "anger" = "darkorchid3", 
+            "disgust" = "black",
+            "fear" = "darkred", 
+            "surprise" = "gold")
+```
+
+```{r}
+words_time %>%
+  filter(date >= as.Date("2021-1-1")) |> 
+  group_by(date) %>%
+  summarise(bing_num = sum(bing_num)) %>%
+  ggplot(aes(x = date, y = bing_num)) +
+  geom_line(color = "#6C8EBF", size = 1.2) +
+  geom_hline(yintercept = 0, color = "gray10", size = 0.5, alpha = 0.6 ) +
+  geom_smooth(method = lm, 
+              se = FALSE, 
+              color = "#E47E72") +
+  labs(x = "Date", y = "Sentiment score", 
+       title = "Sentiment Analysis over Time", 
+       subtitle = "Bing lexicon classification", 
+       caption = "Source: library.ucsb ") +
+  theme_classic() +
+  theme(plot.title = element_text(face = "bold", size = 18),  
+        axis.text = element_text(size = 12), 
+        axis.title = element_text(size = 14),
+        axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1)) +
+  scale_x_date(date_labels = "%b %Y", 
+               breaks = seq(as.Date("2021-01-01"), 
+                            as.Date("2023-04-16"), by = "1 month"))
+
+```
+
+This plot above shows the overall sentiment per day, based on sentiment analysis using the Bing lexicon classification method. The sentiment score is aggregated for each day by summing the scores of individual words analyzed that day, and the resulting plot shows the trend in sentiment over time. The x-axis shows the date range from January 1st, 2021 to April 16th, 2023, and the y-axis shows the sentiment score. The plot suggests that there have been fluctuations in sentiment over time, with both positive and negative trends observed during the period analyzed.
+
+```{r, warning = F}
+words_time |> 
+  filter(nrc %in% c("anticipation", "joy", "trust", "sadness", "anger", "disgust" ,"fear", "surprise")) |> 
+  group_by(date, nrc) |> 
+  summarise(word_appearance = n()) |> 
+  ungroup() |> 
+  group_by(date) |> 
+  mutate(tot_appearance = sum(word_appearance)) |> 
+  mutate(proportion = word_appearance/tot_appearance) |> 
+  ggplot(aes(x=date, y= proportion, color = nrc)) +
+  geom_line(alpha = 0.2) +
+  geom_smooth(method = "loess",
+              se = F,
+              span = 0.5,
+              alpha = 0.4) +
+  labs(x = "Date", 
+       y = "Sentiment Proportion", 
+       color = "NRC Sentiment", 
+       title = "Sentiment Proportion over Time", 
+       subtitle = "NRC word classification", 
+       caption = "Source: library.ucsb ") 
+
+```
+
+The plot above displays the distribution of NRC sentiments used over time, enabling an examination of any potential correlations. To enhance clarity, I have removed the `postive`, and `negative` sentiments, and used the geom_smooth() function to create trend lines that are easier to interpret. This is particularly useful due to the recent high influx of articles related to blue carbon, which can make the line graphs difficult to decipher. Nevertheless, I have made these lines transparent (alpha = 0.2) in the background to ensure that the trends remain visible. Upon analyzing the plot, two significant trends become apparent: surprise is consistently low, while trust and sadness are consistently high.
+
+Below, you can see the total distribution of sentiments across our database.
+
+```{r}
+# Compute the proportion of each category
+nrc_proportions <- words_time %>%
+  count(nrc) %>%
+  mutate(proportion = n / sum(n))
+
+nrc_proportions %>%
+  mutate(proportion = sprintf("%.2f%%", proportion * 100)) %>% # Multiply by 100 and format as percentage
+  kable(format = "html", align = "c") %>%
+  kable_styling(full_width = F, 
+                bootstrap_options = "striped", 
+                position = "center", 
+                font_size = 16)
+
+```
+
+```{r, warning = F}
+words_time %>%
+  group_by(date, nrc) %>%
+  summarise(appearance = n()) %>%
+  group_by(nrc) %>%
+  mutate(cum_appearance = cumsum(appearance)) %>%
+  ungroup() %>%
+  arrange(desc(cum_appearance)) |> 
+  ggplot(aes(x = date, y = cum_appearance, color = nrc)) +
+  geom_line(alpha = 0.8) +
+   scale_color_manual(values = colors) +
+  labs(x = "Date", 
+       y = "Cumulative Appearances", 
+       color = "NRC Sentiment", 
+       title = "Sentiment Cumulative Analysis over Time", 
+       subtitle = "NRC classification", 
+       caption = "Source: library.ucsb ")
+
+```
+
+In the above graph, I have calculated a cumulative score for each sentiment to gain insight into the overall trends of words and vibes used in the articles. This plot also highlights the high influx of articles in recent years. As anticipated, the positive and negative sentiments have the highest scores, but the positive line surpasses the negative line by a significant margin. Additionally, there are noteworthy correlations between certain words and the sentiments of trust, joy, and sadness, which have seen increased usage in recent times. Conversely, surprise and disgust are used less frequently, representing the less common sentiments.
