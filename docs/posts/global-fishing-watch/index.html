@@ -1,0 +1,1683 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.0.37">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Javier Patrón">
+<meta name="dcterms.date" content="2022-12-20">
+<meta name="description" content="Assessing Trends in Fishing Effort Inside and Outside Peru’s EEZ Using AIS Data from Global Fishing Watch.">
+
+<title>Javier Patrón - Analyzing the Economic Exclusive Zone in Perú</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+<script src="https://unpkg.com/@jupyter-widgets/html-manager@*/dist/embed-amd.js" crossorigin="anonymous"></script>
+
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Javier Patrón</span>
+  </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html">Home</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../bio.html">Bio</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../posts.html">Posts</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../resume.html">Resume</a>
+  </li>  
+</ul>
+              <div class="quarto-toggle-container">
+                  <a href="" class="quarto-color-scheme-toggle nav-link" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+              </div>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Analyzing the Economic Exclusive Zone in Perú</h1>
+                  <div>
+        <div class="description">
+          Assessing Trends in Fishing Effort Inside and Outside Peru’s EEZ Using AIS Data from Global Fishing Watch.
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">MEDS</div>
+                <div class="quarto-category">Python</div>
+                <div class="quarto-category">Ocean</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Javier Patrón </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">December 20, 2022</p>
+      </div>
+    </div>
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#assessing-trends-in-fishing-effort-inside-and-outside-perus-eez-using-ais-data-from-global-fishing-watch." id="toc-assessing-trends-in-fishing-effort-inside-and-outside-perus-eez-using-ais-data-from-global-fishing-watch." class="nav-link active" data-scroll-target="#assessing-trends-in-fishing-effort-inside-and-outside-perus-eez-using-ais-data-from-global-fishing-watch.">Assessing Trends in Fishing Effort Inside and Outside Peru’s EEZ Using AIS Data from Global Fishing Watch.</a>
+  <ul class="collapse">
+  <li><a href="#authors" id="toc-authors" class="nav-link" data-scroll-target="#authors">Authors</a></li>
+  <li><a href="#table-of-contents" id="toc-table-of-contents" class="nav-link" data-scroll-target="#table-of-contents">Table of Contents</a></li>
+  <li><a href="#notebook-purpose" id="toc-notebook-purpose" class="nav-link" data-scroll-target="#notebook-purpose">Notebook Purpose</a></li>
+  <li><a href="#dataset-description" id="toc-dataset-description" class="nav-link" data-scroll-target="#dataset-description">Dataset Description</a></li>
+  <li><a href="#dataset-inputoutput" id="toc-dataset-inputoutput" class="nav-link" data-scroll-target="#dataset-inputoutput">Dataset Input/Output</a></li>
+  </ul></li>
+  <li><a href="#read-in-the-data-on-fishing-hours-from-google-earth-engine" id="toc-read-in-the-data-on-fishing-hours-from-google-earth-engine" class="nav-link" data-scroll-target="#read-in-the-data-on-fishing-hours-from-google-earth-engine">Read in the data on fishing hours from google earth engine</a>
+  <ul class="collapse">
+  <li><a href="#metadata-display" id="toc-metadata-display" class="nav-link" data-scroll-target="#metadata-display">Metadata Display</a></li>
+  <li><a href="#metadata-csv-description" id="toc-metadata-csv-description" class="nav-link" data-scroll-target="#metadata-csv-description">Metadata CSV Description:</a></li>
+  <li><a href="#peruvian-fisheries-use-case-example" id="toc-peruvian-fisheries-use-case-example" class="nav-link" data-scroll-target="#peruvian-fisheries-use-case-example">Peruvian Fisheries Use Case Example</a>
+  <ul class="collapse">
+  <li><a href="#visualizing-peruvian-fisheries" id="toc-visualizing-peruvian-fisheries" class="nav-link" data-scroll-target="#visualizing-peruvian-fisheries">Visualizing Peruvian fisheries</a></li>
+  <li><a href="#generating-a-gif-of-monthly-fishing-effort-off-of-perus-coast." id="toc-generating-a-gif-of-monthly-fishing-effort-off-of-perus-coast." class="nav-link" data-scroll-target="#generating-a-gif-of-monthly-fishing-effort-off-of-perus-coast.">Generating a Gif of Monthly Fishing Effort off of Peru’s Coast.</a></li>
+  <li><a href="#quantifying-fishing-hours-inside-and-outside-the-eez" id="toc-quantifying-fishing-hours-inside-and-outside-the-eez" class="nav-link" data-scroll-target="#quantifying-fishing-hours-inside-and-outside-the-eez">Quantifying fishing hours inside and outside the EEZ</a></li>
+  <li><a href="#improving-our-analysis" id="toc-improving-our-analysis" class="nav-link" data-scroll-target="#improving-our-analysis">Improving our analysis</a></li>
+  </ul></li>
+  <li><a href="#binder-environment" id="toc-binder-environment" class="nav-link" data-scroll-target="#binder-environment">Binder Environment</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+<section id="assessing-trends-in-fishing-effort-inside-and-outside-perus-eez-using-ais-data-from-global-fishing-watch." class="level1">
+<h1>Assessing Trends in Fishing Effort Inside and Outside Peru’s EEZ Using AIS Data from Global Fishing Watch.</h1>
+<section id="authors" class="level3">
+<h3 class="anchored" data-anchor-id="authors">Authors</h3>
+<ul>
+<li>Javier Patrón jpatron@ucsb.edu</li>
+<li>Jessica French jfrench@bren.ucsb.edu</li>
+<li>Pol Carbó Mestre pcarbomestre@ucsb.edu</li>
+</ul>
+</section>
+<section id="table-of-contents" class="level2">
+<h2 class="anchored" data-anchor-id="table-of-contents">Table of Contents</h2>
+<ol type="1">
+<li>Purpose(#purpose)</li>
+<li>Dataset Description(#overview)</li>
+<li>Data I/O(#io)</li>
+<li>Metadata Display and Basic Visualization(#display)</li>
+<li>Use Case Examples(#usecases)</li>
+<li>Create Binder Environment(#binder)</li>
+<li><a href="#references">References</a></li>
+</ol>
+</section>
+<section id="notebook-purpose" class="level2">
+<h2 class="anchored" data-anchor-id="notebook-purpose">Notebook Purpose</h2>
+<p>The purpose of this notebook is to explore Global Fishing Watch’s dataset showing daily fishing effort as inferred fishing hours daily. This notebook will show how to read in the dataset, visualize the data using google earth engine, and give an overview of how the data can be used to explore differences in fishing effort within and outside Peru’s EEZ and how fishing effort is impacted by El Niño Southern Oscillation (ENSO) events.</p>
+</section>
+<section id="dataset-description" class="level2">
+<h2 class="anchored" data-anchor-id="dataset-description">Dataset Description</h2>
+<p>The Global Fishing Watch (GFW) provides an open platform to access Automatic Identification System (AIS) data from commercial fishing activities. The AIS is a tracking system that uses transceivers on ships to broadcast vessel information such as unique identification, position, course, and speed. AIS is integrated into all classes of vessels as a collision avoidance tool. However, the GFW collects and processes raw AIS data related to fishing activities to improve records and assign additional information, such as the distance from shore, depth, etc. Then, with the use of machine learning models, they characterize vessels and fishing activities, which constitute some of the products available in their API.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/img3.png" class="img-fluid figure-img" style="width:70.0%"></p>
+</figure>
+</div>
+<p>One of the most interesting products that the GFW API offers is estimates of fishing effort derived from AIS data. GFW uses machine learning models to classify fishing vessels and predict when they are fishing. First, they identify fishing vessels in the AIS system. Then the vessel is characterized using the best available information and their fleet registry data combined with a characterization model trained on 45,441 marine vessels (both fishing and non-fishing) matched to official fleet registries. Then, GFW estimates the vessel’s fishing time and location based on its movement patterns. To do so, a fishing detection model was trained on AIS data from 503 ships and identified fishing activity with &gt;90% accuracy. The model predicts a score for every AIS position in their database to distinguish fishing positions from non-fishing positions (i.e., navigation time). When the model identifies fishing activity, the time associated with that AIS position is registered as apparent fishing activity. More details about the model can be found on the following GitHub repository (<a href="https://github.com/GlobalFishingWatch/vessel-scoring/blob/master/notebooks/Model-Descriptions.ipynb">link)</a>.</p>
+<p><img src="img/img1.png" class="img-fluid">{fig-align= “center” width= “40%”}</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/img2.png" class="img-fluid figure-img" style="width:40.0%"></p>
+</figure>
+</div>
+<p>Once the fishing vessels are identified and their AIS positions have been assigned as fishing positions, the apparent fishing effort can be calculated for any area by summarizing the fishing hours for all fishing vessels in that area. The resulting maps of apparent fishing effort are created by rasterizing all AIS positions into a grid and calculating the total fishing activity in each grid cell. For the present project we will access this type processed data.</p>
+<p>Pre-processed AIS data can be accessed from their <a href="https://github.com/GlobalFishingWatch/gfwr">R package “gfwr”</a> or downloaded from their <a href="https://globalfishingwatch.org/data-download/">website</a> as .cvs files. For this project, we will use some of their existing products related to fishing effort. The data can be accessed from <a href="https://globalfishingwatch.org/data/our-data-in-bigquery/">Google Big Query</a> in a less processed format and through Google Earth Engine (GEE) for two data subproducts <a href="https://developers.google.com/earth-engine/datasets/catalog/GFW_GFF_V1_fishing_hours">daily fishing hours</a> and <a href="https://developers.google.com/earth-engine/datasets/catalog/GFW_GFF_V1_vessel_hours#image-properties">daily vessel hours</a>. For accessibility reasons, we will focus on the GEE data related to fishing hours.</p>
+<p>Each image in the collection contains daily rasters of fishing effort measured in hours of inferred fishing activity per square kilometer. Data is available for a given flag state and day, over a 5 years period (2012-2017), where each band represent a fishing gear type. The following figure summarizes the image resolution and the available bands.</p>
+<p>The data used belongs to the <a href="https://www.science.org/doi/full/10.1126/science.aao5646">first global assessment of commercial fishing activity</a>, published in Science by GFW (2018).</p>
+</section>
+<section id="dataset-inputoutput" class="level2">
+<h2 class="anchored" data-anchor-id="dataset-inputoutput">Dataset Input/Output</h2>
+<p>Load necessary packages.</p>
+<div class="cell" data-execution_count="7">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#1</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Import packages</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> ee</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> geemap.foliumap <span class="im">as</span> geemap</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> json</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> itertools <span class="im">import</span> chain</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> rasterio</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Authenticate and initialize google earth engine.</p>
+<div class="cell" data-execution_count="8">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#2</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Authenticate google earth engine</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co">#ee.Authenticate()</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize google earth engine </span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>ee.Initialize()</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co">#Read in the data from google earth engine and filter metadata to include all countries.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+</section>
+<section id="read-in-the-data-on-fishing-hours-from-google-earth-engine" class="level1">
+<h1>Read in the data on fishing hours from google earth engine</h1>
+<div class="cell" data-execution_count="9">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#3</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>dataset <span class="op">=</span> ee.ImageCollection(<span class="st">'GFW/GFF/V1/fishing_hours'</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter by "WLD" to get all global fishing vessel hours. This includes all countries in the dataset. </span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>fishing_effort_ImgCollection <span class="op">=</span> dataset.filterMetadata(<span class="st">'country'</span>, <span class="st">'equals'</span>, <span class="st">'WLD'</span>)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co"># SRTM data to use for background in the gif.</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>SRTM<span class="op">=</span>ee.Image(<span class="st">"USGS/GTOPO30"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>We define two areas of interest (AOI) for the time series analysis. The first one relative to the EEZ of Peru stored data/eez_peru/geojson/eez_peru.geojson. The second AOI is a square area comprizing the EEZ and the neigboring waters in the west. We chose to focus on the area of Peru’s coast that includes two of the largest fishing ports, Paita and Callao.</p>
+<div class="cell" data-execution_count="10">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">#4</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Read in EEZ geometry of Peru </span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">'data/eez_peru/geojson/eez_peru.geojson'</span>) <span class="im">as</span> f:</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  geojson <span class="op">=</span> json.load(f)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>coords <span class="op">=</span> geojson[<span class="st">"features"</span>][<span class="dv">0</span>][<span class="st">"geometry"</span>][<span class="st">"coordinates"</span>]</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co">## The resulting List from the geojson file has an extra bracket that we have to remove to be read it as a polygon</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>aoi_1 <span class="op">=</span> ee.Geometry.Polygon([i <span class="cf">for</span> i <span class="kw">in</span> chain.from_iterable(coords)])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell" data-execution_count="11">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#5</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Defining new AOI including areas beyond the EEZ</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>geojson <span class="op">=</span> {</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"type"</span>: <span class="st">"FeatureCollection"</span>,</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">"features"</span>: [</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    {</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>      <span class="st">"type"</span>: <span class="st">"Feature"</span>,</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>      <span class="st">"properties"</span>: {},</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>      <span class="st">"geometry"</span>: {</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>        <span class="st">"coordinates"</span>: [</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>          [</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>            [</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>              <span class="op">-</span><span class="fl">89.8703470212856</span>,</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>              <span class="op">-</span><span class="fl">2.9010789371311176</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>            ],</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>            [</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>              <span class="op">-</span><span class="fl">89.8703470212856</span>,</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>              <span class="op">-</span><span class="fl">19.936548732128458</span></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>            ],</span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>            [</span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>              <span class="op">-</span><span class="fl">70.081492068508</span>,</span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>              <span class="op">-</span><span class="fl">19.936548732128458</span></span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>            ],</span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>            [</span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>              <span class="op">-</span><span class="fl">70.081492068508</span>,</span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>              <span class="op">-</span><span class="fl">2.9010789371311176</span></span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>            ],</span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>            [</span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>              <span class="op">-</span><span class="fl">89.8703470212856</span>,</span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>              <span class="op">-</span><span class="fl">2.9010789371311176</span></span>
+<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a>            ]</span>
+<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a>          ]</span>
+<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a>        ],</span>
+<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a>        <span class="st">"type"</span>: <span class="st">"Polygon"</span></span>
+<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a>      }</span>
+<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a>  ]</span>
+<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a>coords <span class="op">=</span> geojson[<span class="st">"features"</span>][<span class="dv">0</span>][<span class="st">"geometry"</span>][<span class="st">"coordinates"</span>]</span>
+<span id="cb5-40"><a href="#cb5-40" aria-hidden="true" tabindex="-1"></a>aoi_2 <span class="op">=</span> ee.Geometry.Polygon(coords)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Define visualization parameters.</p>
+<div class="cell" data-execution_count="12">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">#6</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Define color palette for visualizations</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>trawlersVis <span class="op">=</span> {</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">'palette'</span>: [<span class="st">'0C276C'</span>, <span class="st">'3B9088'</span>, <span class="st">'EEFF00'</span>, <span class="st">'ffffff'</span>]</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Define video parameters</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>videoArgs <span class="op">=</span> {</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">'dimensions'</span>: <span class="dv">670</span>,</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">'region'</span>: aoi_2,</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">'framesPerSecond'</span>: <span class="dv">4</span>,</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">'crs'</span>: <span class="st">'EPSG:4326'</span>,</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">'min'</span>: <span class="fl">0.0</span>,</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">'max'</span>: <span class="fl">3.0</span>,</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>    <span class="st">'palette'</span>: [<span class="st">'0C276C'</span>, <span class="st">'3B9088'</span>, <span class="st">'EEFF00'</span>, <span class="st">'ffffff'</span>]</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<section id="metadata-display" class="level2">
+<h2 class="anchored" data-anchor-id="metadata-display">Metadata Display</h2>
+<p>We can look at the metadata and bands in a couple different ways. The code below is a little overwhelming and difficult to search through.</p>
+<div class="cell" data-execution_count="13">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">#7</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract the first image so we can look at info about the data in general. </span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>image_test <span class="op">=</span> dataset.first()</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>info <span class="op">=</span> image_test.getInfo()</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(info)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>{'type': 'Image', 'bands': [{'id': 'drifting_longlines', 'data_type': {'type': 'PixelType', 'precision': 'float'}, 'dimensions': [36000, 16500], 'crs': 'EPSG:4326', 'crs_transform': [0.01, 0, -180, 0, -0.01, 85]}, {'id': 'fixed_gear', 'data_type': {'type': 'PixelType', 'precision': 'float'}, 'dimensions': [36000, 16500], 'crs': 'EPSG:4326', 'crs_transform': [0.01, 0, -180, 0, -0.01, 85]}, {'id': 'other_fishing', 'data_type': {'type': 'PixelType', 'precision': 'float'}, 'dimensions': [36000, 16500], 'crs': 'EPSG:4326', 'crs_transform': [0.01, 0, -180, 0, -0.01, 85]}, {'id': 'purse_seines', 'data_type': {'type': 'PixelType', 'precision': 'float'}, 'dimensions': [36000, 16500], 'crs': 'EPSG:4326', 'crs_transform': [0.01, 0, -180, 0, -0.01, 85]}, {'id': 'squid_jigger', 'data_type': {'type': 'PixelType', 'precision': 'float'}, 'dimensions': [36000, 16500], 'crs': 'EPSG:4326', 'crs_transform': [0.01, 0, -180, 0, -0.01, 85]}, {'id': 'trawlers', 'data_type': {'type': 'PixelType', 'precision': 'float'}, 'dimensions': [36000, 16500], 'crs': 'EPSG:4326', 'crs_transform': [0.01, 0, -180, 0, -0.01, 85]}], 'version': 1518594814620050.0, 'id': 'GFW/GFF/V1/fishing_hours/ARG-20120101', 'properties': {'system:time_start': 1325376000000, 'country': 'ARG', 'system:footprint': {'type': 'LinearRing', 'coordinates': [[-180, -90], [180, -90], [180, 90], [-180, 90], [-180, -90]]}, 'system:time_end': 1325462400000, 'system:asset_size': 731, 'system:index': 'ARG-20120101'}}</code></pre>
+</div>
+</div>
+<p>This code allows you to see only the band names and numbers in a more readable format.</p>
+<div class="cell" data-execution_count="14">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">#8</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_image_ids(gee_snipet):</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  x <span class="op">=</span> ee.ImageCollection(gee_snipet)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  first_image <span class="op">=</span> x.first()</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  bands_list <span class="op">=</span> first_image.bandNames()</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  lista <span class="op">=</span> bands_list.getInfo()</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> i, val <span class="kw">in</span> <span class="bu">enumerate</span>(lista):</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(i,val)</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="co">#Example</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(get_image_ids(<span class="st">'GFW/GFF/V1/fishing_hours'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>0 drifting_longlines
+1 fixed_gear
+2 other_fishing
+3 purse_seines
+4 squid_jigger
+5 trawlers
+None</code></pre>
+</div>
+</div>
+<p>To read on the metadata we will first create an object image from the collection and index their properties. To built this first image we will create and use simple methods over the original data set of GEE.</p>
+<div class="cell" data-execution_count="15">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">#9</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Creating an image with some filters on time and space</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>fishing_image <span class="op">=</span> dataset <span class="op">\</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    .filterBounds(aoi_2) <span class="op">\</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    .first()</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="co"># See image properties with their names and values</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>fishing_props <span class="op">=</span> geemap.image_props(fishing_image)</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>fishing_props.getInfo()</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Index by country</span></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>country <span class="op">=</span> fishing_props.get(<span class="st">'country'</span>)</span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Country:'</span>, country.getInfo())</span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a><span class="co">#Represent the image properties with propertyNames()</span></span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>properties <span class="op">=</span> fishing_image.propertyNames()</span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Metadata properties:'</span> , properties.getInfo())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Country: ARG
+Metadata properties: ['system:time_start', 'country', 'system:footprint', 'system:time_end', 'system:version', 'system:id', 'system:asset_size', 'system:index', 'system:bands', 'system:band_names']</code></pre>
+</div>
+</div>
+</section>
+<section id="metadata-csv-description" class="level2">
+<h2 class="anchored" data-anchor-id="metadata-csv-description">Metadata CSV Description:</h2>
+<p>The GFW <a href="https://globalfishingwatch.org/data-download/datasets/public-fishing-effort">website</a> allows us to access individual data sets of AIS-based fishing effort and vessel presence. These data sets are provided in daily <code>.csv</code> file format and include the same data that is available through the GFW’s Google Earth Engine (GEE) API. By examining these files, we can gain insight into the GEE API metadata, such as the number of fishing hours per cell and day, the fishing state flag, and the type of gear used. This information can help us understand how the data is structured on the GEE fishing hours data set.</p>
+<div class="cell" data-execution_count="16">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co">#10</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co">#Reading the CSV file with the attributes of the metadata</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>raw_fishing_vessels <span class="op">=</span> pd.read_csv(<span class="st">'2016-01-01.csv'</span>)</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>raw_fishing_vessels.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="16">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>date</th>
+      <th>cell_ll_lat</th>
+      <th>cell_ll_lon</th>
+      <th>flag</th>
+      <th>geartype</th>
+      <th>hours</th>
+      <th>fishing_hours</th>
+      <th>mmsi_present</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2016-01-01</td>
+      <td>-4.00</td>
+      <td>-144.82</td>
+      <td>USA</td>
+      <td>fishing</td>
+      <td>0.2005</td>
+      <td>0.0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2016-01-01</td>
+      <td>-4.25</td>
+      <td>-144.92</td>
+      <td>USA</td>
+      <td>fishing</td>
+      <td>0.0750</td>
+      <td>0.0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2016-01-01</td>
+      <td>5.25</td>
+      <td>-138.54</td>
+      <td>USA</td>
+      <td>fishing</td>
+      <td>1.4925</td>
+      <td>0.0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2016-01-01</td>
+      <td>-5.75</td>
+      <td>-145.45</td>
+      <td>USA</td>
+      <td>fishing</td>
+      <td>0.0500</td>
+      <td>0.0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2016-01-01</td>
+      <td>-6.50</td>
+      <td>-164.41</td>
+      <td>USA</td>
+      <td>fishing</td>
+      <td>0.0333</td>
+      <td>0.0</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+<p>From that file, we can group, count, and sort the data to see which countries and gear types are most highly represented for that day.</p>
+<div class="cell" data-execution_count="17">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co">#11</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Check for even representation of vessels</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(raw_fishing_vessels[<span class="st">'flag'</span>].value_counts().sort_values(ascending<span class="op">=</span><span class="va">False</span>).head())</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(raw_fishing_vessels[<span class="st">'geartype'</span>].value_counts().sort_values(ascending<span class="op">=</span><span class="va">False</span>).head())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>CHN    39022
+TWN     6297
+RUS     6164
+JPN     6130
+USA     5213
+Name: flag, dtype: int64
+trawlers              38067
+drifting_longlines    21721
+fishing               13557
+set_longlines          6244
+tuna_purse_seines      3758
+Name: geartype, dtype: int64</code></pre>
+</div>
+</div>
+</section>
+<section id="peruvian-fisheries-use-case-example" class="level2">
+<h2 class="anchored" data-anchor-id="peruvian-fisheries-use-case-example">Peruvian Fisheries Use Case Example</h2>
+<p>Peru is the second largest producer of wild caught sea food in the world landing 5,658,917 tonnes in 2020 (FAO, 2022). The marine fishing sector is responsible for 232,000 jobs and $3.2 billion in GDP as of 2005 (Christensen et al., 2014). Peruvian fishers were some of the first people to recognize El Niño events through their impact on fisheries (El Niño | National Geographic Society). El Niño Southern Oscillation causes warmer ocean temperatures and a reduction in upwelling, reducing the number of anchoveta and fisheries production.</p>
+<p>Our case study focuses on using Global Fishing Watch (GFW) data on fishing hours to explore fishing activities inside and outside of Peru’s economic exclusive zone (EEZ). The Peruvian fisheries serve as a valuable example of how international law, including the 1982 United Nations Convention on the Law of the Sea, enables developing countries to retain control over their marine resources and maintain food sovereignty. This is especially critical as foreign fleets from across the globe often take advantage of the rich fishing resources and high productivity of Peruvian waters, which extend beyond the boundaries of the EEZ. By studying the data on fishing hours, we can gain a better understanding of the overall health and sustainability of the Peruvian fisheries. This information can provide valuable insights into the importance of the EEZ for Peru and how it helps to protect the country’s marine resources from being exploited by foreign fleets.</p>
+<p>In addition to providing insights into the importance of the EEZ, our analysis will also investigate whether trends in fishing efforts can be used as a proxy to evaluate the impacts of El Niño events on the Peruvian fisheries. Although this constitutes a secondary aspect of our study, we will comment on the fishing fluctuations and whether they may be influenced by the El Niño Southern Oscillation (ENSO). El Niño events can be identified using the Ocean Niño Index (ONI), which is a 3-month running mean of ERSST.v5 sea surface temperature anomalies in the Niño 3.4 region (between 5 degrees North and South of the equator and between 120 and 170 degrees West). For this study, we will focus on the 2015 El Niño event and compare it to the data from the previous year. More information is available <a href="https://origin.cpc.ncep.noaa.gov/products/analysis_monitoring/ensostuff/ONI_v5.php">here</a></p>
+<section id="visualizing-peruvian-fisheries" class="level3">
+<h3 class="anchored" data-anchor-id="visualizing-peruvian-fisheries">Visualizing Peruvian fisheries</h3>
+<p>This Visualization map allows us to understand the significance of Exclusive Economic Zones, particularly in the case of Peru where the fishing industry contributes significantly to the country’s GDP. By using this map, we can compare the total fishing hours within and outside of Peru’s EEZ without considering the flag or gear type. This information is crucial for understanding the impact Peru’s EEZ for managing and regulating this sector.</p>
+<div class="cell" data-execution_count="18">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># File path to save the images to your google drive</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="co">#output_dir = '/Users/javipatron/Documents/MEDS/Personal/personal_webpage/images-gee'</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Function to save each image in the collection</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="co">#def save_image(image):</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Get the image ID</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>    <span class="co">#image_id = image.get('system:index').getInfo()</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Define the output path</span></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>    <span class="co">#output_path = os.path.join(output_dir, image_id + '.tif')</span></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Export the image as a GeoTIFF</span></span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>    <span class="co">#task = ee.batch.Export.image.toDrive(image=image,</span></span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>                                         <span class="co">#description=image_id,</span></span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>                                         <span class="co">#folder='dummy_folder',  # Doesn't matter for local export</span></span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>                                         <span class="co">#fileNamePrefix=image_id,</span></span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>                                         <span class="co">#region=aoi_1,</span></span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>                                         <span class="co">#scale=1000)</span></span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>    <span class="co">#task.start()</span></span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Iterate over the image collection and save each image</span></span>
+<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a><span class="co">#collection_list = fishing_effort_ImgCollection.toList(fishing_effort_ImgCollection.size())</span></span>
+<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a><span class="co">#for i in range(collection_list.length().getInfo()):</span></span>
+<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a>    <span class="co">#image = ee.Image(collection_list.get(i))</span></span>
+<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a>    <span class="co">#save_image(image)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell" data-execution_count="19">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co">#12</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Global fishing effort:</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="co">## Aggregate 2016 collection to single image of global fishing effort</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>effort_all <span class="op">=</span> fishing_effort_ImgCollection.<span class="bu">sum</span>()</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="co">## Sum bands to get total effort across gear types</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>effort_all <span class="op">=</span> effort_all.<span class="bu">reduce</span>(ee.Reducer.<span class="bu">sum</span>())</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="co">## Mask out pixels with no effort</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>effort_all <span class="op">=</span> effort_all.mask(effort_all.gt(<span class="dv">0</span>))</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Fishing effort in Peru's EEZ</span></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>effort_EEZ <span class="op">=</span> fishing_effort_ImgCollection.filterBounds(aoi_1).<span class="bu">map</span>(<span class="kw">lambda</span> image: image.clip(aoi_1))</span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a><span class="co">## Aggregate 2016 collection to single image of global fishing effort</span></span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>effort_EZZ <span class="op">=</span> effort_EEZ.<span class="bu">sum</span>()</span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a><span class="co">## Sum bands to get total effort across gear types</span></span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>effort_EZZ <span class="op">=</span> effort_EZZ.<span class="bu">reduce</span>(ee.Reducer.<span class="bu">sum</span>())</span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a><span class="co">## Mask out pixels with no effort</span></span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a>effort_EZZ <span class="op">=</span> effort_EZZ.mask(effort_EZZ.gt(<span class="dv">0</span>))</span>
+<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualization parameters</span></span>
+<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a>trawlersVis <span class="op">=</span> {</span>
+<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a>  <span class="st">'palette'</span>: [<span class="st">'0C276C'</span>, <span class="st">'3B9088'</span>, <span class="st">'EEFF00'</span>, <span class="st">'ffffff'</span>]</span>
+<span id="cb17-22"><a href="#cb17-22" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb17-23"><a href="#cb17-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-24"><a href="#cb17-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Comparing the two maps</span></span>
+<span id="cb17-25"><a href="#cb17-25" aria-hidden="true" tabindex="-1"></a>left_layer <span class="op">=</span> geemap.ee_tile_layer(effort_EZZ, trawlersVis, name <span class="op">=</span> <span class="st">"All 2016"</span>, opacity <span class="op">=</span> <span class="fl">0.9</span>)</span>
+<span id="cb17-26"><a href="#cb17-26" aria-hidden="true" tabindex="-1"></a>right_layer <span class="op">=</span> geemap.ee_tile_layer(effort_all, trawlersVis, name <span class="op">=</span> <span class="st">"Effort EZZ"</span>, opacity <span class="op">=</span> <span class="fl">0.9</span>)</span>
+<span id="cb17-27"><a href="#cb17-27" aria-hidden="true" tabindex="-1"></a>map_comparison <span class="op">=</span> geemap.Map(center <span class="op">=</span> [<span class="op">-</span><span class="dv">15</span>, <span class="op">-</span><span class="dv">83</span>],zoom <span class="op">=</span> <span class="dv">5</span>)</span>
+<span id="cb17-28"><a href="#cb17-28" aria-hidden="true" tabindex="-1"></a>map_comparison.centerObject(aoi_1, <span class="dv">5</span>)</span>
+<span id="cb17-29"><a href="#cb17-29" aria-hidden="true" tabindex="-1"></a>map_comparison.setOptions(<span class="st">"HYBRID"</span>)</span>
+<span id="cb17-30"><a href="#cb17-30" aria-hidden="true" tabindex="-1"></a>map_comparison.addLayer(aoi_1, {<span class="st">"color"</span>: <span class="st">"white"</span>, <span class="st">"width"</span>: <span class="fl">1.5</span>}, <span class="st">"EEZ of Perú"</span>)<span class="op">;</span></span>
+<span id="cb17-31"><a href="#cb17-31" aria-hidden="true" tabindex="-1"></a>map_comparison.split_map(left_layer, right_layer)</span>
+<span id="cb17-32"><a href="#cb17-32" aria-hidden="true" tabindex="-1"></a>map_comparison</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="19">
+
+<iframe srcdoc="<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv=&quot;content-type&quot; content=&quot;text/html; charset=UTF-8&quot; />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src=&quot;https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js&quot;></script>
+    <script src=&quot;https://code.jquery.com/jquery-1.12.4.min.js&quot;></script>
+    <script src=&quot;https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js&quot;></script>
+    <script src=&quot;https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js&quot;></script>
+    <link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css&quot;/>
+    <link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css&quot;/>
+    <link rel=&quot;stylesheet&quot; href=&quot;https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css&quot;/>
+    <link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css&quot;/>
+    <link rel=&quot;stylesheet&quot; href=&quot;https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css&quot;/>
+    <link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css&quot;/>
+    
+            <meta name=&quot;viewport&quot; content=&quot;width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no&quot; />
+            <style>
+                #map_dc9179a0f45de23e4f0ba424b67d006a {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+        
+    <script src=&quot;https://cdnjs.cloudflare.com/ajax/libs/leaflet.fullscreen/1.4.2/Control.FullScreen.min.js&quot;></script>
+    <link rel=&quot;stylesheet&quot; href=&quot;https://cdnjs.cloudflare.com/ajax/libs/leaflet.fullscreen/1.4.2/Control.FullScreen.min.css&quot;/>
+    <script src=&quot;https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.2/leaflet.draw.js&quot;></script>
+    <link rel=&quot;stylesheet&quot; href=&quot;https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.2/leaflet.draw.css&quot;/>
+    <script src=&quot;https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js&quot;></script>
+    <link rel=&quot;stylesheet&quot; href=&quot;https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css&quot;/>
+    <script src=&quot;https://cdn.jsdelivr.net/gh/digidem/leaflet-side-by-side@gh-pages/leaflet-side-by-side.min.js&quot;></script>
+</head>
+<body>
+    
+    
+            <div class=&quot;folium-map&quot; id=&quot;map_dc9179a0f45de23e4f0ba424b67d006a&quot; ></div>
+        
+</body>
+<script>
+    
+    
+            var map_dc9179a0f45de23e4f0ba424b67d006a = L.map(
+                &quot;map_dc9179a0f45de23e4f0ba424b67d006a&quot;,
+                {
+                    center: [-15.0, -83.0],
+                    crs: L.CRS.EPSG3857,
+                    zoom: 5,
+                    zoomControl: true,
+                    preferCanvas: false,
+                    eeInitialize: true,
+                    addGoogleMap: true,
+                    pluginLatlngpopup: false,
+                    pluginFullscreen: true,
+                    pluginDraw: true,
+                    DrawExport: false,
+                    pluginMinimap: false,
+                    pluginLayercontrol: false,
+                    locateControl: false,
+                    searchControl: true,
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_186a5e252c5c7c641358ab86c2fe8af6 = L.tileLayer(
+                &quot;https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png&quot;,
+                {&quot;attribution&quot;: &quot;Data by \u0026copy; \u003ca target=\&quot;_blank\&quot; href=\&quot;http://openstreetmap.org\&quot;\u003eOpenStreetMap\u003c/a\u003e, under \u003ca target=\&quot;_blank\&quot; href=\&quot;http://www.openstreetmap.org/copyright\&quot;\u003eODbL\u003c/a\u003e.&quot;, &quot;detectRetina&quot;: false, &quot;maxNativeZoom&quot;: 30, &quot;maxZoom&quot;: 30, &quot;minZoom&quot;: 0, &quot;noWrap&quot;: false, &quot;opacity&quot;: 1, &quot;subdomains&quot;: &quot;abc&quot;, &quot;tms&quot;: false}
+            ).addTo(map_dc9179a0f45de23e4f0ba424b67d006a);
+        
+    
+            var tile_layer_4f1a9790eedb24532b5f208ead48e478 = L.tileLayer(
+                &quot;https://mt1.google.com/vt/lyrs=m\u0026x={x}\u0026y={y}\u0026z={z}&quot;,
+                {&quot;attribution&quot;: &quot;Google&quot;, &quot;detectRetina&quot;: false, &quot;maxNativeZoom&quot;: 22, &quot;maxZoom&quot;: 22, &quot;minZoom&quot;: 0, &quot;noWrap&quot;: false, &quot;opacity&quot;: 1, &quot;subdomains&quot;: &quot;abc&quot;, &quot;tms&quot;: false}
+            ).addTo(map_dc9179a0f45de23e4f0ba424b67d006a);
+        
+    
+            L.control.fullscreen(
+                {&quot;forceSeparateButton&quot;: false, &quot;position&quot;: &quot;topleft&quot;, &quot;title&quot;: &quot;Full Screen&quot;, &quot;titleCancel&quot;: &quot;Exit Full Screen&quot;}
+            ).addTo(map_dc9179a0f45de23e4f0ba424b67d006a);
+        
+    
+            var options = {
+              position: &quot;topleft&quot;,
+              draw: {},
+              edit: {},
+            }
+            // FeatureGroup is to store editable layers.
+            var drawnItems = new L.featureGroup().addTo(
+                map_dc9179a0f45de23e4f0ba424b67d006a
+            );
+            options.edit.featureGroup = drawnItems;
+            var draw_control_e9440bc6093a46caec9624e349780799 = new L.Control.Draw(
+                options
+            ).addTo( map_dc9179a0f45de23e4f0ba424b67d006a );
+            map_dc9179a0f45de23e4f0ba424b67d006a.on(L.Draw.Event.CREATED, function(e) {
+                var layer = e.layer,
+                    type = e.layerType;
+                var coords = JSON.stringify(layer.toGeoJSON());
+                layer.on('click', function() {
+                    alert(coords);
+                    console.log(coords);
+                });
+                drawnItems.addLayer(layer);
+             });
+            map_dc9179a0f45de23e4f0ba424b67d006a.on('draw:created', function(e) {
+                drawnItems.addLayer(e.layer);
+            });
+            
+        
+    
+            L.Control.geocoder(
+                {&quot;collapsed&quot;: true, &quot;defaultMarkGeocode&quot;: true, &quot;position&quot;: &quot;topleft&quot;}
+            ).on('markgeocode', function(e) {
+                map_dc9179a0f45de23e4f0ba424b67d006a.setView(e.geocode.center, 11);
+            }).addTo(map_dc9179a0f45de23e4f0ba424b67d006a);
+
+        
+    
+            map_dc9179a0f45de23e4f0ba424b67d006a.fitBounds(
+                [[-15, -83], [-15, -83]],
+                {&quot;maxZoom&quot;: 5}
+            );
+        
+    
+            map_dc9179a0f45de23e4f0ba424b67d006a.fitBounds(
+                [[-11.842666123990998, -78.98239090768544], [-11.842666123990998, -78.98239090768544]],
+                {&quot;maxZoom&quot;: 5}
+            );
+        
+    
+            var tile_layer_40193571cbf18898164f8021b9b928bc = L.tileLayer(
+                &quot;https://mt1.google.com/vt/lyrs=y\u0026x={x}\u0026y={y}\u0026z={z}&quot;,
+                {&quot;attribution&quot;: &quot;Google&quot;, &quot;detectRetina&quot;: false, &quot;maxNativeZoom&quot;: 22, &quot;maxZoom&quot;: 22, &quot;minZoom&quot;: 0, &quot;noWrap&quot;: false, &quot;opacity&quot;: 1, &quot;subdomains&quot;: &quot;abc&quot;, &quot;tms&quot;: false}
+            ).addTo(map_dc9179a0f45de23e4f0ba424b67d006a);
+        
+    
+            var tile_layer_f727c3139647daf6a8af9d9f01d948a0 = L.tileLayer(
+                &quot;https://earthengine.googleapis.com/v1alpha/projects/earthengine-legacy/maps/a3efb60c7b21d71337d57439b2344fd2-bc7e3cd9cbf785040652f33e9813dded/tiles/{z}/{x}/{y}&quot;,
+                {&quot;attribution&quot;: &quot;Google Earth Engine&quot;, &quot;detectRetina&quot;: false, &quot;maxNativeZoom&quot;: 24, &quot;maxZoom&quot;: 24, &quot;minZoom&quot;: 0, &quot;noWrap&quot;: false, &quot;opacity&quot;: 1.0, &quot;subdomains&quot;: &quot;abc&quot;, &quot;tms&quot;: false}
+            ).addTo(map_dc9179a0f45de23e4f0ba424b67d006a);
+        
+    
+            var tile_layer_ebfa721af25500956b9d52dbfa217e6a = L.tileLayer(
+                &quot;https://earthengine.googleapis.com/v1alpha/projects/earthengine-legacy/maps/5da131710c057d8622ac4c1c4a4ba02b-ffa7abbdab3fd1e5f94af2094b7f6c7a/tiles/{z}/{x}/{y}&quot;,
+                {&quot;attribution&quot;: &quot;Google Earth Engine&quot;, &quot;detectRetina&quot;: false, &quot;maxNativeZoom&quot;: 24, &quot;maxZoom&quot;: 24, &quot;minZoom&quot;: 0, &quot;noWrap&quot;: false, &quot;opacity&quot;: 0.9, &quot;subdomains&quot;: &quot;abc&quot;, &quot;tms&quot;: false}
+            ).addTo(map_dc9179a0f45de23e4f0ba424b67d006a);
+        
+    
+            var tile_layer_cf3796f2e4c211cf5455a34765bbdd32 = L.tileLayer(
+                &quot;https://earthengine.googleapis.com/v1alpha/projects/earthengine-legacy/maps/0eb795bb54f422e9a5415078bcb677f5-4c9b2b49a7cacd4fd7b12c723708c4df/tiles/{z}/{x}/{y}&quot;,
+                {&quot;attribution&quot;: &quot;Google Earth Engine&quot;, &quot;detectRetina&quot;: false, &quot;maxNativeZoom&quot;: 24, &quot;maxZoom&quot;: 24, &quot;minZoom&quot;: 0, &quot;noWrap&quot;: false, &quot;opacity&quot;: 0.9, &quot;subdomains&quot;: &quot;abc&quot;, &quot;tms&quot;: false}
+            ).addTo(map_dc9179a0f45de23e4f0ba424b67d006a);
+        
+    
+            var side_by_side_layers_fa0b6b5f80499a99f69a2d080ba098d3 = L.control.sideBySide(
+                tile_layer_ebfa721af25500956b9d52dbfa217e6a, tile_layer_cf3796f2e4c211cf5455a34765bbdd32
+            ).addTo(map_dc9179a0f45de23e4f0ba424b67d006a);
+        
+    
+            var layer_control_fdce6a4e3af50425ffb0e8edcb779d31 = {
+                base_layers : {
+                    &quot;openstreetmap&quot; : tile_layer_186a5e252c5c7c641358ab86c2fe8af6,
+                },
+                overlays :  {
+                    &quot;Google Maps&quot; : tile_layer_4f1a9790eedb24532b5f208ead48e478,
+                    &quot;Google Satellite&quot; : tile_layer_40193571cbf18898164f8021b9b928bc,
+                    &quot;EEZ of Per\u00fa&quot; : tile_layer_f727c3139647daf6a8af9d9f01d948a0,
+                    &quot;All 2016&quot; : tile_layer_ebfa721af25500956b9d52dbfa217e6a,
+                    &quot;Effort EZZ&quot; : tile_layer_cf3796f2e4c211cf5455a34765bbdd32,
+                },
+            };
+            L.control.layers(
+                layer_control_fdce6a4e3af50425ffb0e8edcb779d31.base_layers,
+                layer_control_fdce6a4e3af50425ffb0e8edcb779d31.overlays,
+                {&quot;autoZIndex&quot;: true, &quot;collapsed&quot;: true, &quot;position&quot;: &quot;topright&quot;}
+            ).addTo(map_dc9179a0f45de23e4f0ba424b67d006a);
+        
+</script>
+</html>" width="100%" height="600" style="border:none !important;" "allowfullscreen"="" "webkitallowfullscreen"="" "mozallowfullscreen"=""></iframe>
+</div>
+</div>
+</section>
+<section id="generating-a-gif-of-monthly-fishing-effort-off-of-perus-coast." class="level3">
+<h3 class="anchored" data-anchor-id="generating-a-gif-of-monthly-fishing-effort-off-of-perus-coast.">Generating a Gif of Monthly Fishing Effort off of Peru’s Coast.</h3>
+<p>Another aspect worth exploring is the evolution of the fishing effort across the years. The following code allows us to create an animated image of fishing activity in front of Peru. To do this, we will first aggregate the daily data into monthly fishing hour estimates. Then, we will sum up all band values to obtain information about total fishing. With the resulting images, we will create a <code>.gif</code> to visualize the temporal and spatial evolution of the fisheries.</p>
+<div class="cell" data-execution_count="20">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co">#13</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="co"># monthly sum of fishing effort</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> monthly_Sum (collection, years, months):</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  effort_sum <span class="op">=</span> []</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> year <span class="kw">in</span> years:</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> month <span class="kw">in</span> months:</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>      Monthly_sum <span class="op">=</span> collection.<span class="bu">filter</span>(ee.Filter.calendarRange(year, year, <span class="st">'year'</span>)) <span class="op">\</span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>                              .<span class="bu">filter</span>(ee.Filter.calendarRange(month, month, <span class="st">'month'</span>)) <span class="op">\</span></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>                              .<span class="bu">sum</span>() <span class="op">\</span></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>                              .<span class="bu">reduce</span>(ee.Reducer.<span class="bu">sum</span>()) <span class="op">\</span></span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>                              .<span class="bu">set</span>(<span class="st">'system:time_start'</span>,{<span class="st">'month'</span>: month, <span class="st">'year'</span>: year})</span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>      Monthly_sum <span class="op">=</span> Monthly_sum.mask(Monthly_sum.gt(<span class="dv">0</span>))</span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>      Monthly_sum <span class="op">=</span> SRTM.blend(Monthly_sum)</span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>      effort_sum.append (Monthly_sum)</span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> ee.ImageCollection.fromImages(effort_sum)</span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a><span class="co"># list of images</span></span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> monthly_images (collection, years, months):</span>
+<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a>  effort_images <span class="op">=</span> []</span>
+<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> year <span class="kw">in</span> years:</span>
+<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> month <span class="kw">in</span> months:</span>
+<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a>      Monthly_sum <span class="op">=</span> collection.<span class="bu">filter</span>(ee.Filter.calendarRange(year, year, <span class="st">'year'</span>)) <span class="op">\</span></span>
+<span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a>                              .<span class="bu">filter</span>(ee.Filter.calendarRange(month, month, <span class="st">'month'</span>)) <span class="op">\</span></span>
+<span id="cb18-24"><a href="#cb18-24" aria-hidden="true" tabindex="-1"></a>                              .<span class="bu">sum</span>() <span class="op">\</span></span>
+<span id="cb18-25"><a href="#cb18-25" aria-hidden="true" tabindex="-1"></a>                              .<span class="bu">reduce</span>(ee.Reducer.<span class="bu">sum</span>()) <span class="op">\</span></span>
+<span id="cb18-26"><a href="#cb18-26" aria-hidden="true" tabindex="-1"></a>                              .<span class="bu">set</span>(<span class="st">'system:time_start'</span>,{<span class="st">'month'</span>: month, <span class="st">'year'</span>: year})</span>
+<span id="cb18-27"><a href="#cb18-27" aria-hidden="true" tabindex="-1"></a>      effort_images.append (Monthly_sum)</span>
+<span id="cb18-28"><a href="#cb18-28" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> effort_images</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell" data-execution_count="21">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co">#14</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="co"># create list years and months for use in the function</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>years <span class="op">=</span> <span class="bu">range</span>(<span class="dv">2012</span>, <span class="dv">2017</span>)</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>months <span class="op">=</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">13</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell" data-execution_count="22">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co">#15</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Create an image collection of fishing effort where each image is a sum of the fishing effort for that month. </span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>effort_collection <span class="op">=</span> monthly_Sum(fishing_effort_ImgCollection, years, months)</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Creates a list of the images from the image collection. </span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>effort_list <span class="op">=</span> monthly_images(fishing_effort_ImgCollection, years, months)</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="bu">len</span>(effort_list)</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Creates an empty list to be populated with month and year of images. </span></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>date_list <span class="op">=</span> []</span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Populates the date_list with the month and year of each image. This will be used to annotate the gif with a time stamp. </span></span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> effort_list:</span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>  date <span class="op">=</span> i.get(<span class="st">'system:time_start'</span>).getInfo()</span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>  date_list.append(date)</span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a><span class="bu">len</span>(date_list)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="22">
+<pre><code>60</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="23">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co">#16</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>saved_gif <span class="op">=</span> os.path.join(os.path.expanduser(<span class="st">'~'</span>), <span class="st">""</span>.join([os.getcwd(),<span class="st">"/img/monthly_fishing.gif"</span>]))</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>geemap.download_ee_video(effort_collection, videoArgs, saved_gif)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Generating URL...
+Downloading GIF image from https://earthengine.googleapis.com/v1alpha/projects/earthengine-legacy/videoThumbnails/bdfb4cbb8e73c164946fbcc9f4f8bab8-75030eaf746e2164a0f2b0c9e1b6817a:getPixels
+Please wait ...
+The GIF image has been saved to: /Users/javipatron/Documents/MEDS/Personal/personal_webpage/javipatron.github.io/posts/global-fishing-watch/img/monthly_fishing.gif</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="24">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co">#17</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>out_gif <span class="op">=</span> os.path.join(os.path.expanduser(<span class="st">'~'</span>), <span class="st">""</span>.join([os.getcwd(),<span class="st">"/img/monthly_fishing.gif"</span>]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell" data-execution_count="25">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co">#18</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>geemap.add_text_to_gif(</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>    saved_gif,</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>    out_gif,</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>    xy<span class="op">=</span>(<span class="st">'3%'</span>, <span class="st">'5%'</span>),</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>    text_sequence<span class="op">=</span>date_list,</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>    font_size<span class="op">=</span><span class="dv">20</span>,</span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>    font_color<span class="op">=</span><span class="st">'#ffffff'</span>,</span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>    duration<span class="op">=</span><span class="dv">600</span></span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell" data-execution_count="26">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co">#19</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>geemap.show_image(out_gif)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<script type="application/vnd.jupyter.widget-view+json">
+{"model_id":"d2dc54f343cc47a280430eaa9f83d725","version_major":2,"version_minor":0}
+</script>
+</div>
+</div>
+<p>In the previous <code>.gif</code>, we can observe a seasonal pattern where fishing grounds migrate from the north to the south along the coast and the EEZ borders, with months experiencing minimal activity. However, one limitation of the image the difficulty to discern trend changes across years, making it challenging to determine if ENSO events may be diminishing fishing activity.</p>
+</section>
+<section id="quantifying-fishing-hours-inside-and-outside-the-eez" class="level3">
+<h3 class="anchored" data-anchor-id="quantifying-fishing-hours-inside-and-outside-the-eez">Quantifying fishing hours inside and outside the EEZ</h3>
+<p>In order to further analyze the observed fishing differences between the Exclusive Economic Zone (EEZ) and the region immediately next to it, we will extract temporal series of total fishing hours inside and outside the EEZ. This will provide us with a quantifiable measure to compare the fishing efforts in these two areas. Additionally, the temporal series may enable us to identify any patterns or trends in fishing effort that may be influenced by the 2015 El Niño event.</p>
+<p>Since the GEE dataset exceeds the allowed extraction size, we have created a function that calls for the data of interest in order to work with it in <code>pandas</code>. The following function allow us to agregate all daily fishing hours values per month. With it we get first a dataset with monthly data instead of daily. Once we have temporarilly aggregated the data, we apply a <code>reducer</code> to sum up all fishing gears in one band and get a unique value representing the total fishing hours.</p>
+<div class="cell" data-execution_count="27">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co">#20</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Loop ranges already defined for the gif. </span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Function to extract data of interest:</span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="co">## .sum() Aggregates collections to single monthly image of global fishing effort</span></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="co">## .reduce(ee.Reducer.sum()) Sum bands to get total effort across all gear types</span></span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> monthly_Sum (collection, years, months):</span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>  effort_sum <span class="op">=</span> []</span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> year <span class="kw">in</span> years:</span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> month <span class="kw">in</span> months:</span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>      Monthly_sum <span class="op">=</span> collection.<span class="bu">filter</span>(ee.Filter.calendarRange(year, year, <span class="st">'year'</span>)) <span class="op">\</span></span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>                              .<span class="bu">filter</span>(ee.Filter.calendarRange(month, month, <span class="st">'month'</span>)) <span class="op">\</span></span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a>                              .<span class="bu">sum</span>() <span class="op">\</span></span>
+<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a>                              .<span class="bu">reduce</span>(ee.Reducer.<span class="bu">sum</span>()) <span class="op">\</span></span>
+<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a>                              .<span class="bu">set</span>(<span class="st">'year'</span>, year).<span class="bu">set</span>(<span class="st">'system:time_start'</span>, ee.Date.fromYMD(year, <span class="dv">1</span>, <span class="dv">1</span>))<span class="op">\</span></span>
+<span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a>                              .<span class="bu">set</span>(<span class="st">'month'</span>, month).<span class="bu">set</span>(<span class="st">'system:time_start'</span>, ee.Date.fromYMD(year, month, <span class="dv">1</span>).millis())                                                     </span>
+<span id="cb27-17"><a href="#cb27-17" aria-hidden="true" tabindex="-1"></a>      effort_sum.append (Monthly_sum)</span>
+<span id="cb27-18"><a href="#cb27-18" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> ee.ImageCollection.fromImages(effort_sum)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell" data-execution_count="28">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co">#21</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>byMonth <span class="op">=</span> monthly_Sum(fishing_effort_ImgCollection,years,months)</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="bu">type</span>(byMonth)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="28">
+<pre><code>ee.imagecollection.ImageCollection</code></pre>
+</div>
+</div>
+<p>Our updated image collection now includes monthly fishing data for all gears combined. In order to effectively analyze the time series of this data, we will need to design a new function that allows us to summarize the information within our designated areas of interest (AOIs). This function will take the AOI as a parameter, enabling us to conduct time series analysis on each AOI individually. The upcoming sections will focus on conducting time series analysis for each AOI.</p>
+<section id="fishing-inside-the-eez" class="level4">
+<h4 class="anchored" data-anchor-id="fishing-inside-the-eez">Fishing inside the EEZ</h4>
+<p>The following time series correspond to the fishing data contained inside the EEZ. previously saved as <code>aoi_1</code>.</p>
+<div class="cell" data-execution_count="29">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co">#22</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Function to summarize fishing monthly data:</span></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="co">## Extracting all image values in the collection by the AOI relative to the EEZ</span></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> aoi_sum(img):</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">sum</span> <span class="op">=</span> img.reduceRegion(reducer<span class="op">=</span>ee.Reducer.<span class="bu">sum</span>(), geometry<span class="op">=</span>aoi_1, <span class="co"># EEZ area of interest</span></span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>                           scale<span class="op">=</span><span class="fl">1113.2</span>) <span class="co"># Resolution of the GFW product</span></span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> img.<span class="bu">set</span>(<span class="st">'time'</span>, img.date().millis()).<span class="bu">set</span>(<span class="st">'sum'</span>,<span class="bu">sum</span>)</span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>aoi_reduced_imgs <span class="op">=</span> byMonth.<span class="bu">map</span>(aoi_sum)</span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a>nested_list <span class="op">=</span> aoi_reduced_imgs.reduceColumns(ee.Reducer.toList(<span class="dv">2</span>), [<span class="st">'time'</span>,<span class="st">'sum'</span>]).values().get(<span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell" data-execution_count="30">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co">#23</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Converting GEE data to Pandas and rearranging it for its representation</span></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame(nested_list.getInfo(), columns<span class="op">=</span>[<span class="st">'time'</span>,<span class="st">'sum'</span>])</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'sum'</span>] <span class="op">=</span> df[<span class="st">'sum'</span>].<span class="bu">apply</span>(<span class="kw">lambda</span> x: x.get(<span class="st">'sum'</span>))</span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>df.rename(columns <span class="op">=</span> {<span class="st">'sum'</span>:<span class="st">'total_fishing_hours'</span>}, inplace <span class="op">=</span> <span class="va">True</span>)</span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"id"</span>] <span class="op">=</span> df.index </span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>first_column <span class="op">=</span> df.pop(<span class="st">'id'</span>)</span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>df.insert(<span class="dv">0</span>, <span class="st">'id'</span>, first_column)</span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Setting time format for representation purposes</span></span>
+<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'datetime'</span>] <span class="op">=</span> pd.to_datetime(df[<span class="st">'time'</span>], unit<span class="op">=</span><span class="st">'ms'</span>)</span>
+<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'datetime'</span>] <span class="op">=</span> pd.to_datetime(df[<span class="st">'datetime'</span>],<span class="bu">format</span><span class="op">=</span><span class="st">"%Y%m</span><span class="sc">%d</span><span class="st">"</span>)</span>
+<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a><span class="co">#df.head()</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell" data-execution_count="31">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co">#24</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>), dpi<span class="op">=</span><span class="dv">300</span>)   <span class="co"># create a new figure, set size and resolution (dpi)</span></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>plt.fill_between(df[<span class="st">'datetime'</span>],df[<span class="st">'total_fishing_hours'</span>])   <span class="co"># add data to the plot</span></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Fishing hours inside Peru's EEZ"</span>, fontsize<span class="op">=</span><span class="dv">16</span>)</span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Date'</span>, fontsize<span class="op">=</span><span class="dv">14</span>)</span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Total hours'</span>, fontsize<span class="op">=</span><span class="dv">14</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="31">
+<pre><code>Text(0, 0.5, 'Total hours')</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="index_files/figure-html/cell-26-output-2.png" class="img-fluid"></p>
+</div>
+</div>
+</section>
+<section id="fishing-outside-the-eez" class="level4">
+<h4 class="anchored" data-anchor-id="fishing-outside-the-eez">Fishing outside the EEZ</h4>
+<p>To characterize the fishing activity outside of the EEZ, we need to define a new area of interest. In this case, we will focus on a square region with the same latitude boundaries as the EEZ but extending towards the west in longitude (<code>aoi_2</code>). The first step is to quantify the number of fishing hours over that region. Then we will subtract the EEZ fishing hours previously calculated from it to graphically compare effort from inside and outside.</p>
+<p>The map below shows the new area of interest and the data across a the 5-year time period that will be included in the time series analysis.</p>
+<div class="cell" data-execution_count="32">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co">#25</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Fishing effort in Peru's EEZ</span></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>effort_AOI2 <span class="op">=</span> fishing_effort_ImgCollection.filterBounds(aoi_2).<span class="bu">map</span>(<span class="kw">lambda</span> image: image.clip(aoi_2))</span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a><span class="co">## Aggregate 2016 collection to single image of global fishing effort</span></span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>effort_AOI2 <span class="op">=</span> effort_AOI2.<span class="bu">sum</span>()</span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a><span class="co">## Sum bands to get total effort across gear types</span></span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>effort_AOI2 <span class="op">=</span> effort_AOI2.<span class="bu">reduce</span>(ee.Reducer.<span class="bu">sum</span>())</span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a><span class="co">## Mask out pixels with no effort</span></span>
+<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a>effort_AOI2 <span class="op">=</span> effort_AOI2.mask(effort_AOI2.gt(<span class="dv">0</span>))</span>
+<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-11"><a href="#cb34-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Add the total fishing effort layer</span></span>
+<span id="cb34-12"><a href="#cb34-12" aria-hidden="true" tabindex="-1"></a>Map <span class="op">=</span> geemap.Map(zoom <span class="op">=</span> <span class="dv">2</span>)</span>
+<span id="cb34-13"><a href="#cb34-13" aria-hidden="true" tabindex="-1"></a>Map.centerObject(aoi_2, <span class="dv">5</span>)</span>
+<span id="cb34-14"><a href="#cb34-14" aria-hidden="true" tabindex="-1"></a>Map.setOptions(<span class="st">'HYBRID'</span>)<span class="op">;</span></span>
+<span id="cb34-15"><a href="#cb34-15" aria-hidden="true" tabindex="-1"></a>Map.addLayer(aoi_2, {<span class="st">'color'</span>: <span class="st">'white'</span>,<span class="st">'width'</span>: <span class="fl">1.5</span>}, <span class="st">"Sampling area"</span>)<span class="op">;</span></span>
+<span id="cb34-16"><a href="#cb34-16" aria-hidden="true" tabindex="-1"></a>Map.addLayer(effort_AOI2,trawlersVis)<span class="op">;</span></span>
+<span id="cb34-17"><a href="#cb34-17" aria-hidden="true" tabindex="-1"></a>Map</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="32">
+
+<iframe srcdoc="<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv=&quot;content-type&quot; content=&quot;text/html; charset=UTF-8&quot; />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src=&quot;https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js&quot;></script>
+    <script src=&quot;https://code.jquery.com/jquery-1.12.4.min.js&quot;></script>
+    <script src=&quot;https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js&quot;></script>
+    <script src=&quot;https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js&quot;></script>
+    <link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css&quot;/>
+    <link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css&quot;/>
+    <link rel=&quot;stylesheet&quot; href=&quot;https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css&quot;/>
+    <link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css&quot;/>
+    <link rel=&quot;stylesheet&quot; href=&quot;https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css&quot;/>
+    <link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css&quot;/>
+    
+            <meta name=&quot;viewport&quot; content=&quot;width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no&quot; />
+            <style>
+                #map_4d34c3c5af7489dee65a5aa932abfcee {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+        
+    <script src=&quot;https://cdnjs.cloudflare.com/ajax/libs/leaflet.fullscreen/1.4.2/Control.FullScreen.min.js&quot;></script>
+    <link rel=&quot;stylesheet&quot; href=&quot;https://cdnjs.cloudflare.com/ajax/libs/leaflet.fullscreen/1.4.2/Control.FullScreen.min.css&quot;/>
+    <script src=&quot;https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.2/leaflet.draw.js&quot;></script>
+    <link rel=&quot;stylesheet&quot; href=&quot;https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.2/leaflet.draw.css&quot;/>
+    <script src=&quot;https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js&quot;></script>
+    <link rel=&quot;stylesheet&quot; href=&quot;https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css&quot;/>
+</head>
+<body>
+    
+    
+            <div class=&quot;folium-map&quot; id=&quot;map_4d34c3c5af7489dee65a5aa932abfcee&quot; ></div>
+        
+</body>
+<script>
+    
+    
+            var map_4d34c3c5af7489dee65a5aa932abfcee = L.map(
+                &quot;map_4d34c3c5af7489dee65a5aa932abfcee&quot;,
+                {
+                    center: [20.0, 0.0],
+                    crs: L.CRS.EPSG3857,
+                    zoom: 2,
+                    zoomControl: true,
+                    preferCanvas: false,
+                    eeInitialize: true,
+                    addGoogleMap: true,
+                    pluginLatlngpopup: false,
+                    pluginFullscreen: true,
+                    pluginDraw: true,
+                    DrawExport: false,
+                    pluginMinimap: false,
+                    pluginLayercontrol: false,
+                    locateControl: false,
+                    searchControl: true,
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_a6782446fbdb95a20d3fb260e9fbd0fb = L.tileLayer(
+                &quot;https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png&quot;,
+                {&quot;attribution&quot;: &quot;Data by \u0026copy; \u003ca target=\&quot;_blank\&quot; href=\&quot;http://openstreetmap.org\&quot;\u003eOpenStreetMap\u003c/a\u003e, under \u003ca target=\&quot;_blank\&quot; href=\&quot;http://www.openstreetmap.org/copyright\&quot;\u003eODbL\u003c/a\u003e.&quot;, &quot;detectRetina&quot;: false, &quot;maxNativeZoom&quot;: 30, &quot;maxZoom&quot;: 30, &quot;minZoom&quot;: 0, &quot;noWrap&quot;: false, &quot;opacity&quot;: 1, &quot;subdomains&quot;: &quot;abc&quot;, &quot;tms&quot;: false}
+            ).addTo(map_4d34c3c5af7489dee65a5aa932abfcee);
+        
+    
+            var tile_layer_4f1a9790eedb24532b5f208ead48e478 = L.tileLayer(
+                &quot;https://mt1.google.com/vt/lyrs=m\u0026x={x}\u0026y={y}\u0026z={z}&quot;,
+                {&quot;attribution&quot;: &quot;Google&quot;, &quot;detectRetina&quot;: false, &quot;maxNativeZoom&quot;: 22, &quot;maxZoom&quot;: 22, &quot;minZoom&quot;: 0, &quot;noWrap&quot;: false, &quot;opacity&quot;: 1, &quot;subdomains&quot;: &quot;abc&quot;, &quot;tms&quot;: false}
+            ).addTo(map_4d34c3c5af7489dee65a5aa932abfcee);
+        
+    
+            L.control.fullscreen(
+                {&quot;forceSeparateButton&quot;: false, &quot;position&quot;: &quot;topleft&quot;, &quot;title&quot;: &quot;Full Screen&quot;, &quot;titleCancel&quot;: &quot;Exit Full Screen&quot;}
+            ).addTo(map_4d34c3c5af7489dee65a5aa932abfcee);
+        
+    
+            var options = {
+              position: &quot;topleft&quot;,
+              draw: {},
+              edit: {},
+            }
+            // FeatureGroup is to store editable layers.
+            var drawnItems = new L.featureGroup().addTo(
+                map_4d34c3c5af7489dee65a5aa932abfcee
+            );
+            options.edit.featureGroup = drawnItems;
+            var draw_control_fa945f8820fcc32948f6bd2415ba7868 = new L.Control.Draw(
+                options
+            ).addTo( map_4d34c3c5af7489dee65a5aa932abfcee );
+            map_4d34c3c5af7489dee65a5aa932abfcee.on(L.Draw.Event.CREATED, function(e) {
+                var layer = e.layer,
+                    type = e.layerType;
+                var coords = JSON.stringify(layer.toGeoJSON());
+                layer.on('click', function() {
+                    alert(coords);
+                    console.log(coords);
+                });
+                drawnItems.addLayer(layer);
+             });
+            map_4d34c3c5af7489dee65a5aa932abfcee.on('draw:created', function(e) {
+                drawnItems.addLayer(e.layer);
+            });
+            
+        
+    
+            L.Control.geocoder(
+                {&quot;collapsed&quot;: true, &quot;defaultMarkGeocode&quot;: true, &quot;position&quot;: &quot;topleft&quot;}
+            ).on('markgeocode', function(e) {
+                map_4d34c3c5af7489dee65a5aa932abfcee.setView(e.geocode.center, 11);
+            }).addTo(map_4d34c3c5af7489dee65a5aa932abfcee);
+
+        
+    
+            map_4d34c3c5af7489dee65a5aa932abfcee.fitBounds(
+                [[20, 0], [20, 0]],
+                {&quot;maxZoom&quot;: 2}
+            );
+        
+    
+            map_4d34c3c5af7489dee65a5aa932abfcee.fitBounds(
+                [[-11.493252083428661, -79.9759195448968], [-11.493252083428661, -79.9759195448968]],
+                {&quot;maxZoom&quot;: 5}
+            );
+        
+    
+            var tile_layer_40193571cbf18898164f8021b9b928bc = L.tileLayer(
+                &quot;https://mt1.google.com/vt/lyrs=y\u0026x={x}\u0026y={y}\u0026z={z}&quot;,
+                {&quot;attribution&quot;: &quot;Google&quot;, &quot;detectRetina&quot;: false, &quot;maxNativeZoom&quot;: 22, &quot;maxZoom&quot;: 22, &quot;minZoom&quot;: 0, &quot;noWrap&quot;: false, &quot;opacity&quot;: 1, &quot;subdomains&quot;: &quot;abc&quot;, &quot;tms&quot;: false}
+            ).addTo(map_4d34c3c5af7489dee65a5aa932abfcee);
+        
+    
+            var tile_layer_feebeca9d41270a2998abe6975b0ea17 = L.tileLayer(
+                &quot;https://earthengine.googleapis.com/v1alpha/projects/earthengine-legacy/maps/42ad1e767dd69f89608791d0825eea12-55ef874fffcfab4d32b16afdca6baf11/tiles/{z}/{x}/{y}&quot;,
+                {&quot;attribution&quot;: &quot;Google Earth Engine&quot;, &quot;detectRetina&quot;: false, &quot;maxNativeZoom&quot;: 24, &quot;maxZoom&quot;: 24, &quot;minZoom&quot;: 0, &quot;noWrap&quot;: false, &quot;opacity&quot;: 1.0, &quot;subdomains&quot;: &quot;abc&quot;, &quot;tms&quot;: false}
+            ).addTo(map_4d34c3c5af7489dee65a5aa932abfcee);
+        
+    
+            var tile_layer_13ca7b873f5d3730b6daeb96af6e3f01 = L.tileLayer(
+                &quot;https://earthengine.googleapis.com/v1alpha/projects/earthengine-legacy/maps/3f3376326c7f3626b00f56951cc92ee6-4bb7f55278c3501bad13ba678943ca33/tiles/{z}/{x}/{y}&quot;,
+                {&quot;attribution&quot;: &quot;Google Earth Engine&quot;, &quot;detectRetina&quot;: false, &quot;maxNativeZoom&quot;: 24, &quot;maxZoom&quot;: 24, &quot;minZoom&quot;: 0, &quot;noWrap&quot;: false, &quot;opacity&quot;: 1.0, &quot;subdomains&quot;: &quot;abc&quot;, &quot;tms&quot;: false}
+            ).addTo(map_4d34c3c5af7489dee65a5aa932abfcee);
+        
+    
+            var layer_control_9bdc5a45dd49974c0e58a512592d065c = {
+                base_layers : {
+                    &quot;openstreetmap&quot; : tile_layer_a6782446fbdb95a20d3fb260e9fbd0fb,
+                },
+                overlays :  {
+                    &quot;Google Maps&quot; : tile_layer_4f1a9790eedb24532b5f208ead48e478,
+                    &quot;Google Satellite&quot; : tile_layer_40193571cbf18898164f8021b9b928bc,
+                    &quot;Sampling area&quot; : tile_layer_feebeca9d41270a2998abe6975b0ea17,
+                    &quot;Layer untitled&quot; : tile_layer_13ca7b873f5d3730b6daeb96af6e3f01,
+                },
+            };
+            L.control.layers(
+                layer_control_9bdc5a45dd49974c0e58a512592d065c.base_layers,
+                layer_control_9bdc5a45dd49974c0e58a512592d065c.overlays,
+                {&quot;autoZIndex&quot;: true, &quot;collapsed&quot;: true, &quot;position&quot;: &quot;topright&quot;}
+            ).addTo(map_4d34c3c5af7489dee65a5aa932abfcee);
+        
+</script>
+</html>" width="100%" height="600" style="border:none !important;" "allowfullscreen"="" "webkitallowfullscreen"="" "mozallowfullscreen"=""></iframe>
+</div>
+</div>
+<div class="cell" data-execution_count="33">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co">#26</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Function to summarize fishing monthly data inside and outside the EEZ</span></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> aoi_sum(img):</span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">sum</span> <span class="op">=</span> img.reduceRegion(reducer<span class="op">=</span>ee.Reducer.<span class="bu">sum</span>(), geometry<span class="op">=</span>aoi_2, </span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>                           scale<span class="op">=</span><span class="fl">1113.2</span>)</span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> img.<span class="bu">set</span>(<span class="st">'time'</span>, img.date().millis()).<span class="bu">set</span>(<span class="st">'sum'</span>,<span class="bu">sum</span>)</span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a>aoi_reduced_imgs <span class="op">=</span> byMonth.<span class="bu">map</span>(aoi_sum)</span>
+<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a>nested_list <span class="op">=</span> aoi_reduced_imgs.reduceColumns(ee.Reducer.toList(<span class="dv">2</span>), [<span class="st">'time'</span>,<span class="st">'sum'</span>]).values().get(<span class="dv">0</span>)</span>
+<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-11"><a href="#cb35-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Converting GEE data to Pandas and rearranging it for its representation</span></span>
+<span id="cb35-12"><a href="#cb35-12" aria-hidden="true" tabindex="-1"></a>df2 <span class="op">=</span> pd.DataFrame(nested_list.getInfo(), columns<span class="op">=</span>[<span class="st">'time'</span>,<span class="st">'sum'</span>])</span>
+<span id="cb35-13"><a href="#cb35-13" aria-hidden="true" tabindex="-1"></a>df2[<span class="st">'sum'</span>] <span class="op">=</span> df2[<span class="st">'sum'</span>].<span class="bu">apply</span>(<span class="kw">lambda</span> x: x.get(<span class="st">'sum'</span>))</span>
+<span id="cb35-14"><a href="#cb35-14" aria-hidden="true" tabindex="-1"></a>df2.rename(columns <span class="op">=</span> {<span class="st">'sum'</span>:<span class="st">'total_fishing_hours'</span>}, inplace <span class="op">=</span> <span class="va">True</span>)</span>
+<span id="cb35-15"><a href="#cb35-15" aria-hidden="true" tabindex="-1"></a>df2[<span class="st">"id"</span>] <span class="op">=</span> df2.index </span>
+<span id="cb35-16"><a href="#cb35-16" aria-hidden="true" tabindex="-1"></a>first_column <span class="op">=</span> df2.pop(<span class="st">'id'</span>)</span>
+<span id="cb35-17"><a href="#cb35-17" aria-hidden="true" tabindex="-1"></a>df2.insert(<span class="dv">0</span>, <span class="st">'id'</span>, first_column)</span>
+<span id="cb35-18"><a href="#cb35-18" aria-hidden="true" tabindex="-1"></a>df2[<span class="st">'datetime'</span>] <span class="op">=</span> pd.to_datetime(df2[<span class="st">'time'</span>], unit<span class="op">=</span><span class="st">'ms'</span>)</span>
+<span id="cb35-19"><a href="#cb35-19" aria-hidden="true" tabindex="-1"></a>df2[<span class="st">'datetime'</span>] <span class="op">=</span> pd.to_datetime(df2[<span class="st">'datetime'</span>],<span class="bu">format</span><span class="op">=</span><span class="st">"%Y%m</span><span class="sc">%d</span><span class="st">"</span>)</span>
+<span id="cb35-20"><a href="#cb35-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-21"><a href="#cb35-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Ploting time series</span></span>
+<span id="cb35-22"><a href="#cb35-22" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>), dpi<span class="op">=</span><span class="dv">300</span>)   </span>
+<span id="cb35-23"><a href="#cb35-23" aria-hidden="true" tabindex="-1"></a>plt.fill_between(df2[<span class="st">'datetime'</span>],df2[<span class="st">'total_fishing_hours'</span>])</span>
+<span id="cb35-24"><a href="#cb35-24" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Fishing hours inside the second AOI"</span>, fontsize<span class="op">=</span><span class="dv">16</span>)</span>
+<span id="cb35-25"><a href="#cb35-25" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Date'</span>, fontsize<span class="op">=</span><span class="dv">14</span>)</span>
+<span id="cb35-26"><a href="#cb35-26" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Total hours'</span>, fontsize<span class="op">=</span><span class="dv">14</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="33">
+<pre><code>Text(0, 0.5, 'Total hours')</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="index_files/figure-html/cell-28-output-2.png" class="img-fluid"></p>
+</div>
+</div>
+<p>To compare fishing efforts within and outside, we can subtract the total fishing hours from the previous data frames. This will give us the actual fishing effort outside the EEZ, which we can then represent alongside fishing within the EEZ in an area chart for easy visualization and comparison.</p>
+<div class="cell" data-execution_count="34">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co">#27</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Combining both df</span></span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"total_fishing_hours_outside"</span>] <span class="op">=</span> <span class="bu">abs</span>(df[<span class="st">"total_fishing_hours"</span>] <span class="op">-</span> df2[<span class="st">"total_fishing_hours"</span>])</span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>df.rename(columns <span class="op">=</span> {<span class="st">'total_fishing_hours'</span>:<span class="st">'total_fishing_hours_inside'</span>}, inplace <span class="op">=</span> <span class="va">True</span>) </span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>total_fishing_df <span class="op">=</span> df[[<span class="st">'id'</span>, <span class="st">'time'</span>, <span class="st">'datetime'</span>,<span class="st">'total_fishing_hours_inside'</span>,<span class="st">'total_fishing_hours_outside'</span>]]</span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>total_fishing_df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="34">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>id</th>
+      <th>time</th>
+      <th>datetime</th>
+      <th>total_fishing_hours_inside</th>
+      <th>total_fishing_hours_outside</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>1325376000000</td>
+      <td>2012-01-01</td>
+      <td>0.000000</td>
+      <td>160.185273</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1</td>
+      <td>1328054400000</td>
+      <td>2012-02-01</td>
+      <td>29.597059</td>
+      <td>442.994487</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2</td>
+      <td>1330560000000</td>
+      <td>2012-03-01</td>
+      <td>0.683282</td>
+      <td>512.164755</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>3</td>
+      <td>1333238400000</td>
+      <td>2012-04-01</td>
+      <td>7.479013</td>
+      <td>2290.269927</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>4</td>
+      <td>1335830400000</td>
+      <td>2012-05-01</td>
+      <td>11.036600</td>
+      <td>3353.737642</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="cell" data-execution_count="35">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co">#28</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>), dpi<span class="op">=</span><span class="dv">300</span>)   </span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>plt.stackplot(total_fishing_df[<span class="st">'datetime'</span>],</span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>              [total_fishing_df[<span class="st">'total_fishing_hours_inside'</span>], total_fishing_df[<span class="st">'total_fishing_hours_outside'</span>]],</span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>              labels<span class="op">=</span>[<span class="st">'Inside the EEZ'</span>, <span class="st">'Outside the EEZ'</span>],</span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>              alpha<span class="op">=</span><span class="fl">0.8</span>)</span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Fishing hours in front of the coast of Perú"</span>, fontsize<span class="op">=</span><span class="dv">16</span>)</span>
+<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Date'</span>, fontsize<span class="op">=</span><span class="dv">14</span>)</span>
+<span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Total hours'</span>, fontsize<span class="op">=</span><span class="dv">14</span>)</span>
+<span id="cb38-10"><a href="#cb38-10" aria-hidden="true" tabindex="-1"></a>plt.legend(loc<span class="op">=</span><span class="dv">2</span>, fontsize<span class="op">=</span><span class="st">'large'</span>)</span>
+<span id="cb38-11"><a href="#cb38-11" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<p><img src="index_files/figure-html/cell-30-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<p>The orange region of the graph indicates the amount of fishing occurring in international waters, while the blue area represents the fishing that takes place within Peru’s exclusive economic zone (EEZ). It is likely that this fishing is carried out by Peru’s own fleet or by other countries with which Peru has bilateral fishing agreements. From the data, it is clear that the majority of fishing effort occurs outside of Peru’s EEZ, with some instances exceeding 30,000 hours. This highlights the importance of the EEZ, as it protects Peru’s resources from being over exploited by foreign fleets. Without the EEZ, foreign fleets would be able to legally access and deplete Peru’s waters.</p>
+<p>On the other hand, there is a distinct pattern of fishing activity that tends to peak during the summer and fall months, and decrease during the winter. This trend is consistent both inside and outside the Exclusive Economic Zone (EEZ). Additionally, it appears that there has been an increase in fishing hours when comparing the first two years of data with the last three years. However, this could be attributed to better availability of AIS data over the years rather than any actual changes in fishing patterns. Furthermore, there is no clear evidence of an influence of ENSO events on fishing activity. In fact, values for 2014 and 2015 are relatively similar, indicating that fishing hours may not be the most effective way to measure the impact of atmospheric and oceanic oscillations on fisheries.</p>
+</section>
+</section>
+<section id="improving-our-analysis" class="level3">
+<h3 class="anchored" data-anchor-id="improving-our-analysis">Improving our analysis</h3>
+<p>Overall, the notebook has successfully introduced the GFW datasets and its access through GEE. However, continuing the analysis could provide further insights into the study case.</p>
+<p>We could improve our analysis in several ways. For instance, we could investigate the contribution of different fishing flags to the total fishing effort both inside and outside the EEZ. This would allow us to identify which international fleets are fishing in Peru’s waters and evaluate the countries that have fishing agreements with Peru. We could also compare total navigation hours (a data set also available from GEE) with fishing hours to establish how busy the waters are within our areas of interest.</p>
+<p>Furthermore, we could delve deeper into exploring the effects of ENSO. Initially, we could have included a time series of the ENSO indicator from the 3-month mean of ERSST.v5 sea surface temperature anomalies in the Niño 3.4 region, which we did not incorporate as we did not detect any influence. In this regard, we could have explored additional GFW data sets (accessible through Google BigQuery) representing fishing activities using indicators influenced by El Niño.</p>
+</section>
+</section>
+<section id="binder-environment" class="level2">
+<h2 class="anchored" data-anchor-id="binder-environment">Binder Environment</h2>
+<p>The content of the present notebook can be accessed using Binder’s services for building and sharing reproducible and interactive computational environments from online repositories.</p>
+<p>Click this link to launch the notebook in your browser:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="https://mybinder.org/v2/gh/EDS220-Fall2022-org/homework-2-mangrove-team.git/HEAD?labpath=peruvian-fisheries-effort.ipynb"><img src="https://mybinder.org/badge_logo.svg" class="img-fluid figure-img"></a></p>
+<p></p><figcaption class="figure-caption">Binder</figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references">References</h2>
+<ol type="1">
+<li><p>Christensen, V., de la Puente, S., Sueiro, J. C., Steenbeek, J., &amp; Majluf, P. (2014). Valuing seafood: The Peruvian fisheries sector. Marine Policy, 44, 302–311. https://doi.org/10.1016/j.marpol.2013.09.022</p></li>
+<li><p>El Niño | National Geographic Society. (n.d.). Retrieved November 29, 2022, from https://education.nationalgeographic.org/resource/el-nino</p></li>
+<li><p>FAO. Fishery and Aquaculture Statistics. Global capture production 1950-2020 (FishStatJ). 2022. In: FAO Fisheries and Aquaculture Division [online]. Rome. Updated 2022.</p></li>
+<li><p>GFW (global fishing watch) daily fishing hours | Earth Engine Data catalog | google developers (no date) Google. Google. Available at: https://developers.google.com/earth-engine/datasets/catalog/GFW_GFF_V1_fishing_hours (Accessed: November 30, 2022).</p></li>
+<li><p>Global Fishing Watch Application Programming Interfaces (API) Documentation (https://globalfishingwatch.org/our-apis/documentation#introduction)</p></li>
+<li><p>Kroodsma, David A., Juan Mayorga, Timothy Hochberg, Nathan A. Miller, Kristina Boerder, Francesco Ferretti, Alex Wilson et al.&nbsp;“Tracking the global footprint of fisheries.” Science 359, no. 6378 (2018): 904-908. DOI:10.1126/science.aao5646.</p></li>
+</ol>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } 
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">Copyright 2023, Javier Patrón</div>   
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/javipatron">
+      <i class="bi bi-github" role="img">
+</i> 
+    </a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+
+
+
+</body></html>
