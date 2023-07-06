@@ -16,7 +16,7 @@ format:
 code-overflow: wrap
 code-block-bg: true
 code-block-border-left: "#6B5A75"
-categories: [MEDS, Spatial, Ocean, R]
+categories: [Spatial, Ocean, R, MEDS]
 citation: 
   url: https://github.com/javipatron
 image: spatial.png

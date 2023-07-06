@@ -157,9 +157,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         </div>
       </div>
                           <div class="quarto-categories">
-                <div class="quarto-category">MEDS</div>
+                <div class="quarto-category">Mangroves</div>
                 <div class="quarto-category">Machine Learning</div>
                 <div class="quarto-category">R</div>
+                <div class="quarto-category">MEDS</div>
               </div>
                   </div>
   </div>
@@ -202,13 +203,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#part-1-load-the-data" id="toc-part-1-load-the-data" class="nav-link active" data-scroll-target="#part-1-load-the-data">Part 1: Load the data</a></li>
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a>
+  <ul class="collapse">
+  <li><a href="#part-1-load-the-data" id="toc-part-1-load-the-data" class="nav-link" data-scroll-target="#part-1-load-the-data">Part 1: Load the data</a></li>
   <li><a href="#part-2-explore-and-clean" id="toc-part-2-explore-and-clean" class="nav-link" data-scroll-target="#part-2-explore-and-clean">Part 2: Explore and Clean</a></li>
   <li><a href="#part-3-score" id="toc-part-3-score" class="nav-link" data-scroll-target="#part-3-score">Part 3: Score</a></li>
   <li><a href="#part-4-statistic-analysis" id="toc-part-4-statistic-analysis" class="nav-link" data-scroll-target="#part-4-statistic-analysis">Part 4: Statistic Analysis</a></li>
   <li><a href="#part-5-examination" id="toc-part-5-examination" class="nav-link" data-scroll-target="#part-5-examination">Part 5: Examination</a></li>
   <li><a href="#part-6-plots-on-emotions" id="toc-part-6-plots-on-emotions" class="nav-link" data-scroll-target="#part-6-plots-on-emotions">Part 6: Plots on emotions</a></li>
   <li><a href="#part-7-plots-over-time" id="toc-part-7-plots-over-time" class="nav-link" data-scroll-target="#part-7-plots-over-time">Part 7: Plots over time</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -218,6 +222,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
+<section id="overview" class="level1">
+<h1>Overview</h1>
 <p>Sentiment analysis is a tool for assessing the mood of a piece of text. For example, we can use sentiment analysis to understand public perceptions of topics in environmental policy like energy, climate, and conservation. In this post we will access the Nexis Uni Database through the UCSB library <a href="https://www.library.ucsb.edu/research/db/211" class="uri">https://www.library.ucsb.edu/research/db/211</a>. Then we will choose a key search term or terms to define a set of articles.</p>
 <p>In this lab, I will be exploring the words <em>‘blue cabron’</em> and <em>‘mangrove’</em>. I am particularly interested in investigating the relationship between positivism and negativism as they relate to political and government initiatives in the environment.</p>
 <p><a href="https://search.library.ucsb.edu/discovery/search?query=any,contains,blue%20carbon&amp;tab=Everything&amp;search_scope=DN_and_CI&amp;vid=01UCSB_INST:UCSB&amp;lang=en&amp;offset=0">Here</a> is a link that takes you to the related articles from the University of California data base.</p>
@@ -570,6 +576,7 @@ Joining with `by = join_by(word)`</code></pre>
 <p>In the above graph, I have calculated a cumulative score for each sentiment to gain insight into the overall trends of words and vibes used in the articles. This plot also highlights the high influx of articles in recent years. As anticipated, the positive and negative sentiments have the highest scores, but the positive line surpasses the negative line by a significant margin. Additionally, there are noteworthy correlations between certain words and the sentiments of trust, joy, and sadness, which have seen increased usage in recent times. Conversely, surprise and disgust are used less frequently, representing the less common sentiments.</p>
 
 
+</section>
 </section>
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{patrón2023,

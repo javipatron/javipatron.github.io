@@ -15,19 +15,21 @@ format:
 code-overflow: wrap
 code-block-bg: true
 code-block-border-left: "#6B5A75"
-categories: [MEDS, Forest, R]
+categories: [Statistics, Forest, R, MEDS]
 citation: 
   url: https://github.com/javipatron
 image: carbon-cycle.jpeg
 ---
 
-### Introduction:
+# Overview
 
 Carbon sequestration in forests is the process by which trees and vegetation absorb carbon dioxide (CO2) from the atmosphere and store it in the form of carbon (C) within their biomass (AGB) and soils (BGB). Forests play a vital role in mitigating climate change as they act as natural carbon sinks, helping to reduce the concentration of CO2, a greenhouse gas, in the atmosphere.
 
 Carbon cycle in forests
 
 [![](carbon-cycle.jpeg){width="80%"}](https://portal.ct.gov/DEEP/Forestry/Climate-Change/Carbon-and-Forests)
+
+# Introduction
 
 In this post, we will perform a sensitivity analysis to calculate the total carbon sequestration in forests, considering their complex and dynamic nature. Forests are influenced by factors such as tree species, age, soil quality, and climate conditions, which affect carbon sequestration rates and capacity. By conducting sensitivity analysis, we will examine how changes in these factors impact carbon sequestration estimates. Keeping the Ordinary Differential Equations (ODE) simple in this post will demonstrate the effectiveness of this statistical analysis. It will enable us to identify the most influential factors, quantify their effects, and gain precise insights into forest carbon sequestration.
 

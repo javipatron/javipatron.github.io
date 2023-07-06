@@ -1,5 +1,5 @@
 ---
-title: "Blog Post Title"
+title: "My Blog Post Title"
 description: "What my first post looks like"
 image: shark_fiji.jpg
 author: 
@@ -7,8 +7,8 @@ author:
     url: https//javipatron.github.io
     affiliation: MEDS
     affiliation-url: https://ucsb-meds.github.io
-date: 2022-10-24
-categories: [MEDS, R, Python, Ocean] # Add the categories for you blog
+date: 2022-08-28
+categories: [MEDS, R, Ocean] # Add the categories for you blog
 citation: 
   url: https://javipatron.github.io/posts/blog_example_1/
 bibliography: references.bib
@@ -26,8 +26,10 @@ shark_y <- c(0,1,2,2,5,5,2,2,5,1,-1,0,0,-2,0,0)
 plot(shark_x,shark_y, type = "o", col= "blue")
 ```
 
-In this page will also help me visualize my references, cites, changes, and edits to official posts in my webpage.
+This page is intended as a wake-up call, illustrating the progression before and after my master's degree. The graph you see here took a lot of time, lessons learned, and effort from my past self in August 2022. It was during this time that I started diving deeper into the field of data science.
 
-Here is some more text. Cite: [@ref_id]
+This post is a way for me to express my creativity and share my belief that practicing, repeating, and staying disciplined can lead to incredible achievements. If you're reading this now, it's because you have a special dedication and commitment to paying attention. I want to sincerely congratulate you for genuinely engaging with my webpage. Your careful attention to detail is greatly appreciated.
 
-When you want to reference stuff. Then in this same pager click in "Insert v", then click in citation... then copy and paste the url
+The world needs more people like you who care about the environment. So, thank you.
+
+Here is some more information about webpages and posts[@ref_id]

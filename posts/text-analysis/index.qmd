@@ -15,11 +15,13 @@ format:
 code-overflow: wrap
 code-block-bg: true
 code-block-border-left: "#6B5A75"
-categories: [MEDS, Machine Learning, R]
+categories: [Mangroves, Machine Learning, R, MEDS]
 citation: 
   url: https://github.com/javipatron
 image: newspaper.jpg
 ---
+
+# Overview
 
 Sentiment analysis is a tool for assessing the mood of a piece of text. For example, we can use sentiment analysis to understand public perceptions of topics in environmental policy like energy, climate, and conservation. In this post we will access the Nexis Uni Database through the UCSB library <https://www.library.ucsb.edu/research/db/211>. Then we will choose a key search term or terms to define a set of articles.
 

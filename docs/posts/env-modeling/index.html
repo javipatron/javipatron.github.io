@@ -156,9 +156,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         </div>
       </div>
                           <div class="quarto-categories">
-                <div class="quarto-category">MEDS</div>
+                <div class="quarto-category">Statistics</div>
                 <div class="quarto-category">Forest</div>
                 <div class="quarto-category">R</div>
+                <div class="quarto-category">MEDS</div>
               </div>
                   </div>
   </div>
@@ -201,8 +202,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction:</a></li>
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction">Introduction</a>
+  <ul class="collapse">
   <li><a href="#the-model-ode" id="toc-the-model-ode" class="nav-link" data-scroll-target="#the-model-ode">The Model (ODE)</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -212,8 +216,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<section id="introduction" class="level3">
-<h3 class="anchored" data-anchor-id="introduction">Introduction:</h3>
+<section id="overview" class="level1">
+<h1>Overview</h1>
 <p>Carbon sequestration in forests is the process by which trees and vegetation absorb carbon dioxide (CO2) from the atmosphere and store it in the form of carbon (C) within their biomass (AGB) and soils (BGB). Forests play a vital role in mitigating climate change as they act as natural carbon sinks, helping to reduce the concentration of CO2, a greenhouse gas, in the atmosphere.</p>
 <p>Carbon cycle in forests</p>
 <div class="quarto-figure quarto-figure-center">
@@ -221,9 +225,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><a href="https://portal.ct.gov/DEEP/Forestry/Climate-Change/Carbon-and-Forests"><img src="carbon-cycle.jpeg" class="img-fluid figure-img" style="width:80.0%"></a></p>
 </figure>
 </div>
+</section>
+<section id="introduction" class="level1">
+<h1>Introduction</h1>
 <p>In this post, we will perform a sensitivity analysis to calculate the total carbon sequestration in forests, considering their complex and dynamic nature. Forests are influenced by factors such as tree species, age, soil quality, and climate conditions, which affect carbon sequestration rates and capacity. By conducting sensitivity analysis, we will examine how changes in these factors impact carbon sequestration estimates. Keeping the Ordinary Differential Equations (ODE) simple in this post will demonstrate the effectiveness of this statistical analysis. It will enable us to identify the most influential factors, quantify their effects, and gain precise insights into forest carbon sequestration.</p>
 <p>Carrying Capacity (K) and Carbon Sequestration: In the context of carbon sequestration, the carrying capacity (K) represents the maximum level of carbon that a forest ecosystem can store sustainable over the long term. It is determined by factors such as available land area, tree growth rates, nutrient availability, and ecosystem resilience. The carrying capacity sets an upper limit on the amount of carbon that can be sequestered by a forest, beyond which further increases may be unsustainable or lead to ecosystem degradation. Understanding the carrying capacity is crucial for forest managers and policymakers as it helps in setting realistic targets for carbon sequestration, guiding reforestation efforts, and ensuring the long-term effectiveness of forest-based climate change mitigation strategies.</p>
-</section>
 <section id="the-model-ode" class="level2">
 <h2 class="anchored" data-anchor-id="the-model-ode">The Model (ODE)</h2>
 <p>Consider the following models of forest growth</p>
@@ -584,6 +590,7 @@ X3 0.2075388 0.0002857185 0.008787598 0.1879067 0.2237080</code></pre>
 <p>Climate change has a significant impact on forests, as they are sensitive to weather conditions and changes in water availability due to higher temperatures. This can result in slower forest growth before reaching full canopy coverage, as water scarcity and decreased soil nutrients impede plant growth. Sensitivity analysis is a valuable method for understanding the initial equations of forest growth, and by creating a randomized sensitivity table, we can observe the potential effects on final forest growth. On average, for this post we can see that the maximum forest size in terms of carbon (C) units is approximately 180, showing a significant increase after reaching canopy closure, but with a flattened growth rate over time as we can see in the first plots.</p>
 
 
+</section>
 </section>
 </section>
 

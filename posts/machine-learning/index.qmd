@@ -15,11 +15,13 @@ format:
 code-overflow: wrap
 code-block-bg: true
 code-block-border-left: "#6B5A75"
-categories: [MEDS, Ocean, R]
+categories: [Ocean, Machine Leaning, R, MEDS]
 citation: 
   url: https://github.com/javipatron
 image: inorganic-carbon.jpeg
 ---
+
+# Overview
 
 In this lab, we will apply our machine learning knowledge to train models that can predict dissolved inorganic carbon concentrations in water samples collected by the California Cooperative Oceanic Fisheries Investigations program (CalCOFI). After developing our model, we will test its accuracy using a separate data set and compete against our classmates in a Kaggle competition. [Here](https://www.kaggle.com/competitions/eds-232-ocean-chemistry-prediction-for-calcofi/overview), you can find more details about the competition.
 
