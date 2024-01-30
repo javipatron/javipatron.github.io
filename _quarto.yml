@@ -18,7 +18,7 @@ website:
         href: resume.qmd
     
   page-footer: 
-    left: "Copyright 2023, Javier Patrón" 
+    left: "Copyright 2024, Javier Patrón" 
     right: 
       - icon: github
         href: https://github.com/javipatron 
