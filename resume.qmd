@@ -30,11 +30,11 @@ Highlighted Coursework: Sustainability and Energy Efficiency, Computerized Innov
 
 #### *Programming, Coding, & Data Analysis:*
 
-R, Python, SQL, Git (+ GitHub); Familiar with C++, HTML.
+R, Python, GIS, SQL, Git (+ GitHub); Familiar with C++, HTML.
 
 #### *Programming Environments:*
 
-RStudio, Google Earth Engine, Visual Studio Code, Jupyter Notebooks.
+RStudio, Google Earth Engine, QGIS, Visual Studio Code, Jupyter Notebooks.
 
 #### *Technical Coding Skills:*
 
@@ -42,7 +42,7 @@ Geospatial Analysis and Remote Sensing, Data Visualization, Machine Learning.
 
 #### *GE Company Award:*
 
-Nominated as "Best Digital Worker" who embraced digital deployment in the region as an overachiever and a role model.
+Nominated as "2021 Best Digital Worker" who embraced digital deployment in the region as an overachiever and a role model for the company.
 
 # MASTER´S CAPSTONE DATA SCIENCE PROJECT
 
@@ -52,19 +52,19 @@ Nominated as "Best Digital Worker" who embraced digital deployment in the region
 
 Role: Research and Data Scientist **\|** Client: [Ocean Rainforest](https://www.oceanrainforest.com/)
 
-• Synthesize existing data sets from the Santa Barbara Channel to analyze spatial and temporal patterns of kelp variables.
+• Generated a dynamic, interactive, and open-source, data pipeline for running a geospatial model. This species distribution model helped us identify locations where kelp productivity and growth can be optimized for kelp restoration projects in the future.
 
-• Generate a dynamic, interactive, open-source, geospatial model to identify locations where kelp productivity and growth are optimized with the goal of identifying sites for kelp restoration in the future.
+• Synthesized datasets from the Santa Barbara Channel to examine spatial and temporal patterns in kelp-related variables, such as oceanographic factors, sea surface temperature, substrate and more.
 
 # EXPERIENCE
 
-### **Environmental Data Analyst -- Silvestrum Climate Associates,** remote (7/23 -- Present)
+### **Environmental Data Analyst -- [Silvestrum Climate Associates](https://www.silvestrum.com/),** remote (7/23 -- Present)
 
--   Specialized in carbon finance and environmental carbon accountability, responsible for promoting global carbon finance initiatives through the strategic utilization of methodologies and techniques.
+-   Specialize in carbon finance projects with data science and project management, covering remote sensing, hydrofluid analysis, and carbon modeling. Developed a reproducible Arcpy script for biomass and soil carbon estimation in 120 countries (1996-2022), and working in line with Verra methodologies for carbon project monitoring data procedures with indices and remote sensing.
 
--   Collaborating with scientists, stakeholders, and government officials to enhance Silvestrum's environmental data analysis capabilities while actively participating in fieldwork, worldwide projects, and international workshops.
+-   Conduct sea level rise analysis for internal risk assessment in carbon projects and implemented business analytics for workload spreadsheets to enhance efficiency in task distribution among team members.
 
-### **Intern, Data Project Manager -- Silvestrum Climate Associates,** remote (1/23 -- 6/23)
+### **Intern, Data Project Manager -- [Silvestrum Climate Associates](https://www.silvestrum.com/),** remote (1/23 -- 6/23)
 
 -   Focusing on carbon accounting methodologies, statistical modeling, and empirical analysis for blue carbon ecosystems and carbon initiatives.
 
@@ -84,13 +84,13 @@ Role: Research and Data Scientist **\|** Client: [Ocean Rainforest](https://www.
 
 Global commissioning and tech-support team leader for GE Current´s smart controls software.
 
-• Manager of the global tech-support team (18 pax). Build and create all procedures needed for the new business strategy and increase their IoT and AI solutions capability.
+• Managed an 18-person global tech-support team, leading tech support operations supporting the business strategy new software and enhance IoT and AI solution capabilities.
 
 • \$5.8 USD in revenue recognition o Tech leader for GE Current´s largest gateway programming implementation for energy efficiency and IoT, AI software in over 1250 stores across Mexico.
 
 • Technical leader for GE Current´s largest gateway programming implementation for energy efficiency and IoT, AI software in over 1250 stores across Mexico.
 
-### *Digital Project Manager -- Current powered by GE*
+### *Digital Project Manager -- [Current powered by GE](https://www.led.com/)*
 
 ##### *Mexico City, Mexico (1/18 -- 6/20)*
 
@@ -100,7 +100,7 @@ Lead as a consultant and project manager for all Latin America Turn-Key digital 
 
 • Client´s POC and project coordinator for third-party contractors, report project status, budget, and risks to GE leadership (LatAm, USA, AUS). Central POC. Lead coordination among third-party contractors.
 
-### *Projects Intern -- General Electric*
+### *Projects Intern -- [General Electric](https://www.ge.com/)*
 
 ##### *Mexico City, Mexico (5/17 -- 6/20)*
 
