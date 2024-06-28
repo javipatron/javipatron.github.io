@@ -1,6 +1,6 @@
 ---
 title: "Javier Patrón" 
-image: images/kelp-javi.jpg
+image: images/star-javi.jpg
 page-layout: full
 about: 
   template: jolla

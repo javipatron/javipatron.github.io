@@ -1,0 +1,1708 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Javier Patrón">
+<meta name="dcterms.date" content="2024-06-28">
+<meta name="description" content="A blue carbon project analysis for monitoring campaigns calculating the amout of sample plots based on real field datasets">
+
+<title>Javier Patrón - Blue Carbon Sample Size Analysis</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+<script src="../../site_libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="../../site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Javier Patrón</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html" rel="" target="">
+ <span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../bio.html" rel="" target="">
+ <span class="menu-text">Bio</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../posts.html" rel="" target="">
+ <span class="menu-text">Posts</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../resume.html" rel="" target="">
+ <span class="menu-text">Resume</span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools ms-auto">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Blue Carbon Sample Size Analysis</h1>
+                  <div>
+        <div class="description">
+          A blue carbon project analysis for monitoring campaigns calculating the amout of sample plots based on real field datasets
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">Statistics</div>
+                <div class="quarto-category">R</div>
+                <div class="quarto-category">Mangroves</div>
+              </div>
+                  </div>
+  </div>
+    
+  <div class="quarto-title-meta-author">
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-heading">Affiliation</div>
+    
+      <div class="quarto-title-meta-contents">
+      <p class="author">Javier Patrón </p>
+    </div>
+      <div class="quarto-title-meta-contents">
+          <p class="affiliation">
+              <a href="http://ucsb-meds.github.io">
+              MEDS
+              </a>
+            </p>
+        </div>
+      </div>
+
+  <div class="quarto-title-meta">
+
+        
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">June 28, 2024</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#step-6.-calculate-the-different-sample-size-with-the-proposed-equations-from-the-sop." id="toc-step-6.-calculate-the-different-sample-size-with-the-proposed-equations-from-the-sop." class="nav-link" data-scroll-target="#step-6.-calculate-the-different-sample-size-with-the-proposed-equations-from-the-sop.">Step 6. Calculate the different sample size with the proposed equations from the SOP.</a>
+  <ul class="collapse">
+  <li><a href="#a.-power-calculation" id="toc-a.-power-calculation" class="nav-link" data-scroll-target="#a.-power-calculation">a. Power Calculation</a>
+  <ul class="collapse">
+  <li><a href="#power-calculation-graph" id="toc-power-calculation-graph" class="nav-link" data-scroll-target="#power-calculation-graph">Power Calculation Graph</a></li>
+  </ul></li>
+  <li><a href="#b.-central-limit-theorem" id="toc-b.-central-limit-theorem" class="nav-link" data-scroll-target="#b.-central-limit-theorem">b. Central Limit Theorem</a></li>
+  <li><a href="#c.-ar-methodological-tool." id="toc-c.-ar-methodological-tool." class="nav-link" data-scroll-target="#c.-ar-methodological-tool.">c.&nbsp;A/R Methodological Tool.</a></li>
+  <li><a href="#cifor" id="toc-cifor" class="nav-link" data-scroll-target="#cifor">CIFOR</a></li>
+  <li><a href="#winrock" id="toc-winrock" class="nav-link" data-scroll-target="#winrock">WINROCK</a></li>
+  <li><a href="#final-sample-size-and-correlations-per-method" id="toc-final-sample-size-and-correlations-per-method" class="nav-link" data-scroll-target="#final-sample-size-and-correlations-per-method">Final sample size and correlations per method</a></li>
+  <li><a href="#step-7.-calculate-the-different-sample-sizes-with-the-real-data-sets." id="toc-step-7.-calculate-the-different-sample-sizes-with-the-real-data-sets." class="nav-link" data-scroll-target="#step-7.-calculate-the-different-sample-sizes-with-the-real-data-sets.">Step 7. Calculate the different sample sizes with the real data sets.</a>
+  <ul class="collapse">
+  <li><a href="#methodology-results-for-site-b" id="toc-methodology-results-for-site-b" class="nav-link" data-scroll-target="#methodology-results-for-site-b">Methodology results for site B</a></li>
+  </ul></li>
+  <li><a href="#step-8.-perform-the-confusion-matrix-to-understand-the-relationship-between-parameters-and-strengthen-the-sop-for-calculating-sample-sizes" id="toc-step-8.-perform-the-confusion-matrix-to-understand-the-relationship-between-parameters-and-strengthen-the-sop-for-calculating-sample-sizes" class="nav-link" data-scroll-target="#step-8.-perform-the-confusion-matrix-to-understand-the-relationship-between-parameters-and-strengthen-the-sop-for-calculating-sample-sizes">Step 8. Perform the confusion matrix to understand the relationship between parameters and strengthen the SOP for calculating sample sizes</a>
+  <ul class="collapse">
+  <li><a href="#confusion-matrix---site-a" id="toc-confusion-matrix---site-a" class="nav-link" data-scroll-target="#confusion-matrix---site-a">Confusion Matrix - Site A</a></li>
+  <li><a href="#p-value-results---site-a" id="toc-p-value-results---site-a" class="nav-link" data-scroll-target="#p-value-results---site-a">P-Value Results - Site A</a></li>
+  <li><a href="#confusion-matrix---site-b" id="toc-confusion-matrix---site-b" class="nav-link" data-scroll-target="#confusion-matrix---site-b">Confusion Matrix - Site B</a></li>
+  <li><a href="#p-value-results.-site-b" id="toc-p-value-results.-site-b" class="nav-link" data-scroll-target="#p-value-results.-site-b">P-Value Results. Site B</a></li>
+  <li><a href="#confusion-matrix---site-c" id="toc-confusion-matrix---site-c" class="nav-link" data-scroll-target="#confusion-matrix---site-c">Confusion Matrix - Site C</a></li>
+  <li><a href="#p-value-results---site-c" id="toc-p-value-results---site-c" class="nav-link" data-scroll-target="#p-value-results---site-c">P-Value Results - Site C</a></li>
+  <li><a href="#conclusions" id="toc-conclusions" class="nav-link" data-scroll-target="#conclusions">Conclusions</a></li>
+  <li><a href="#key-takeaways" id="toc-key-takeaways" class="nav-link" data-scroll-target="#key-takeaways">Key Takeaways</a></li>
+  </ul></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>In this R Markdown we will calculate the sample sizes for three example data sets, and we will do an analysis with a confusion matrix to understand what are most important parameters from the field data in order to calculate the total carbon per tree per hectare. This step is important, so we can identify what are the important pieces wen we are stratifying the sample plots, and we want to homogenize the total project area as much as possible. Additionally, to understand our sample size options we we will create a demo data frame with random sample sizes and calculate the sample size needed depending in the variance.</p>
+<p>The steps followed are.</p>
+<ol type="1">
+<li>Download the libraries</li>
+<li>Read the data. Datasets:
+<ul>
+<li><strong>Site A:</strong> Abu Ali, Saudi Arabia</li>
+<li><strong>Site B:</strong> Delta Blue Carbon, Sindh Pakistan</li>
+<li><strong>Site C:</strong> Sidnh Pakistan, Pakistan institute</li>
+</ul></li>
+<li>Cleaning and tidy the data into the same format</li>
+<li>Bind the data sets into only one big df</li>
+<li>Create a demo data set for understanding how the sample size is influenced by the variation and standard deviation of the data.</li>
+<li>Calculate the different sample size with the proposed equations from the SOP.</li>
+<li>Calculate the different sample sizes with the real data sets.</li>
+<li>Perform the confusion matrix to understand the relationship between parameters and strengthen the SOP for calculating sample sizes</li>
+</ol>
+<p>Here is our demo data set summary:</p>
+<div class="cell">
+<div class="cell-output-display">
+<div class="table-responsive">
+<table class="table table-striped table-hover table-condensed table-sm small" data-quarto-postprocess="true">
+<caption>Summary Demo Data Set</caption>
+<thead>
+<tr class="header">
+<th style="text-align: center;" data-quarto-table-cell-role="th">site_name</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">tree_count</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">mean_carbon_kg</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">sd_carbon_kg</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">std_error</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">Very Steady</td>
+<td style="text-align: center;">151</td>
+<td style="text-align: center;">0.1481133</td>
+<td style="text-align: center;">0.0709162</td>
+<td style="text-align: center;">0.0057711</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Steady</td>
+<td style="text-align: center;">173</td>
+<td style="text-align: center;">0.2263267</td>
+<td style="text-align: center;">0.1571232</td>
+<td style="text-align: center;">0.0119459</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Normal</td>
+<td style="text-align: center;">178</td>
+<td style="text-align: center;">0.4256436</td>
+<td style="text-align: center;">0.2501144</td>
+<td style="text-align: center;">0.0187469</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Variant</td>
+<td style="text-align: center;">190</td>
+<td style="text-align: center;">0.6394418</td>
+<td style="text-align: center;">0.4990083</td>
+<td style="text-align: center;">0.0362019</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Very Variant</td>
+<td style="text-align: center;">208</td>
+<td style="text-align: center;">1.7013919</td>
+<td style="text-align: center;">1.2109702</td>
+<td style="text-align: center;">0.0839657</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="step-6.-calculate-the-different-sample-size-with-the-proposed-equations-from-the-sop." class="level1">
+<h1>Step 6. Calculate the different sample size with the proposed equations from the SOP.</h1>
+<section id="a.-power-calculation" class="level2">
+<h2 class="anchored" data-anchor-id="a.-power-calculation">a. Power Calculation</h2>
+<p>In this case, we utilized the pwr.t.test() function from the pwr package in R. This function calculates the sample size, taking into consideration the desired power level, with certain significance level (power = 95% confidence ,margin of error = 0.05).</p>
+<p>The effect size for each stratum was determined by dividing a desired mean (0.4 kg per sample), by the standard deviation within that stratum, meaning how much our samples deviate from the target mean.</p>
+<p><strong>Results:</strong> In “<span style="background-color: lightblue;">lightblue</span>” results gave us 2.3 for the smallest sample size due to low variance, and 239.2 as the highest sample size due to higher variance.</p>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-sm table-striped small" data-quarto-postprocess="true">
+<caption>Stratas summary: Power Calculation Sample</caption>
+<thead>
+<tr class="header">
+<th style="text-align: center;" data-quarto-table-cell-role="th">site_name</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">tree_count</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">mean_carbon_kg</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">sd_carbon_kg</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">std_error</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">power_calc</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">Very Steady</td>
+<td style="text-align: center;">151</td>
+<td style="text-align: center;">0.1481133</td>
+<td style="text-align: center;">0.0709162</td>
+<td style="text-align: center;">0.0057711</td>
+<td style="text-align: center; background-color: lightblue !important;">2.3</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Steady</td>
+<td style="text-align: center;">173</td>
+<td style="text-align: center;">0.2263267</td>
+<td style="text-align: center;">0.1571232</td>
+<td style="text-align: center;">0.0119459</td>
+<td style="text-align: center; background-color: lightblue !important;">5.2</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Normal</td>
+<td style="text-align: center;">178</td>
+<td style="text-align: center;">0.4256436</td>
+<td style="text-align: center;">0.2501144</td>
+<td style="text-align: center;">0.0187469</td>
+<td style="text-align: center; background-color: lightblue !important;">11.2</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Variant</td>
+<td style="text-align: center;">190</td>
+<td style="text-align: center;">0.6394418</td>
+<td style="text-align: center;">0.4990083</td>
+<td style="text-align: center;">0.0362019</td>
+<td style="text-align: center; background-color: lightblue !important;">41.4</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Very Variant</td>
+<td style="text-align: center;">208</td>
+<td style="text-align: center;">1.7013919</td>
+<td style="text-align: center;">1.2109702</td>
+<td style="text-align: center;">0.0839657</td>
+<td style="text-align: center; background-color: lightblue !important;">239.2</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+<p>The pwr.t.test() function is good when you have a desired mean for each stratum and will easily determine the adequate sample sizes that accounts for the variability within each stratum. To visualize the results better here is the graph for the <strong>Variant Statification.</strong></p>
+<section id="power-calculation-graph" class="level3">
+<h3 class="anchored" data-anchor-id="power-calculation-graph">Power Calculation Graph</h3>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+</section>
+<section id="b.-central-limit-theorem" class="level2">
+<h2 class="anchored" data-anchor-id="b.-central-limit-theorem">b. Central Limit Theorem</h2>
+<p>Now we will calculate the sample size using the Central Limit Theorem.</p>
+<p><span class="math display">\[n = \left(\frac{Z \cdot sd}{E}\right)^2\]</span></p>
+<p>where:</p>
+<ul>
+<li><p><span class="math inline">\(n\)</span> = sample size</p></li>
+<li><p><span class="math inline">\(Z\)</span> = Z-score (e.g., 1.96 for 95% confidence)</p></li>
+<li><p><span class="math inline">\(sd\)</span> = Standard Deviation of your population</p></li>
+<li><p><span class="math inline">\(E\)</span> = Margin of error you are willing to accept in your estimate</p></li>
+</ul>
+<p>Using the Central Limit Theorem, we calculate the minimum sample size to ensure our margin of error and confidence interval stay within VM0033 requirements:</p>
+<ul>
+<li><p>For a <strong>90% Confidence Interval</strong>: 90% confidence that our carbon stock estimate is no more than 20% off the true value.</p></li>
+<li><p>For a <strong>95% Confidence Interval</strong>: 95% confidence that our carbon stock estimate is no more than 30% off the true value.</p></li>
+</ul>
+<p><strong>Results:</strong> In “<span style="background-color: lightgreen;">lightgreen</span>” the CLT results gave us 9.7852599 for the smallest sample size due to low variance, and 21.62359 as the highest sample size due to higher variance.</p>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-sm table-striped small" data-quarto-postprocess="true">
+<caption>Demo stratas summary: CLT Sample</caption>
+<thead>
+<tr class="header">
+<th style="text-align: center;" data-quarto-table-cell-role="th">site_name</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">tree_count</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">mean_carbon_kg</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">sd_carbon_kg</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">std_error</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">power_calc</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">CLT</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">Very Steady</td>
+<td style="text-align: center;">151</td>
+<td style="text-align: center;">0.1481133</td>
+<td style="text-align: center;">0.0709162</td>
+<td style="text-align: center;">0.0057711</td>
+<td style="text-align: center; background-color: lightblue !important;">2.3</td>
+<td style="text-align: center; background-color: lightgreen !important;">9.78526</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Steady</td>
+<td style="text-align: center;">173</td>
+<td style="text-align: center;">0.2263267</td>
+<td style="text-align: center;">0.1571232</td>
+<td style="text-align: center;">0.0119459</td>
+<td style="text-align: center; background-color: lightblue !important;">5.2</td>
+<td style="text-align: center; background-color: lightgreen !important;">20.57209</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Normal</td>
+<td style="text-align: center;">178</td>
+<td style="text-align: center;">0.4256436</td>
+<td style="text-align: center;">0.2501144</td>
+<td style="text-align: center;">0.0187469</td>
+<td style="text-align: center; background-color: lightblue !important;">11.2</td>
+<td style="text-align: center; background-color: lightgreen !important;">14.73855</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Variant</td>
+<td style="text-align: center;">190</td>
+<td style="text-align: center;">0.6394418</td>
+<td style="text-align: center;">0.4990083</td>
+<td style="text-align: center;">0.0362019</td>
+<td style="text-align: center; background-color: lightblue !important;">41.4</td>
+<td style="text-align: center; background-color: lightgreen !important;">25.99459</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Very Variant</td>
+<td style="text-align: center;">208</td>
+<td style="text-align: center;">1.7013919</td>
+<td style="text-align: center;">1.2109702</td>
+<td style="text-align: center;">0.0839657</td>
+<td style="text-align: center; background-color: lightblue !important;">239.2</td>
+<td style="text-align: center; background-color: lightgreen !important;">21.62359</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+</section>
+<section id="c.-ar-methodological-tool." class="level2">
+<h2 class="anchored" data-anchor-id="c.-ar-methodological-tool.">c.&nbsp;A/R Methodological Tool.</h2>
+<p><span class="math display">\[n =\frac{N \text{ }* \text{ }tvalue^2 \text{ }* \text{ }(\epsilon\ w * s)^2)}{N \text{ }*\text{ } E^2 + \text{ }tvalue^2 \text{ }* \text{ }\epsilon\ w * s^2}\]</span></p>
+<p><em>n</em> = Number of sample plots required for estimation of biomass stocks within the project boundary; dimensionless.</p>
+<p><em>N</em> = Total number of possible sample plots within the project boundary space or the population; dimensionless. (<code>plot_count</code>)</p>
+<p><em>t-value</em> = Two-sided Student´s t-value, at infinite degrees of freedom, for the required confidence level; dimensionless. (<code>Table-\&gt; 90% = 1.645</code>)</p>
+<p><em>w</em> = Relative weight of the area of stratum i (i.e.&nbsp;the area of the stratum i divided by the project). (<code>154/ plot_count * 154</code>)</p>
+<p><em>s =</em> Estimated standard deviation of biomass stock in stratum (<code>SD Carbon Biomass</code>)</p>
+<p><em>E</em> = Acceptable margin of error (i.e.&nbsp;calculated by multiplying the mean biomass stock by the desired precision. i.e.&nbsp;mean biomass stock * 0.1 (for 10% precision) or 0.2 (for 20% precision)</p>
+<p><strong>Results:</strong> In the “<span style="background-color: lightpink;">lightpink</span>” the A/R Methodological tool gave us 0.7823963 for the smallest sample size due to low variance, and 168.9942103 as the highest sample size due to higher variance.</p>
+<p>INCOMPLETE: The E factor its having an effect on the final A/R Tool that needs to be reviewed.</p>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-sm table-striped small" data-quarto-postprocess="true">
+<caption>Demo Strata summary: A/R Methodological Tool</caption>
+<thead>
+<tr class="header">
+<th style="text-align: center;" data-quarto-table-cell-role="th">site_name</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">tree_count</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">stratum_size_ha</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">mean_carbon_kg</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">sd_carbon_kg</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">std_error</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">power_calc</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">CLT</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">ar_tool</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">Very Steady</td>
+<td style="text-align: center;">151</td>
+<td style="text-align: center;">100</td>
+<td style="text-align: center;">0.1481133</td>
+<td style="text-align: center;">0.0709162</td>
+<td style="text-align: center;">0.0057711</td>
+<td style="text-align: center; background-color: lightblue !important;">2.3</td>
+<td style="text-align: center; background-color: lightgreen !important;">9.78526</td>
+<td style="text-align: center; background-color: lightpink !important;">0.7823963</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Steady</td>
+<td style="text-align: center;">173</td>
+<td style="text-align: center;">100</td>
+<td style="text-align: center;">0.2263267</td>
+<td style="text-align: center;">0.1571232</td>
+<td style="text-align: center;">0.0119459</td>
+<td style="text-align: center; background-color: lightblue !important;">5.2</td>
+<td style="text-align: center; background-color: lightgreen !important;">20.57209</td>
+<td style="text-align: center; background-color: lightpink !important;">3.8227536</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Normal</td>
+<td style="text-align: center;">178</td>
+<td style="text-align: center;">100</td>
+<td style="text-align: center;">0.4256436</td>
+<td style="text-align: center;">0.2501144</td>
+<td style="text-align: center;">0.0187469</td>
+<td style="text-align: center; background-color: lightblue !important;">11.2</td>
+<td style="text-align: center; background-color: lightgreen !important;">14.73855</td>
+<td style="text-align: center; background-color: lightpink !important;">9.5999852</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Variant</td>
+<td style="text-align: center;">190</td>
+<td style="text-align: center;">100</td>
+<td style="text-align: center;">0.6394418</td>
+<td style="text-align: center;">0.4990083</td>
+<td style="text-align: center;">0.0362019</td>
+<td style="text-align: center; background-color: lightblue !important;">41.4</td>
+<td style="text-align: center; background-color: lightgreen !important;">25.99459</td>
+<td style="text-align: center; background-color: lightpink !important;">36.6006678</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Very Variant</td>
+<td style="text-align: center;">208</td>
+<td style="text-align: center;">100</td>
+<td style="text-align: center;">1.7013919</td>
+<td style="text-align: center;">1.2109702</td>
+<td style="text-align: center;">0.0839657</td>
+<td style="text-align: center; background-color: lightblue !important;">239.2</td>
+<td style="text-align: center; background-color: lightgreen !important;">21.62359</td>
+<td style="text-align: center; background-color: lightpink !important;">168.9942103</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+</section>
+<section id="cifor" class="level2">
+<h2 class="anchored" data-anchor-id="cifor">CIFOR</h2>
+<p>The CIFOR document by Kauffman and Donato (2012) on mangrove forest research outlines a formula for calculating sample sizes. Published by the Center for International Forestry Research.</p>
+<p><span class="math display">\[n = \left(\frac{t \cdot s}{E}\right)^2\]</span></p>
+<p>Where:</p>
+<ul>
+<li><p>n = the number of sample plots</p></li>
+<li><p>t = the t-distribution value, usually 2 for 95% confidence</p></li>
+<li><p>s = the expected standard deviation from prior data</p></li>
+<li><p>E = the acceptable margin of error.</p></li>
+</ul>
+<p><strong>Results:</strong> In the “<span style="background-color: gold;">gold</span>” the CIFOR tool gave us 22.0168348 for the smallest sample size due to low variance, and 48.6530775 as the highest sample size due to higher variance.</p>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-sm table-striped small" data-quarto-postprocess="true">
+<caption>Demo Strata summary: CIFOR Sample</caption>
+<thead>
+<tr class="header">
+<th style="text-align: center;" data-quarto-table-cell-role="th">site_name</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">tree_count</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">mean_carbon_kg</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">sd_carbon_kg</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">std_error</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">power_calc</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">CLT</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">ar_tool</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">CIFOR</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">Very Steady</td>
+<td style="text-align: center;">151</td>
+<td style="text-align: center;">0.1481133</td>
+<td style="text-align: center;">0.0709162</td>
+<td style="text-align: center;">0.0057711</td>
+<td style="text-align: center; background-color: lightblue !important;">2.3</td>
+<td style="text-align: center; background-color: lightgreen !important;">9.78526</td>
+<td style="text-align: center; background-color: lightpink !important;">0.7823963</td>
+<td style="text-align: center; background-color: gold !important;">22.01683</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Steady</td>
+<td style="text-align: center;">173</td>
+<td style="text-align: center;">0.2263267</td>
+<td style="text-align: center;">0.1571232</td>
+<td style="text-align: center;">0.0119459</td>
+<td style="text-align: center; background-color: lightblue !important;">5.2</td>
+<td style="text-align: center; background-color: lightgreen !important;">20.57209</td>
+<td style="text-align: center; background-color: lightpink !important;">3.8227536</td>
+<td style="text-align: center; background-color: gold !important;">46.28720</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Normal</td>
+<td style="text-align: center;">178</td>
+<td style="text-align: center;">0.4256436</td>
+<td style="text-align: center;">0.2501144</td>
+<td style="text-align: center;">0.0187469</td>
+<td style="text-align: center; background-color: lightblue !important;">11.2</td>
+<td style="text-align: center; background-color: lightgreen !important;">14.73855</td>
+<td style="text-align: center; background-color: lightpink !important;">9.5999852</td>
+<td style="text-align: center; background-color: gold !important;">33.16173</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Variant</td>
+<td style="text-align: center;">190</td>
+<td style="text-align: center;">0.6394418</td>
+<td style="text-align: center;">0.4990083</td>
+<td style="text-align: center;">0.0362019</td>
+<td style="text-align: center; background-color: lightblue !important;">41.4</td>
+<td style="text-align: center; background-color: lightgreen !important;">25.99459</td>
+<td style="text-align: center; background-color: lightpink !important;">36.6006678</td>
+<td style="text-align: center; background-color: gold !important;">58.48783</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Very Variant</td>
+<td style="text-align: center;">208</td>
+<td style="text-align: center;">1.7013919</td>
+<td style="text-align: center;">1.2109702</td>
+<td style="text-align: center;">0.0839657</td>
+<td style="text-align: center; background-color: lightblue !important;">239.2</td>
+<td style="text-align: center; background-color: lightgreen !important;">21.62359</td>
+<td style="text-align: center; background-color: lightpink !important;">168.9942103</td>
+<td style="text-align: center; background-color: gold !important;">48.65308</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+</section>
+<section id="winrock" class="level2">
+<h2 class="anchored" data-anchor-id="winrock">WINROCK</h2>
+<p>Now we wil add the results from the Winrock tool manually for a good comparison of all five methods.</p>
+<p><strong>Results:</strong> In the “<span style="background-color: purple;">purple</span>” ethe Winrock tool gave us 5.99 for the smallest sample size due to low variance, and 106.6 as the highest sample size due to higher variance.</p>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-sm table-striped small" data-quarto-postprocess="true">
+<caption>Table 1. Demo dataset summary per stratum</caption>
+<thead>
+<tr class="header">
+<th style="text-align: center;" data-quarto-table-cell-role="th">site_name</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">tree_count</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">mean_carbon_kg</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">sd_carbon_kg</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">std_error</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">power_calc</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">CLT</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">ar_tool</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">CIFOR</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">Winrock</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">Very Steady</td>
+<td style="text-align: center;">151</td>
+<td style="text-align: center;">0.1481133</td>
+<td style="text-align: center;">0.0709162</td>
+<td style="text-align: center;">0.0057711</td>
+<td style="text-align: center; background-color: lightblue !important;">2.3</td>
+<td style="text-align: center; background-color: lightgreen !important;">9.78526</td>
+<td style="text-align: center; background-color: lightpink !important;">0.7823963</td>
+<td style="text-align: center; background-color: gold !important;">22.01683</td>
+<td style="text-align: center; background-color: #D8AFF1 !important;">5.99</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Steady</td>
+<td style="text-align: center;">173</td>
+<td style="text-align: center;">0.2263267</td>
+<td style="text-align: center;">0.1571232</td>
+<td style="text-align: center;">0.0119459</td>
+<td style="text-align: center; background-color: lightblue !important;">5.2</td>
+<td style="text-align: center; background-color: lightgreen !important;">20.57209</td>
+<td style="text-align: center; background-color: lightpink !important;">3.8227536</td>
+<td style="text-align: center; background-color: gold !important;">46.28720</td>
+<td style="text-align: center; background-color: #D8AFF1 !important;">13.70</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Normal</td>
+<td style="text-align: center;">178</td>
+<td style="text-align: center;">0.4256436</td>
+<td style="text-align: center;">0.2501144</td>
+<td style="text-align: center;">0.0187469</td>
+<td style="text-align: center; background-color: lightblue !important;">11.2</td>
+<td style="text-align: center; background-color: lightgreen !important;">14.73855</td>
+<td style="text-align: center; background-color: lightpink !important;">9.5999852</td>
+<td style="text-align: center; background-color: gold !important;">33.16173</td>
+<td style="text-align: center; background-color: #D8AFF1 !important;">22.96</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Variant</td>
+<td style="text-align: center;">190</td>
+<td style="text-align: center;">0.6394418</td>
+<td style="text-align: center;">0.4990083</td>
+<td style="text-align: center;">0.0362019</td>
+<td style="text-align: center; background-color: lightblue !important;">41.4</td>
+<td style="text-align: center; background-color: lightgreen !important;">25.99459</td>
+<td style="text-align: center; background-color: lightpink !important;">36.6006678</td>
+<td style="text-align: center; background-color: gold !important;">58.48783</td>
+<td style="text-align: center; background-color: #D8AFF1 !important;">36.75</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Very Variant</td>
+<td style="text-align: center;">208</td>
+<td style="text-align: center;">1.7013919</td>
+<td style="text-align: center;">1.2109702</td>
+<td style="text-align: center;">0.0839657</td>
+<td style="text-align: center; background-color: lightblue !important;">239.2</td>
+<td style="text-align: center; background-color: lightgreen !important;">21.62359</td>
+<td style="text-align: center; background-color: lightpink !important;">168.9942103</td>
+<td style="text-align: center; background-color: gold !important;">48.65308</td>
+<td style="text-align: center; background-color: #D8AFF1 !important;">106.60</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="final-sample-size-and-correlations-per-method" class="level2">
+<h2 class="anchored" data-anchor-id="final-sample-size-and-correlations-per-method">Final sample size and correlations per method</h2>
+<p>The table below presents two critical metrics for evaluating our methodologies:</p>
+<ol type="1">
+<li><p>The total sample size.</p></li>
+<li><p>The correlation with standard deviation (SD).</p></li>
+</ol>
+<p>Overall, this table highlights the impact of variability on each method and shows the total sample size for each method which is good for the cost-benefit analysis. As you can see the correlation with SD shows how the project variance influences each method’s outcomes. A higher correlation suggests that changes in the SD significantly affect the method’s performance. In this case, the Winrock method show the highest correlation with SD, with the AR Tool and Power Calc following. This indicates their sensitivity to the data variance, and can be useful for stakeholder decisions.</p>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-sm table-striped small" data-quarto-postprocess="true">
+<caption>Table: Total Sample Size and Correlation per Method</caption>
+<thead>
+<tr class="header">
+<th style="text-align: center;" data-quarto-table-cell-role="th">method</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">total_sample_size</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">Correlation_with_SD</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center; background-color: lightgreen !important;">CLT</td>
+<td style="text-align: center; background-color: lightgreen !important;">92.71408</td>
+<td style="text-align: center; background-color: lightgreen !important;">0.5307088</td>
+</tr>
+<tr class="even">
+<td style="text-align: center; background-color: #D8AFF1 !important;">Winrock</td>
+<td style="text-align: center; background-color: #D8AFF1 !important;">186.00000</td>
+<td style="text-align: center; background-color: #D8AFF1 !important;">0.9966763</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center; background-color: gold !important;">CIFOR</td>
+<td style="text-align: center; background-color: gold !important;">208.60668</td>
+<td style="text-align: center; background-color: gold !important;">0.5307088</td>
+</tr>
+<tr class="even">
+<td style="text-align: center; background-color: lightpink !important;">ar_tool</td>
+<td style="text-align: center; background-color: lightpink !important;">219.80001</td>
+<td style="text-align: center; background-color: lightpink !important;">0.9868234</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center; background-color: lightblue !important;">power_calc</td>
+<td style="text-align: center; background-color: lightblue !important;">299.30000</td>
+<td style="text-align: center; background-color: lightblue !important;">0.9787978</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+</section>
+<section id="step-7.-calculate-the-different-sample-sizes-with-the-real-data-sets." class="level2">
+<h2 class="anchored" data-anchor-id="step-7.-calculate-the-different-sample-sizes-with-the-real-data-sets.">Step 7. Calculate the different sample sizes with the real data sets.</h2>
+<p>Now, we will calculate the sample sizes again, but this time using the actual data collected from the three mangrove restoration sites.</p>
+<section id="methodology-results-for-site-b" class="level3">
+<h3 class="anchored" data-anchor-id="methodology-results-for-site-b">Methodology results for site B</h3>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-sm table-striped small" data-quarto-postprocess="true">
+<caption>Table 4. Real Data Set Sample Sizes</caption>
+<thead>
+<tr class="header">
+<th style="text-align: center;" data-quarto-table-cell-role="th">site</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">year</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">plot_size_m2</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">plot_count</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">sd_carbon_kg</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">power_calc</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">CLT</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">ar_tool</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">CIFOR</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">Winrock</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">B</td>
+<td style="text-align: center;">2020</td>
+<td style="text-align: center;">153.938</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">0.8938315</td>
+<td style="text-align: center; background-color: lightblue !important;">192.1</td>
+<td style="text-align: center; background-color: lightgreen !important;">313.98551</td>
+<td style="text-align: center; background-color: lightpink !important;">0.0001628</td>
+<td style="text-align: center; background-color: gold !important;">706.4674</td>
+<td style="text-align: center; background-color: #D8AFF1 !important;">32.76</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">B</td>
+<td style="text-align: center;">2019</td>
+<td style="text-align: center;">153.938</td>
+<td style="text-align: center;">7</td>
+<td style="text-align: center;">1.8395299</td>
+<td style="text-align: center; background-color: lightblue !important;">51.2</td>
+<td style="text-align: center; background-color: lightgreen !important;">82.42220</td>
+<td style="text-align: center; background-color: lightpink !important;">0.0014350</td>
+<td style="text-align: center; background-color: gold !important;">185.4499</td>
+<td style="text-align: center; background-color: #D8AFF1 !important;">97.37</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">B</td>
+<td style="text-align: center;">2017</td>
+<td style="text-align: center;">153.938</td>
+<td style="text-align: center;">11</td>
+<td style="text-align: center;">2.1047953</td>
+<td style="text-align: center; background-color: lightblue !important;">44.5</td>
+<td style="text-align: center; background-color: lightgreen !important;">71.47415</td>
+<td style="text-align: center; background-color: lightpink !important;">0.0008316</td>
+<td style="text-align: center; background-color: gold !important;">160.8168</td>
+<td style="text-align: center; background-color: #D8AFF1 !important;">73.94</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">B</td>
+<td style="text-align: center;">2018</td>
+<td style="text-align: center;">153.938</td>
+<td style="text-align: center;">7</td>
+<td style="text-align: center;">2.5186589</td>
+<td style="text-align: center; background-color: lightblue !important;">62.8</td>
+<td style="text-align: center; background-color: lightgreen !important;">101.56436</td>
+<td style="text-align: center; background-color: lightpink !important;">0.0012075</td>
+<td style="text-align: center; background-color: gold !important;">228.5198</td>
+<td style="text-align: center; background-color: #D8AFF1 !important;">89.27</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">B</td>
+<td style="text-align: center;">2016</td>
+<td style="text-align: center;">153.938</td>
+<td style="text-align: center;">13</td>
+<td style="text-align: center;">4.5645982</td>
+<td style="text-align: center; background-color: lightblue !important;">42.4</td>
+<td style="text-align: center; background-color: lightgreen !important;">68.08314</td>
+<td style="text-align: center; background-color: lightpink !important;">0.0124360</td>
+<td style="text-align: center; background-color: gold !important;">153.1871</td>
+<td style="text-align: center; background-color: #D8AFF1 !important;">282.53</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">B</td>
+<td style="text-align: center;">2015</td>
+<td style="text-align: center;">153.938</td>
+<td style="text-align: center;">7</td>
+<td style="text-align: center;">6.5105214</td>
+<td style="text-align: center; background-color: lightblue !important;">74.9</td>
+<td style="text-align: center; background-color: lightgreen !important;">121.38922</td>
+<td style="text-align: center; background-color: lightpink !important;">0.0069008</td>
+<td style="text-align: center; background-color: gold !important;">273.1257</td>
+<td style="text-align: center; background-color: #D8AFF1 !important;">213.14</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-36-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+</section>
+<section id="step-8.-perform-the-confusion-matrix-to-understand-the-relationship-between-parameters-and-strengthen-the-sop-for-calculating-sample-sizes" class="level2">
+<h2 class="anchored" data-anchor-id="step-8.-perform-the-confusion-matrix-to-understand-the-relationship-between-parameters-and-strengthen-the-sop-for-calculating-sample-sizes">Step 8. Perform the confusion matrix to understand the relationship between parameters and strengthen the SOP for calculating sample sizes</h2>
+<p>Now, for this last step, we will create three confusion matrices to analyze the field sampling data from mangrove restoration projects. This analysis will help us understand and explore the relationships between the parameters involved.</p>
+<p>For each data set, we will filter the important columns and run the analysis between each parameter. Showing the correlation values. A value close to 1 indicates a strong positive relationship, meaning that as one variable increases, the other one increases in that magnitude as well. Negative values indicate an inverse relationship, meaning as one variable increases, the other decreases.</p>
+<p>To complement this analysis, we will run t-tests to review the statistical significance of the observed correlations. This step is essential because even a high correlation might not hold practical significance if for example, the data comes from a dispersed set of data (e.g.&nbsp;a cloud of points). Which can potentially mislead our interpretation of the relationships within our environmental sampling data.</p>
+<section id="this-table-will-describe-the-symbol-for-the-significant-levels-based-in-the-results-of-the-p-value" class="level4">
+<h4 class="anchored" data-anchor-id="this-table-will-describe-the-symbol-for-the-significant-levels-based-in-the-results-of-the-p-value">This table will describe the symbol for the significant levels based in the results of the p-value</h4>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-sm table-striped small" data-quarto-postprocess="true">
+<caption>Significance Levels Description</caption>
+<thead>
+<tr class="header">
+<th style="text-align: center;" data-quarto-table-cell-role="th">P.Value</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">Symbol</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">&lt; 0.001</td>
+<td style="text-align: center;">***</td>
+<td style="text-align: center;">Highly significant</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">0.001 - 0.01</td>
+<td style="text-align: center;">**</td>
+<td style="text-align: center;">Very significant</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">0.01 - 0.05</td>
+<td style="text-align: center;">*</td>
+<td style="text-align: center;">Significant</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">0.05 - 0.1</td>
+<td style="text-align: center;">.</td>
+<td style="text-align: center;">Marginally significant</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">&gt; 0.1</td>
+<td style="text-align: center;">---</td>
+<td style="text-align: center;">Not significant</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+</section>
+<section id="confusion-matrix---site-a" class="level3">
+<h3 class="anchored" data-anchor-id="confusion-matrix---site-a">Confusion Matrix - Site A</h3>
+<section id="abu-ali-saudi-arabia" class="level4">
+<h4 class="anchored" data-anchor-id="abu-ali-saudi-arabia">Abu Ali, Saudi Arabia</h4>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-39-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+</section>
+<section id="p-value-results---site-a" class="level3">
+<h3 class="anchored" data-anchor-id="p-value-results---site-a">P-Value Results - Site A</h3>
+<section id="abu-ali-saudi-arabia-1" class="level4">
+<h4 class="anchored" data-anchor-id="abu-ali-saudi-arabia-1">Abu Ali, Saudi Arabia</h4>
+<div class="cell">
+<div class="cell-output-display">
+<div class="table-responsive">
+<table class="table table-striped table-hover table-condensed table-sm small" data-quarto-postprocess="true">
+<caption>P-Value Significance Matrix. SITE A</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th"></th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">plantation_year</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">plot_size_m2</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">height_cm</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">crown_size_m</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">total_tree_kg_c</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">total_tree_mg_c_ha</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">plantation_year</td>
+<td style="text-align: center;">NA</td>
+<td style="text-align: center;">***</td>
+<td style="text-align: center;">***</td>
+<td style="text-align: center;">***</td>
+<td style="text-align: center;">***</td>
+<td style="text-align: center;">***</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">plot_size_m2</td>
+<td style="text-align: center;">***</td>
+<td style="text-align: center;">NA</td>
+<td style="text-align: center;">***</td>
+<td style="text-align: center;">***</td>
+<td style="text-align: center;">***</td>
+<td style="text-align: center;">***</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">height_cm</td>
+<td style="text-align: center;">***</td>
+<td style="text-align: center;">***</td>
+<td style="text-align: center;">NA</td>
+<td style="text-align: center;">***</td>
+<td style="text-align: center;">***</td>
+<td style="text-align: center;">***</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">crown_size_m</td>
+<td style="text-align: center;">***</td>
+<td style="text-align: center;">***</td>
+<td style="text-align: center;">***</td>
+<td style="text-align: center;">NA</td>
+<td style="text-align: center;">***</td>
+<td style="text-align: center;">***</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">total_tree_kg_c</td>
+<td style="text-align: center;">***</td>
+<td style="text-align: center;">***</td>
+<td style="text-align: center;">***</td>
+<td style="text-align: center;">***</td>
+<td style="text-align: center;">NA</td>
+<td style="text-align: center;">***</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">total_tree_mg_c_ha</td>
+<td style="text-align: center;">***</td>
+<td style="text-align: center;">***</td>
+<td style="text-align: center;">***</td>
+<td style="text-align: center;">***</td>
+<td style="text-align: center;">***</td>
+<td style="text-align: center;">NA</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+</div>
+</div>
+</section>
+</section>
+<section id="confusion-matrix---site-b" class="level3">
+<h3 class="anchored" data-anchor-id="confusion-matrix---site-b">Confusion Matrix - Site B</h3>
+<section id="delta-blue-carbon-sindh-pakistan" class="level4">
+<h4 class="anchored" data-anchor-id="delta-blue-carbon-sindh-pakistan">Delta Blue Carbon, Sindh, Pakistan</h4>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-44-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+</section>
+<section id="p-value-results.-site-b" class="level3">
+<h3 class="anchored" data-anchor-id="p-value-results.-site-b">P-Value Results. Site B</h3>
+<section id="delta-blue-carbon-sindh-pakistan-1" class="level4">
+<h4 class="anchored" data-anchor-id="delta-blue-carbon-sindh-pakistan-1">Delta Blue Carbon, Sindh, Pakistan</h4>
+<div class="cell">
+<div class="cell-output-display">
+<div class="table-responsive">
+<table class="table table-striped table-hover table-condensed table-sm small" data-quarto-postprocess="true">
+<caption>P-Value Significance Matrix. SITE B</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th"></th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">year</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">plot</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">height_cm</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">crown_dia_m</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">total_c_kg</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">total_c_t_ha</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">year</td>
+<td style="text-align: center;">NA</td>
+<td style="text-align: center;">***</td>
+<td style="text-align: center;">***</td>
+<td style="text-align: center;">***</td>
+<td style="text-align: center;">***</td>
+<td style="text-align: center;">***</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">plot</td>
+<td style="text-align: center;">***</td>
+<td style="text-align: center;">NA</td>
+<td style="text-align: center;">***</td>
+<td style="text-align: center;">***</td>
+<td style="text-align: center;">***</td>
+<td style="text-align: center;">***</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">height_cm</td>
+<td style="text-align: center;">***</td>
+<td style="text-align: center;">***</td>
+<td style="text-align: center;">NA</td>
+<td style="text-align: center;">***</td>
+<td style="text-align: center;">***</td>
+<td style="text-align: center;">***</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">crown_dia_m</td>
+<td style="text-align: center;">***</td>
+<td style="text-align: center;">***</td>
+<td style="text-align: center;">***</td>
+<td style="text-align: center;">NA</td>
+<td style="text-align: center;">***</td>
+<td style="text-align: center;">***</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">total_c_kg</td>
+<td style="text-align: center;">***</td>
+<td style="text-align: center;">***</td>
+<td style="text-align: center;">***</td>
+<td style="text-align: center;">***</td>
+<td style="text-align: center;">NA</td>
+<td style="text-align: center;">***</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">total_c_t_ha</td>
+<td style="text-align: center;">***</td>
+<td style="text-align: center;">***</td>
+<td style="text-align: center;">***</td>
+<td style="text-align: center;">***</td>
+<td style="text-align: center;">***</td>
+<td style="text-align: center;">NA</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+</div>
+</div>
+</section>
+</section>
+<section id="confusion-matrix---site-c" class="level3">
+<h3 class="anchored" data-anchor-id="confusion-matrix---site-c">Confusion Matrix - Site C</h3>
+<section id="pakistan-institute" class="level4">
+<h4 class="anchored" data-anchor-id="pakistan-institute">Pakistan Institute</h4>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-48-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+</section>
+<section id="p-value-results---site-c" class="level3">
+<h3 class="anchored" data-anchor-id="p-value-results---site-c">P-Value Results - Site C</h3>
+<section id="pakistan-institute-1" class="level4">
+<h4 class="anchored" data-anchor-id="pakistan-institute-1">Pakistan Institute</h4>
+<div class="cell">
+<div class="cell-output-display">
+<div class="table-responsive">
+<table class="table table-striped table-hover table-condensed table-sm small" data-quarto-postprocess="true">
+<caption>P-Value Significance Matrix. SITE C</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th"></th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">year_of_plantation</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">x_coordinate</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">y_coordinate</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">species</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">dbh</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">height_m</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">crown_dia_m</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">total_c</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">total_c_t_ha_34</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">year_of_plantation</td>
+<td style="text-align: center;">NA</td>
+<td style="text-align: center;"><span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: lightyellow !important;">*</span></td>
+<td style="text-align: center;"><span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: orange !important;">.</span></td>
+<td style="text-align: center;">***</td>
+<td style="text-align: center;">***</td>
+<td style="text-align: center;">***</td>
+<td style="text-align: center;">***</td>
+<td style="text-align: center;">***</td>
+<td style="text-align: center;">***</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">x_coordinate</td>
+<td style="text-align: center;"><span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: lightyellow !important;">*</span></td>
+<td style="text-align: center;">NA</td>
+<td style="text-align: center;">***</td>
+<td style="text-align: center;">***</td>
+<td style="text-align: center;">***</td>
+<td style="text-align: center;">***</td>
+<td style="text-align: center;">***</td>
+<td style="text-align: center;">***</td>
+<td style="text-align: center;">***</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">y_coordinate</td>
+<td style="text-align: center;"><span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: orange !important;">.</span></td>
+<td style="text-align: center;">***</td>
+<td style="text-align: center;">NA</td>
+<td style="text-align: center;">***</td>
+<td style="text-align: center;">***</td>
+<td style="text-align: center;">***</td>
+<td style="text-align: center;">***</td>
+<td style="text-align: center;">***</td>
+<td style="text-align: center;">***</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">species</td>
+<td style="text-align: center;">***</td>
+<td style="text-align: center;">***</td>
+<td style="text-align: center;">***</td>
+<td style="text-align: center;">NA</td>
+<td style="text-align: center;">***</td>
+<td style="text-align: center;">***</td>
+<td style="text-align: center;">***</td>
+<td style="text-align: center;">***</td>
+<td style="text-align: center;">***</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">dbh</td>
+<td style="text-align: center;">***</td>
+<td style="text-align: center;">***</td>
+<td style="text-align: center;">***</td>
+<td style="text-align: center;">***</td>
+<td style="text-align: center;">NA</td>
+<td style="text-align: center;">***</td>
+<td style="text-align: center;">***</td>
+<td style="text-align: center;">***</td>
+<td style="text-align: center;">***</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">height_m</td>
+<td style="text-align: center;">***</td>
+<td style="text-align: center;">***</td>
+<td style="text-align: center;">***</td>
+<td style="text-align: center;">***</td>
+<td style="text-align: center;">***</td>
+<td style="text-align: center;">NA</td>
+<td style="text-align: center;">***</td>
+<td style="text-align: center;">***</td>
+<td style="text-align: center;">***</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">crown_dia_m</td>
+<td style="text-align: center;">***</td>
+<td style="text-align: center;">***</td>
+<td style="text-align: center;">***</td>
+<td style="text-align: center;">***</td>
+<td style="text-align: center;">***</td>
+<td style="text-align: center;">***</td>
+<td style="text-align: center;">NA</td>
+<td style="text-align: center;">***</td>
+<td style="text-align: center;">***</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">total_c</td>
+<td style="text-align: center;">***</td>
+<td style="text-align: center;">***</td>
+<td style="text-align: center;">***</td>
+<td style="text-align: center;">***</td>
+<td style="text-align: center;">***</td>
+<td style="text-align: center;">***</td>
+<td style="text-align: center;">***</td>
+<td style="text-align: center;">NA</td>
+<td style="text-align: center;">***</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">total_c_t_ha_34</td>
+<td style="text-align: center;">***</td>
+<td style="text-align: center;">***</td>
+<td style="text-align: center;">***</td>
+<td style="text-align: center;">***</td>
+<td style="text-align: center;">***</td>
+<td style="text-align: center;">***</td>
+<td style="text-align: center;">***</td>
+<td style="text-align: center;">***</td>
+<td style="text-align: center;">NA</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+</div>
+</div>
+</section>
+</section>
+<section id="conclusions" class="level3">
+<h3 class="anchored" data-anchor-id="conclusions">Conclusions</h3>
+<ul>
+<li><p>The demo data frame helped me understand how the sample size varies with the type of variance in each stratum. The relationship isn’t linear, and the sample sizes are highly sensitive to the standard deviation (SD) of each stratum. This raises a follow up question: how can we create effective strata that will lead to an optimal sample size saving costs and effort?</p></li>
+<li><p>The Power Calculation was the most respondent to variance, offering a reasonable sample sizes for achieving desired power (conservative).</p></li>
+<li><p>The Central Limit Theorem provides a simpler, big-picture view with a trend of having smaller sample sizes compared to power calculation.</p></li>
+<li><p>The A/R Methodological tool (VM0033) gave us good results within the expected limits for the demo sample data set, but it does require complete data for the weighting parameter (‘wi’), size per strata, total project area, and sample plot size.</p></li>
+<li><p>CIFOR tool, is the simplest method but gave us the highest variance in sample sizing. I recommend it when data to use other methods are missing.</p></li>
+<li><p>For the real data sets we got reasonable sample size from power calculation and CLT. The A/R tool results unfortunately did not worked as expected due to the weighting strata size.</p></li>
+<li><p>Win Rock tool is very easy to use. It does need the data for sizes and weighting which is asked in specifically in the A/R Methodology. Is a conservative tool.</p></li>
+<li><p>Confusion matrices are valuable for guiding field data collection, highlighting important variables.</p>
+<ul>
+<li><p>High correlation observed between carbon stock and crown size in all three matrices.</p></li>
+<li><p>For Site A, the plot size was inversely related to total tree carbon per ha. This may indicate bias in the carbon calculation.</p></li>
+<li><p>The diameter at breast height (dbh) showed the highest correlation with carbon stock for the third matrix, along with an intresting X coordinate factor giving us a higher correlated relationship with carbon stock than Y coordinate.</p></li>
+</ul></li>
+</ul>
+</section>
+<section id="key-takeaways" class="level3">
+<h3 class="anchored" data-anchor-id="key-takeaways">Key Takeaways</h3>
+<ol type="1">
+<li><p>Understanding the correlation between stratification and variance for sample size is key. Larger areas with greater variance will need more samples, highlighting the importance of having the correct stratification to create relatively homogeneous areas, minimizing the variance from the beginning of the project.</p></li>
+<li><p>Running correlation matrices and t-tests, we can help you oversee what are the key parameters to consider in the stratification. In this case, we saw that it is essential to consider clusters based on crown size, plot size, height, and diameter at breast height (DBH).</p></li>
+<li><p>For Site A, there was an inverse relationship between plot size and total tree carbon per hectare, indicating that plot size does influence the calculations. The key takeaway here that plot sizes do influence in the calculation, and its useful to have different plot sizes measurements to run analysis and feed the continuous improvement plan for the project.</p></li>
+<li><p>An interesting point from the A/R Tool shows that in large strata, once you approach the sample size cap, expanding the area further slightly increases the sample size. For example, expanding from 1,000 ha to 100,000 ha has a smaller % effect on sample size than increasing from 100 ha to 500 ha. This needs to be considered in the stratification process.</p></li>
+<li><p>The use of other methods is useful when:</p>
+<ol type="a">
+<li><p>If you are going to a new site and have a small data sets, you can calculate the sample size with CIFOR or CLT and kick off the initial analysis for a monitoring campaign.</p></li>
+<li><p>Comparing the sample sizes between methods vs.&nbsp;theoretical analysis can help make decisions to stakeholders more easy or safe.</p></li>
+<li><p>Developing a more detailed monitoring campaign plan based on the initial data available. For carbon projects is common to not have all data fields available, which this methods can be beneficial to have different options.</p></li>
+</ol></li>
+</ol>
+
+
+</section>
+</section>
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{patrón2024,
+  author = {Patrón, Javier},
+  title = {Blue {Carbon} {Sample} {Size} {Analysis}},
+  date = {2024-06-28},
+  url = {https://github.com/javipatron},
+  langid = {en}
+}
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-patrón2024" class="csl-entry quarto-appendix-citeas" role="listitem">
+Patrón, Javier. 2024. <span>“Blue Carbon Sample Size Analysis.”</span>
+June 28, 2024. <a href="https://github.com/javipatron">https://github.com/javipatron</a>.
+</div></div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">Copyright 2024, Javier Patrón</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/javipatron">
+      <i class="bi bi-github" role="img">
+</i> 
+    </a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+
+
+
+</body></html>

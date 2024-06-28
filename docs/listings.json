@@ -2,6 +2,7 @@
   {
     "listing": "/posts.html",
     "items": [
+      "/posts/sample-plots/index.html",
       "/posts/env-modeling/index.html",
       "/posts/text-analysis/index.html",
       "/posts/machine-learning/index.html",

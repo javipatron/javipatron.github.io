@@ -30,11 +30,7 @@ Highlighted Coursework: Sustainability and Energy Efficiency, Computerized Innov
 
 #### *Programming, Coding, & Data Analysis:*
 
-R, Python, GIS, SQL, Git (+ GitHub); Familiar with C++, HTML.
-
-#### *Programming Environments:*
-
-RStudio, Google Earth Engine, QGIS, Visual Studio Code, Jupyter Notebooks.
+Google Earth Engine, R, Python, GIS, SQL, Git (+ GitHub);
 
 #### *Technical Coding Skills:*
 
@@ -60,15 +56,17 @@ Role: Research and Data Scientist **\|** Client: [Ocean Rainforest](https://www.
 
 ### **Environmental Data Analyst -- [Silvestrum Climate Associates](https://www.silvestrum.com/),** remote (7/23 -- Present)
 
--   Specialize in carbon finance projects with data science and project management, covering remote sensing, hydrofluid analysis, and carbon modeling. Developed a reproducible Arcpy script for biomass and soil carbon estimation in 120 countries (1996-2022), and working in line with Verra methodologies for carbon project monitoring data procedures with indices and remote sensing.
+-   Specialize in Nature-Based Solutions for carbon projects, employing data science with a focus on remote sensing, GIS, and ocean hydrology. Develop and apply QC/QA procedures and environmental carbon models, enhancing project deliverables and outcomes.
 
--   Conduct sea level rise analysis for internal risk assessment in carbon projects and implemented business analytics for workload spreadsheets to enhance efficiency in task distribution among team members.
+-   Utilize machine learning and NASA ARSET for mapping blue carbon areas using GEE, create ArcPy scripts for global carbon stock estimation, and establish SOPs for mangrove quantification.
+
+-   Transform data analysis into interactive visualizations for stakeholder engagement and decision-making. Innovate data management solutions to optimize team efficiency and Silvestrum project pipeline.
 
 ### **Intern, Data Project Manager -- [Silvestrum Climate Associates](https://www.silvestrum.com/),** remote (1/23 -- 6/23)
 
--   Focusing on carbon accounting methodologies, statistical modeling, and empirical analysis for blue carbon ecosystems and carbon initiatives.
+-   Focused on carbon accounting methodologies like Verra and Plan Vivo, statistical modeling, and empirical analysis for blue carbon ecosystems and carbon initiatives.
 
--   Collaborating with a diverse team of experts in carbon science, land use management, and remote sensing, contributing to analysis, report writing, and project development and implementation.
+-   Collaborated as a Project Manager with experts in carbon science, land use, and remote sensing for a carbon project in Yucatan, Mexico, focusing on the technical side with analysis, GIS, and project development.
 
 ### *Intern, Collaboration with Center for Marine Biodiversity and Conservation: [CMBC](https://cmbc.ucsd.edu/)*
 
@@ -82,13 +80,13 @@ Role: Research and Data Scientist **\|** Client: [Ocean Rainforest](https://www.
 
 ##### *Mexico City, Mexico (6/20 -- 7/21)*
 
-Global commissioning and tech-support team leader for GE Current´s smart controls software.
+Global commissioning and tech-support team leader for GE Current ́s smart controls software.
 
-• Managed an 18-person global tech-support team, leading tech support operations supporting the business strategy new software and enhance IoT and AI solution capabilities.
+-   Managed an 18-person global tech-support team, leading tech support operations supporting the business strategy new software and enhance IoT and AI solution capabilities.
 
-• \$5.8 USD in revenue recognition o Tech leader for GE Current´s largest gateway programming implementation for energy efficiency and IoT, AI software in over 1250 stores across Mexico.
+-   USD \$5.8M in revenue recognition.
 
-• Technical leader for GE Current´s largest gateway programming implementation for energy efficiency and IoT, AI software in over 1250 stores across Mexico.
+-   Technical leader for GE Current ́s most extensive gateway programming implementation, optimizing energy efficiency in over 1250 stores across Mexico using IoT and AI software, leading to substantial sustainable energy savings.
 
 ### *Digital Project Manager -- [Current powered by GE](https://www.led.com/)*
 

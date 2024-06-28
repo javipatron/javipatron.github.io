@@ -1,0 +1,1150 @@
+---
+title: "Blue Carbon Sample Size Analysis"
+description: "A blue carbon project analysis for monitoring campaigns calculating the amout of sample plots based on real field datasets"
+author:
+  name: Javier Patrón
+  affiliation: MEDS
+  affiliation-url: http://ucsb-meds.github.io
+date: 2024-06-28
+always_allow_html: yes
+
+format:
+  html:
+    code-fold: true
+    code-summary: "Show code"
+code-overflow: wrap
+code-block-bg: true
+code-block-border-left: "#6B5A75"
+categories: [Statistics, R, Mangroves]
+citation: 
+  url: https://github.com/javipatron
+---
+
+## Introduction
+
+In this R Markdown we will calculate the sample sizes for three example data sets, and we will do an analysis with a confusion matrix to understand what are most important parameters from the field data in order to calculate the total carbon per tree per hectare. This step is important, so we can identify what are the important pieces wen we are stratifying the sample plots, and we want to homogenize the total project area as much as possible. Additionally, to understand our sample size options we we will create a demo data frame with random sample sizes and calculate the sample size needed depending in the variance.
+
+The steps followed are.
+
+1.  Download the libraries
+2.  Read the data. Datasets:
+    -   **Site A:** Abu Ali, Saudi Arabia
+    -   **Site B:** Delta Blue Carbon, Sindh Pakistan
+    -   **Site C:** Sidnh Pakistan, Pakistan institute
+3.  Cleaning and tidy the data into the same format
+4.  Bind the data sets into only one big df
+5.  Create a demo data set for understanding how the sample size is influenced by the variation and standard deviation of the data.
+6.  Calculate the different sample size with the proposed equations from the SOP.
+7.  Calculate the different sample sizes with the real data sets.
+8.  Perform the confusion matrix to understand the relationship between parameters and strengthen the SOP for calculating sample sizes
+
+```{r, include = FALSE}
+# 1. Load the libraries
+library(tidyverse)
+library(here)
+library(janitor)
+library(knitr)
+library(pwr)
+library(skimr)
+library(tidymodels)
+library(kableExtra)
+library(corrplot)
+library(stringr)
+library(plotly)
+library(stargazer)
+library(car)
+library(estimatr)
+
+```
+
+```{r, include = FALSE}
+
+#2. Read the data (csv files)
+
+# Load the shared Mangrove Data from Silvestrum
+mangrove_df_a <- read_csv("/Users/javipatron/Library/Mobile Documents/com~apple~CloudDocs/Documents/Silvestrum/EDS222-Stats/mangrove-analysis/data/sitea.csv") |> clean_names() #Clean names will make the column names as lower case
+
+mangrove_df_b <- read_csv("/Users/javipatron/Library/Mobile Documents/com~apple~CloudDocs/Documents/Silvestrum/EDS222-Stats/mangrove-analysis/data/siteb.csv") |> clean_names() |> na.omit() #homogenizing the column names and adding NA to values
+
+mangrove_df_c <- read_csv("/Users/javipatron/Library/Mobile Documents/com~apple~CloudDocs/Documents/Silvestrum/EDS222-Stats/mangrove-analysis/data/sitec.csv") |> 
+  clean_names() |> 
+  filter(!is.na(total_c_t_ha_34))
+
+```
+
+```{r, include = FALSE}
+# 3. Cleaning and tidy the data
+# Changing the type of class of some columns
+
+# Note: Plot names ending with ".1" indicate modifications from the original dataset, where such plots were previously labeled with "\_new" or a similar suffix. This adjustment ensures consistency and clarity in plot identification throughout the analysis.
+
+mangrove_df_a <- mangrove_df_a %>%
+  mutate(plot = case_when(
+    str_detect(plot, "_new$") ~ paste0(as.character(str_remove(plot, "_new")), ".1"),
+    TRUE ~ plot))
+
+```
+
+```{r, include = FALSE}
+# 3. Cleaning and tidy the data
+tidy_a <- mangrove_df_a |> 
+  select(plantation_year, plot, plot_size_m2, height_cm, cd_chatting_m, total_tree_kg_c, total_tree_mg_c_ha) |> 
+  mutate(site = "A",
+         cd_chatting_m = cd_chatting_m * 100) |> 
+  relocate(site, .before = plantation_year) |> 
+  rename(year = plantation_year,
+         plot_name = plot,
+         crown_diameter_cm = cd_chatting_m,
+         total_tree_c_kg = total_tree_kg_c,
+         "total_tree_c_Mg_ha" = total_tree_mg_c_ha) |>
+  mutate(plot_name = as.numeric(plot_name),
+         new_plot_name = ifelse(plot_name < 10, sprintf("%g", plot_name), as.character(plot_name))) |> 
+  relocate(new_plot_name, .after = plot_name)
+
+```
+
+```{r, include = FALSE}
+# 3. Cleaning and tidy the data
+tidy_b <- mangrove_df_b |> 
+  select(year, plot, height_cm, crown_dia_m, total_c_kg, total_c_t_ha) |>
+  mutate(plot_size_m2 = 153.938) |> 
+  mutate(site = "B",
+         crown_dia_m = crown_dia_m *100) |> 
+  rename(plot_name = plot,
+         total_tree_c_kg = total_c_kg,
+         "total_tree_c_Mg_ha" = total_c_t_ha,
+         crown_diameter_cm = crown_dia_m ) |> 
+  relocate(site, .before = year) |> 
+  relocate(plot_size_m2, .before = height_cm)
+
+```
+
+```{r, include = FALSE }
+# 3. Cleaning and tidy the data
+tidy_b <- tidy_b %>% 
+  mutate(new_plot_name = str_extract(plot_name, "(?<=Sample Plot #\\s)\\d+")) |> 
+  relocate(new_plot_name, .after = plot_name)
+```
+
+```{r, include = FALSE}
+# 3. Cleaning and tidy the data
+tidy_c <- mangrove_df_c |> 
+  select(year = year_of_plantation, 
+         plot_name = plot_no,
+         height_cm = ht_m_21,
+         crown_diameter_cm = crown_dia_m, 
+         total_tree_c_kg = total_c, 
+         total_tree_c_Mg_ha = total_c_t_ha_34) |> 
+  mutate(plot_size_m2 = 254.47,
+         site = "C",
+         height_cm = (as.numeric(height_cm)*100),
+         crown_diameter_cm = as.numeric(crown_diameter_cm)*100) |> 
+  relocate(site, .before = year) |> 
+  relocate(plot_size_m2, .before = height_cm)
+
+tidy_c <- tidy_c |>
+  mutate(new_plot_name = ifelse(plot_name < 10, paste0("0", as.character(plot_name)), as.character(plot_name))) %>%
+  relocate(new_plot_name, .after = plot_name)
+  
+```
+
+```{r, include = FALSE}
+
+# 4. Joining the tidy data
+full_df <- rbind(tidy_a, tidy_b, tidy_c) |> 
+  mutate(plot_name = paste0("site", site, "_", year, "_plot_", new_plot_name)) |> 
+  rename(full_plot_name = plot_name) |> 
+  mutate(new_plot_name = paste0("Sample_Plot#", new_plot_name)) |> 
+  rename(plot_name = new_plot_name) |> 
+  relocate(full_plot_name, .before = height_cm)
+
+```
+
+Here is our demo data set summary:
+
+```{r, include=F}
+# 5. Create the random data set
+generate_data <- function(site_name, n_trees_range, mean_c, sd_c) {
+  # Sample a single value for n_trees within the provided range
+  n_trees <- sample(n_trees_range, 1)
+  
+  data.frame(
+    site_name = rep(site_name, n_trees),
+    total_tree_c_kg = abs(rnorm(n_trees, mean = mean_c, sd = sd_c))
+  )
+}
+
+   # Default mean value for carbon
+
+# Generate data for "Very Steady" site with specified standard deviations and the range for tree count
+very_steady <- generate_data("Very Steady", 150:300, 0.15, sd_c = 0.08
+                             )
+steady <- generate_data("Steady", 150:300, 0.2, sd_c = 0.2)
+normal <- generate_data("Normal", 150:300, 0.4, sd_c = 0.3)
+variant <- generate_data("Variant", 150:300, 0.45, sd_c = 0.6)
+very_variant <- generate_data("Very Variant", 150:300, 0.65, sd_c = 2)
+
+# Combine all data into one data frame
+plantation_data <- bind_rows(very_steady, 
+                             steady, 
+                             normal, 
+                             variant, 
+                             very_variant)
+
+
+# Calculate mean and sd for each site
+summary_demo_data <- plantation_data %>%
+  group_by(site_name) %>%
+  summarise(
+    tree_count = n(),
+    mean_carbon_kg = mean(total_tree_c_kg),
+    sd_carbon_kg = sd(total_tree_c_kg)) |>
+  mutate(std_error = sd_carbon_kg / sqrt(tree_count))
+```
+
+```{r, echo= F}
+kable(arrange(summary_demo_data, sd_carbon_kg), align = "c", caption = "Summary Demo Data Set") %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"), full_width = F)
+
+```
+
+```{r, echo=FALSE}
+plantation_data$site_name <- factor(plantation_data$site_name, 
+                                    levels = c("Very Steady", 
+                                               "Steady", 
+                                               "Normal", 
+                                               "Variant",
+                                               "Very Variant"))
+
+ggplot(plantation_data, aes(x = site_name, 
+                            y = total_tree_c_kg, 
+                            fill = site_name)) +
+  geom_boxplot() +
+  labs(title = "Total Tree Carbon Storage by Site",
+       x = "Site Name",
+       y = "Total Tree Carbon Storage (kg)") +
+  theme_minimal()
+
+```
+
+# Step 6. Calculate the different sample size with the proposed equations from the SOP.
+
+## a. Power Calculation
+
+In this case, we utilized the pwr.t.test() function from the pwr package in R. This function calculates the sample size, taking into consideration the desired power level, with certain significance level (power = 95% confidence ,margin of error = 0.05).
+
+The effect size for each stratum was determined by dividing a desired mean (0.4 kg per sample), by the standard deviation within that stratum, meaning how much our samples deviate from the target mean.
+
+```{r, include = F}
+
+power_vector <- c()
+effect_size_results <- c()  # Corrected variable name
+
+for(i in 1:nrow(summary_demo_data)) {
+  sd = as.numeric(summary_demo_data$sd_carbon_kg[i])
+  effect_size = 0.4/ sd
+    
+    # Perform power calculation
+    result <- try(pwr.t.test(d = effect_size, 
+                             power = 0.95, 
+                             sig.level = 0.05,
+                             type = "two.sample",
+                             alternative = "two.sided"), 
+                  silent = TRUE)
+    
+    effect_size_results[i] <- effect_size
+    
+    # Check for errors
+    if(class(result) == "try-error") {
+      cat("Power calculation failed at row", i, ": effect_size =", effect_size, "\n")
+      new <- NA
+    } else {
+      cat("The effect_size at site name:", summary_demo_data$site_name[i], "is =", effect_size, "\n")
+      new <- round(result$n, 1)
+    }
+  
+  power_vector <- c(power_vector, new)
+}
+
+
+effect_size_results
+
+
+power_vector
+summary_demo_data$power_calc <- power_vector
+```
+
+**Results:** In "[lightblue]{style="background-color: lightblue;"}" results gave us `r power_vector[4]` for the smallest sample size due to low variance, and `r power_vector[5]` as the highest sample size due to higher variance.
+
+```{r, echo = F}
+arrange(summary_demo_data, sd_carbon_kg) %>%
+  kbl(booktabs = TRUE, align = "c", caption = "Stratas summary: Power Calculation Sample") %>%
+  kable_styling(full_width = FALSE) %>%
+  column_spec(6, background = "lightblue")
+```
+
+The pwr.t.test() function is good when you have a desired mean for each stratum and will easily determine the adequate sample sizes that accounts for the variability within each stratum. To visualize the results better here is the graph for the **Variant Statification.**
+
+### Power Calculation Graph
+
+```{r, echo = F}
+effect_size <- effect_size_results[3]
+pwr_plot <- pwr.t.test(d = effect_size, 
+                             power = 0.95, 
+                             sig.level = 0.05,
+                             type = "two.sample",
+                             alternative = "two.sided")
+plot(pwr_plot)
+
+```
+
+## b. Central Limit Theorem
+
+Now we will calculate the sample size using the Central Limit Theorem.
+
+$$n = \left(\frac{Z \cdot sd}{E}\right)^2$$
+
+where:
+
+-   $n$ = sample size
+
+-   $Z$ = Z-score (e.g., 1.96 for 95% confidence)
+
+-   $sd$ = Standard Deviation of your population
+
+-   $E$ = Margin of error you are willing to accept in your estimate
+
+Using the Central Limit Theorem, we calculate the minimum sample size to ensure our margin of error and confidence interval stay within VM0033 requirements:
+
+-   For a **90% Confidence Interval**: 90% confidence that our carbon stock estimate is no more than 20% off the true value.
+
+-   For a **95% Confidence Interval**: 95% confidence that our carbon stock estimate is no more than 30% off the true value.
+
+```{r, include = F}
+
+CLT <- numeric(length = nrow(summary_demo_data))
+
+for(i in 1:nrow(summary_demo_data)) {
+  sd <- summary_demo_data$sd_carbon_kg[i]
+  mean <- summary_demo_data$mean_carbon_kg[i]
+  Z <- 1.96 # 95% CI
+  E <- mean * 0.30 # 20 Units of margin of error
+  n <- (Z * sd / E)^2
+  CLT[i] <- n
+}
+
+# Add the calculated sample sizes back to the dataframe
+summary_demo_data$CLT <- CLT
+
+CLT
+```
+
+**Results:** In "[lightgreen]{style="background-color: lightgreen;"}" the CLT results gave us `r CLT[4]` for the smallest sample size due to low variance, and `r CLT[5]` as the highest sample size due to higher variance.
+
+```{r, echo = F}
+arrange(summary_demo_data, sd_carbon_kg) |> 
+  kbl(booktabs = TRUE, align = "c", caption = "Demo stratas summary: CLT Sample") |> 
+  kable_styling(full_width = FALSE) |> 
+  column_spec(6, background = "lightblue") |> 
+  column_spec(7, background = "lightgreen")
+```
+
+## c. A/R Methodological Tool.
+
+$$n =\frac{N \text{ }* \text{ }tvalue^2 \text{ }* \text{ }(\epsilon\ w * s)^2)}{N \text{ }*\text{ } E^2 + \text{ }tvalue^2 \text{ }* \text{ }\epsilon\ w * s^2}$$
+
+*n* = Number of sample plots required for estimation of biomass stocks within the project boundary; dimensionless.
+
+*N* = Total number of possible sample plots within the project boundary space or the population; dimensionless. (`plot_count`)
+
+*t-value* = Two-sided Student´s t-value, at infinite degrees of freedom, for the required confidence level; dimensionless. (`Table-\> 90% = 1.645`)
+
+*w* = Relative weight of the area of stratum i (i.e. the area of the stratum i divided by the project). (`154/ plot_count * 154`)
+
+*s =* Estimated standard deviation of biomass stock in stratum (`SD Carbon Biomass`)
+
+*E* = Acceptable margin of error (i.e. calculated by multiplying the mean biomass stock by the desired precision. i.e. mean biomass stock \* 0.1 (for 10% precision) or 0.2 (for 20% precision)
+
+```{r, include=F}
+# Given t-value for a 90% confidence level. 95% is 1.96
+tvalue <- 1.96
+
+# Calculate E, the acceptable margin of error
+E <- mean(summary_demo_data$mean_carbon_kg) * 0.05
+summary_demo_data$plot_size_ha <- c(0.153938, 0.153938, 0.153938, 0.153938, 0.153938)
+summary_demo_data$stratum_size_ha <-  c(100, 100, 100, 100, 100)
+
+ar_tool <- c()
+
+# Loop through each stratum to calculate the required number of sample plots
+for (i in 1:nrow(summary_demo_data)) {
+  w_i <- summary_demo_data$stratum_size_ha[i] / sum(summary_demo_data$stratum_size_ha)
+  s_i <- summary_demo_data$sd_carbon_kg[i]
+  N <- sum(summary_demo_data$stratum_size_ha / summary_demo_data$plot_size_ha)
+  
+  # Calculate the number of sample plots required for the stratum i
+  n <- (N * tvalue^2 * (w_i * s_i)^2) / ((N * (E)^2) + ((tvalue)^2 * (w_i * (s_i)^2)))
+  
+  # Assign the calculated sample size to the ar_tool column for stratum i
+  ar_tool[i] <- n
+}
+
+ar_tool
+summary_demo_data$ar_tool <- ar_tool
+
+```
+
+**Results:** In the "[lightpink]{style="background-color: lightpink;"}" the A/R Methodological tool gave us `r ar_tool[4]` for the smallest sample size due to low variance, and `r ar_tool[5]` as the highest sample size due to higher variance.
+
+INCOMPLETE: The E factor its having an effect on the final A/R Tool that needs to be reviewed.
+
+```{r, include = F}
+# REAL SITE B CALC
+
+# test_AR_siteB <- summary_full_df |> 
+#   filter(site == "B") |> 
+#   select(site, year, plot_size_m2, plot_count, mean_carbon_kg,sd_carbon_kg)
+# 
+# tvalue <- 1.96
+# 
+# # Calculate E, the acceptable margin of error
+# E <- mean(test_AR_siteB$mean_carbon_kg) * 0.10
+# test_AR_siteB$stratum_size_ha <-  c(9685, 18544, 10399, 10472, 15630, 10835)
+# 
+# 
+# ar_tool <- c()
+# 
+# # Loop through each stratum to calculate the required number of sample plots
+# for (i in 1:nrow(test_AR_siteB)) {
+#   w_i <- test_AR_siteB$stratum_size_ha[i] / sum(test_AR_siteB$stratum_size_ha)
+#   s_i <- test_AR_siteB$sd_carbon_kg[i]
+#   N <- sum(test_AR_siteB$stratum_size_ha / test_AR_siteB$plot_size_m2)*10000
+#   
+#   # Calculate the number of sample plots required for the stratum i
+#   n <- (N * tvalue^2 * (w_i * s_i)^2) / ((N * (E)^2) + ((tvalue)^2 * (w_i * (s_i)^2)))
+#   
+#   # Assign the calculated sample size to the ar_tool column for stratum i
+#   ar_tool[i] <- n
+# }
+# 
+# ar_tool
+
+
+```
+
+```{r, echo = F}
+arrange(summary_demo_data, sd_carbon_kg) |> 
+  select(site_name, tree_count, stratum_size_ha, mean_carbon_kg, sd_carbon_kg, std_error, power_calc, CLT, ar_tool) |> 
+  kbl(booktabs = TRUE, align = "c", caption = "Demo Strata summary: A/R Methodological Tool") |> 
+  kable_styling(full_width = FALSE) |> 
+  column_spec(7, background = "lightblue") |> 
+  column_spec(8, background = "lightgreen") |> 
+  column_spec(9, background = "lightpink")
+```
+
+## CIFOR
+
+The CIFOR document by Kauffman and Donato (2012) on mangrove forest research outlines a formula for calculating sample sizes. Published by the Center for International Forestry Research.
+
+$$n = \left(\frac{t \cdot s}{E}\right)^2$$
+
+Where:
+
+-   n = the number of sample plots
+
+-   t = the t-distribution value, usually 2 for 95% confidence
+
+-   s = the expected standard deviation from prior data
+
+-   E = the acceptable margin of error.
+
+```{r, include = F}
+# Define parameters
+t_value <- 1.96
+
+# Calculate sample size
+CIFOR <- (t_value * summary_demo_data$sd_carbon_kg / (summary_demo_data$mean_carbon_kg*0.2))^2
+
+# Add sample size as a new column to summary_full_df
+summary_demo_data$CIFOR <- CIFOR
+
+CIFOR
+
+#mean <- summary_demo_data$mean_carbon_kg[i]
+
+```
+
+**Results:** In the "[gold]{style="background-color: gold;"}" the CIFOR tool gave us `r CIFOR[4]` for the smallest sample size due to low variance, and `r CIFOR[5]` as the highest sample size due to higher variance.
+
+```{r, echo = F}
+
+arrange(summary_demo_data, sd_carbon_kg) |> 
+  select(site_name, tree_count, mean_carbon_kg, sd_carbon_kg, std_error, power_calc, CLT, ar_tool, CIFOR) |> 
+  kbl(booktabs = TRUE, align = "c", caption = "Demo Strata summary: CIFOR Sample") |> 
+  kable_styling(full_width = FALSE) |> 
+  column_spec(6, background = "lightblue") |> 
+  column_spec(7, background = "lightgreen") |> 
+  column_spec(8, background = "lightpink") |> 
+  column_spec(9, background = "gold")
+```
+
+## WINROCK
+
+Now we wil add the results from the Winrock tool manually for a good comparison of all five methods.
+
+**Results:** In the "[purple]{style="background-color: purple;"}" ethe Winrock tool gave us 5.99 for the smallest sample size due to low variance, and 106.6 as the highest sample size due to higher variance.
+
+```{r, echo = F}
+
+summary_demo_data <- summary_demo_data |>
+  ungroup() |> 
+   mutate(Winrock = c(22.96, 13.70, 36.75, 5.99, 106.60))
+
+arrange(summary_demo_data, sd_carbon_kg) |> 
+  select(site_name, tree_count, mean_carbon_kg, sd_carbon_kg, std_error, power_calc, CLT, ar_tool, CIFOR, Winrock) |> 
+  kbl(booktabs = TRUE, align = "c", caption = "Table 1. Demo dataset summary per stratum") |> 
+  kable_styling(full_width = FALSE) |> 
+  column_spec(6, background = "lightblue") |> 
+  column_spec(7, background = "lightgreen") |> 
+  column_spec(8, background = "lightpink") |> 
+  column_spec(9, background = "gold") |> 
+  column_spec(10, background = "#D8AFF1") 
+
+```
+
+```{r, echo = F}
+summary_demo_data %>%
+  arrange(sd_carbon_kg) %>%
+  mutate(site_name = factor(site_name, levels = unique(site_name))) %>%
+  select(site_name, power_calc, CLT, ar_tool, CIFOR, Winrock) %>%
+  pivot_longer(cols = c(power_calc, CLT, ar_tool, CIFOR, Winrock), 
+               names_to = "method", 
+               values_to = "sample_size") %>%
+  ggplot(aes(x = site_name, y = sample_size, color = method)) +
+  geom_point() +
+  scale_color_manual(values = c("power_calc" = "lightblue", 
+                                "CLT" = "lightgreen", 
+                                "ar_tool" = "lightpink", 
+                                "CIFOR" = "gold",
+                               "Winrock" = "#D8AFF1")) +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) +
+   labs(title = "Graph 1. Sample Size by Strata",
+       x = "Strata Type",
+       y = "Sample Size",
+       color = "Method")
+```
+
+## Final sample size and correlations per method
+
+```{r, echo = F}
+
+total_sample_size <- data.frame(
+    method = c("CIFOR", "Winrock", "CLT", "ar_tool", "power_calc"),
+    total_sample_size = c(
+        sum(summary_demo_data$CIFOR),
+        sum(summary_demo_data$Winrock),
+        sum(summary_demo_data$CLT),
+        sum(summary_demo_data$ar_tool),
+        sum(summary_demo_data$power_calc))) 
+
+```
+
+The table below presents two critical metrics for evaluating our methodologies:
+
+1.  The total sample size.
+
+2.  The correlation with standard deviation (SD).
+
+Overall, this table highlights the impact of variability on each method and shows the total sample size for each method which is good for the cost-benefit analysis. As you can see the correlation with SD shows how the project variance influences each method's outcomes. A higher correlation suggests that changes in the SD significantly affect the method's performance. In this case, the Winrock method show the highest correlation with SD, with the AR Tool and Power Calc following. This indicates their sensitivity to the data variance, and can be useful for stakeholder decisions.
+
+```{r, echo =F}
+
+# Calculate correlation with SD for each method
+correlations <- sapply(c("CIFOR", "Winrock", "CLT", "ar_tool", "power_calc"), function(method) {
+  cor(summary_demo_data$sd_carbon_kg, summary_demo_data[[method]], use = "complete.obs")
+})
+
+correlation_df <- data.frame(method = c("CIFOR", "Winrock", "CLT", "ar_tool", "power_calc"), Correlation_with_SD = correlations)
+
+# Merge the two data frames
+merged_df <- merge(total_sample_size, correlation_df, by = "method")
+
+
+merged_df %>%
+  arrange(total_sample_size) %>%
+  kbl(booktabs = TRUE, align = "c", caption = "Table: Total Sample Size and Correlation per Method") %>%
+  kable_styling(full_width = FALSE) |> 
+  row_spec(1, background = "lightgreen") |> 
+  row_spec(2, background = "#D8AFF1") |> 
+  row_spec(3, background = "gold") |> 
+  row_spec(4, background = "lightpink") |> 
+  row_spec(5, background = "lightblue")
+
+
+```
+
+## Step 7. Calculate the different sample sizes with the real data sets.
+
+Now, we will calculate the sample sizes again, but this time using the actual data collected from the three mangrove restoration sites.
+
+```{r, include = F}
+
+# Creating a summary table for number of plots
+summary_full_df <- full_df |> 
+  group_by(site, year, plot_size_m2) |> 
+  summarise(plot_count = length(unique(plot_name)),
+            tree_count = n(),
+            density = (tree_count/plot_count),
+            mean_height_cm = mean(height_cm),
+            sd_height_cm = sd(height_cm),
+            mean_crown_diameter_cm = mean(crown_diameter_cm),
+            sd_crown_diameter_cm = sd(crown_diameter_cm),
+            mean_carbon_kg = mean(total_tree_c_kg),
+            sd_carbon_kg = sd(total_tree_c_kg),
+            mean_tot_carbon_Mg_ha = mean(total_tree_c_Mg_ha),
+            sd_tot_carbon_Mg_ha = sd(total_tree_c_Mg_ha),
+            std_error = sd_tot_carbon_Mg_ha/sqrt(plot_count)) |> 
+  na.omit()
+
+
+```
+
+```{r, include = F}
+
+# POWER CALCULATION
+
+power_vector <- c()
+effect_size_results <- c()  # Corrected variable name
+
+for(i in 1:nrow(summary_full_df)) {
+  sd = as.numeric(summary_full_df$sd_carbon_kg[i])
+  effect_size = as.numeric(summary_full_df$mean_carbon_kg[i]) / sd
+    
+    # Perform power calculation
+    result <- try(pwr.t.test(d = effect_size, 
+                             power = 0.95, 
+                             sig.level = 0.05,
+                             type = "two.sample",
+                             alternative = "two.sided"), 
+                  silent = TRUE)
+    
+    effect_size_results[i] <- effect_size
+    
+    # Check for errors
+    if(class(result) == "try-error") {
+      cat("Power calculation failed at row", i, ": effect_size =", effect_size, "\n")
+      new <- NA
+    } else {
+      cat("The effect_size at site name:", summary_full_df$site_name[i], "is =", effect_size, "\n")
+      new <- round(result$n, 1)
+    }
+  
+  power_vector <- c(power_vector, new)
+}
+
+effect_size_results
+
+power_vector
+
+```
+
+```{r, include = F}
+sample_size_methods <- summary_full_df |> 
+   dplyr::select(site, year, plot_size_m2, plot_count, sd_carbon_kg)
+
+sample_size_methods$power_calc <- power_vector
+
+```
+
+```{r, include = F}
+# power_vector <- c()
+# 
+# for(i in 1:nrow(summary_full_df)) {
+#   sd = as.numeric(summary_full_df$sd_carbon_kg[i])
+#   mean = as.numeric(summary_full_df$mean_carbon_kg[i])
+#   d1 = sqrt(sd^2 / 2)
+#   effect_size = mean / d1
+#   
+#   # Attempt to perform power calculation
+#   result <- try(pwr.t.test(d = effect_size, 
+#                            power = 0.90, 
+#                            sig.level = 0.05,
+#                            type = "two.sample",
+#                            alternative = "two.sided"), silent = TRUE)
+#   
+#   # Check if an error occurred and assign NA to new if so
+#   if(class(result) == "try-error") {
+#     new <- NA
+#   } else {
+#     new <- round(result$n, 1)
+#   }
+#   
+#   # Append the result or NA to the power_vector
+#   power_vector <- c(power_vector, new)
+# }
+# 
+# 
+# # Preparing the new data frame
+# sample_size_methods <- summary_full_df |> 
+#   dplyr::select(site, year, plot_size_m2, plot_count)
+# 
+# sample_size_methods$power_calc <- power_vector
+# 
+# power_vector
+
+```
+
+```{r, include = F}
+#CLT
+
+CLT <- numeric(length = nrow(summary_full_df))
+
+for(i in 1:nrow(summary_full_df)) {
+  sd <- summary_full_df$sd_carbon_kg[i]
+  mean <- summary_full_df$mean_carbon_kg[i]
+  Z <- 1.96 # 95% CI
+  E <- mean * 0.30 # 20 Units of margin of error
+  n <- (Z * sd / E)^2
+  CLT[i] <- n
+}
+
+# Add the calculated sample sizes back to the dataframe
+sample_size_methods$CLT <- CLT
+
+CLT
+```
+
+```{r, include = F}
+## A/R Methodological tool
+
+# Given t-value for a 90% confidence level. 95% is 1.96
+tvalue <- 1.96
+
+# Calculate E, the acceptable margin of error
+E <- mean(summary_full_df$mean_carbon_kg) * 0.10
+
+summary_full_df$stratum_size_ha <-  c(2000, 2000, 2000, 2000, 2000, 2000, 9685, 18544, 10399, 10472, 15630, 10835, 2000, 2000, 2000, 2000 , 2000 , 2000 , 2000 , 2000 , 2000 , 2000 , 2000 , 2000 , 2000 , 2000 , 2000 , 2000 , 2000) 
+
+
+# Initialize an empty vector to store results
+ar_tool <- numeric(length = nrow(summary_full_df))
+
+# Loop through each stratum to calculate the required number of sample plots
+for (i in 1:nrow(summary_full_df)) {
+  w_i <- summary_full_df$stratum_size_ha[i] / sum(summary_full_df$stratum_size_ha)
+  s_i <- summary_full_df$sd_carbon_kg[i]
+  N <- sum(summary_full_df$stratum_size_ha / summary_full_df$plot_size_m2)
+  
+  # Calculate the number of sample plots required for the stratum i
+  n <- (N * tvalue^2 * (w_i * s_i)^2) / ((N * (E)^2) + ((tvalue)^2 * (w_i * (s_i)^2)))
+  
+  # Assign the calculated sample size to the ar_tool column for stratum i
+  ar_tool[i] <- n
+}
+
+# You might want to add the results back to your dataframe
+sample_size_methods$ar_tool <- ar_tool
+
+ar_tool
+
+```
+
+```{r, include = F}
+# CIFOR 
+t_value <- 1.96
+CIFOR <- (t_value * summary_full_df$sd_carbon_kg / (summary_full_df$mean_carbon_kg*0.2))^2
+sample_size_methods$CIFOR <- CIFOR
+
+CIFOR
+```
+
+```{r, include = F}
+# WINROCK
+sample_size_methods <- sample_size_methods |> 
+  ungroup() |> 
+  mutate(Winrock = c(NA, NA, NA, NA, NA, NA, 213.14, 282.53, 73.94, 89.27, 97.37, 32.76, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA))
+
+```
+
+### Methodology results for site B
+
+```{r, echo = F}
+
+sample_size_methods |> 
+  filter(site == "B") |> 
+  arrange(sd_carbon_kg) |> 
+  kbl(booktabs = TRUE, align = "c", caption = "Table 4. Real Data Set Sample Sizes") |> 
+  kable_styling(full_width = FALSE) |> 
+  column_spec(6, background = "lightblue") |> 
+  column_spec(7, background = "lightgreen") |> 
+  column_spec(8, background = "lightpink") |> 
+  column_spec(9, background = "gold") |> 
+  column_spec(10, background = "#D8AFF1") 
+
+```
+
+```{r, include = F}
+# Merge and filter the data
+filtered_df <- inner_join(summary_full_df, sample_size_methods, by = c("site", "year", "plot_size_m2", "plot_count","sd_carbon_kg")) %>%
+  filter(site == "B")
+
+# List of methodology columns
+method_columns <- c("power_calc", "CLT", "ar_tool", "CIFOR", "Winrock")
+
+# Identify columns to calculate correlations with (excluding site, year, plot_size_m2, plot_count, and methods)
+data_columns <- setdiff(names(filtered_df), c("site", "year", "plot_size_m2", "plot_count", "stratum_size_ha", "std_error", method_columns))
+
+# Initialize a dataframe to store all correlations
+correlation_summary_df <- data.frame(matrix(ncol = length(data_columns) + 1, nrow = length(method_columns)))
+names(correlation_summary_df) <- c("Method", data_columns)
+correlation_summary_df$Method <- method_columns
+
+# Calculate correlations for each method with all data columns and fill the data frame
+for (method in method_columns) {
+  for (column in data_columns) {
+    correlation_summary_df[correlation_summary_df$Method == method, column] <- 
+      cor(filtered_df[[column]], filtered_df[[method]], use = "complete.obs")
+  }
+}
+
+# View the complete correlation summary dataframe
+correlation_summary_df |> 
+  arrange(sd_carbon_kg) |>
+  kbl(booktabs = TRUE, align = "c", caption = "Table 5. Method correlation per parameter") |> 
+  kable_styling(full_width = FALSE) |> 
+  row_spec(1, background = "lightblue")  |> 
+  row_spec(2, background = "lightgreen") |> 
+  row_spec(3, background = "gold") |> 
+  row_spec(4, background = "lightpink") |> 
+  row_spec(5, background = "#D8AFF1") 
+```
+
+```{r, echo = F, warning = F}
+
+sample_size_methods |> 
+  mutate(site_year = paste(site, year, sep = "-")) |> 
+  pivot_longer(cols = c(power_calc, CLT, ar_tool, CIFOR, Winrock), 
+               names_to = "method", 
+               values_to = "sample_size") |> 
+  ggplot(aes(x = site_year, y = sample_size, color = method)) +
+  geom_point() +
+  scale_color_manual(values = c("power_calc" = "blue", 
+                                "CLT" = "green3", 
+                                "ar_tool" = "pink2", 
+                                "CIFOR" = "gold",
+                                "Winrock" = "purple")) +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) +
+  labs(title = "Graph 2. Sample Samples by Strata",
+       x = "Strata (Site-Year)",
+       y = "Samples Size",
+       color = "Method")
+
+```
+
+## Step 8. Perform the confusion matrix to understand the relationship between parameters and strengthen the SOP for calculating sample sizes
+
+Now, for this last step, we will create three confusion matrices to analyze the field sampling data from mangrove restoration projects. This analysis will help us understand and explore the relationships between the parameters involved.
+
+For each data set, we will filter the important columns and run the analysis between each parameter. Showing the correlation values. A value close to 1 indicates a strong positive relationship, meaning that as one variable increases, the other one increases in that magnitude as well. Negative values indicate an inverse relationship, meaning as one variable increases, the other decreases.
+
+To complement this analysis, we will run t-tests to review the statistical significance of the observed correlations. This step is essential because even a high correlation might not hold practical significance if for example, the data comes from a dispersed set of data (e.g. a cloud of points). Which can potentially mislead our interpretation of the relationships within our environmental sampling data.
+
+#### This table will describe the symbol for the significant levels based in the results of the p-value
+
+```{r, echo = F}
+# Create a dataframe for the significance symbols
+significance_levels <- data.frame(
+  `P-Value` = c("< 0.001", "0.001 - 0.01", "0.01 - 0.05", "0.05 - 0.1", "> 0.1"),
+  `Symbol` = c("***", "**", "*", ".", " --- "),
+  `Description` = c("Highly significant", "Very significant", "Significant", "Marginally significant", "Not significant")
+)
+
+# Use kable to create the table
+kable(significance_levels, booktabs = TRUE, align = "c", caption = "Significance Levels Description") %>%
+  kable_styling(full_width = FALSE)
+```
+
+### Confusion Matrix - Site A
+
+#### Abu Ali, Saudi Arabia
+
+```{r, include = F}
+mangrove_recipe <- mangrove_df_a |> 
+  rename(crown_size_m = cd_chatting_m ) |> 
+  select(c(plantation_year, 
+           plot_size_m2, 
+           height_cm,
+           crown_size_m, 
+           total_tree_kg_c, 
+           total_tree_mg_c_ha)) |> 
+  recipe(total_tree_mg_c_ha ~ .) |> 
+  step_integer(plantation_year, 
+               plot_size_m2,total_tree_mg_c_ha, zero_based = TRUE) |> 
+  prep() |> 
+  bake(new_data = NULL)
+
+# Obtain correlation matrix
+tree_matrix <- cor(mangrove_recipe)
+```
+
+```{r, echo = F}
+# Make a correlation plot between the variables
+corrplot(tree_matrix, 
+         method = "shade", 
+         shade.col = NA, 
+         tl.col = "black", 
+         tl.srt = 45, 
+         addCoef.col = "white", 
+         cl.pos = "n", 
+         order = "original")
+```
+
+```{r, include = F}
+# Creating a matrix that calculates the p-value and prints out the results
+calculate_p_values_signif <- function(data, columns) {
+  p_value_matrix <- matrix(nrow = length(columns), ncol = length(columns),
+                           dimnames = list(columns, columns), data = NA_character_)  # Ensure matrix is of character type
+  for (i in 1:length(columns)) {
+    for (j in 1:length(columns)) {
+      if (i == j) {
+        p_value_matrix[i, j] <- NA  # Keep NA for diagonal
+      } else if (!all(is.na(data[[columns[i]]])) && !all(is.na(data[[columns[j]]]))) {
+        test_result <- cor.test(data[[columns[i]]], data[[columns[j]]], method = "pearson", use = "complete.obs")
+        p_value <- test_result$p.value
+        if (p_value < 0.001) {
+          p_value_matrix[i, j] <- "***"
+        } else if (p_value < 0.01) {
+          p_value_matrix[i, j] <- "**"
+        } else if (p_value < 0.05) {
+          p_value_matrix[i, j] <- "*"
+        } else if (p_value < 0.1) {
+          p_value_matrix[i, j] <- "."
+        } else {
+          p_value_matrix[i, j] <- "---"  # Non-significant
+        }
+      } else {
+        p_value_matrix[i, j] <- NA  # Use NA for non-comparable pairs
+      }
+    }
+  }
+  return(p_value_matrix)
+}
+```
+
+### P-Value Results - Site A
+
+#### Abu Ali, Saudi Arabia
+
+```{r, include = F}
+selected_columns <- c("plantation_year", 
+           "plot_size_m2", 
+           "height_cm",
+           "crown_size_m", 
+           "total_tree_kg_c", 
+           "total_tree_mg_c_ha")
+
+# Apply to the preprocessed data
+p_value_matrix_signif <- calculate_p_values_signif(mangrove_recipe, selected_columns)
+
+```
+
+```{r, echo = F}
+
+colored_df <- as.data.frame.matrix(p_value_matrix_signif)
+
+# Now, print the colored matrix as a table with the additional cells colored
+kable(colored_df, "html", align = "c", escape = FALSE, booktabs = TRUE, caption = "P-Value Significance Matrix. SITE A") %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"), full_width = F)
+
+```
+
+### Confusion Matrix - Site B
+
+#### Delta Blue Carbon, Sindh, Pakistan
+
+```{r, include = F}
+mangrove_recipe <- mangrove_df_b |> 
+  select(c(year,
+           plot, 
+           height_cm,
+           crown_dia_m, 
+           total_c_kg, 
+           total_c_t_ha)) |> 
+  recipe(total_c_t_ha ~ .) |> 
+  step_integer(year,
+               plot,
+               total_c_t_ha, 
+               zero_based = TRUE) |> 
+  prep() |> 
+  bake(new_data = NULL)
+
+# Obtain correlation matrix
+tree_matrix <- cor(mangrove_recipe)
+```
+
+```{r, echo = F}
+# Make a correlation plot between the variables
+corrplot(tree_matrix, 
+         method = "shade", 
+         shade.col = NA, 
+         tl.col = "black", 
+         tl.srt = 45, 
+         addCoef.col = "white", 
+         cl.pos = "n", 
+         order = "original")
+```
+
+### P-Value Results. Site B
+
+#### Delta Blue Carbon, Sindh, Pakistan
+
+```{r, include = F}
+selected_columns <- c("year", 
+           "plot",  
+           "height_cm",
+           "crown_dia_m", 
+           "total_c_kg", 
+           "total_c_t_ha")
+
+# Apply to the preprocessed data
+p_value_matrix_signif <- calculate_p_values_signif(mangrove_recipe, selected_columns)
+
+# Print the matrix with significance codes
+print(p_value_matrix_signif)
+
+```
+
+```{r, echo = F}
+
+colored_df <- as.data.frame.matrix(p_value_matrix_signif)
+
+# Now, print the colored matrix as a table with the additional cells colored
+kable(colored_df, "html", align = "c",escape = FALSE, booktabs = TRUE, caption = "P-Value Significance Matrix. SITE B") %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"), full_width = F)
+```
+
+### Confusion Matrix - Site C
+
+#### Pakistan Institute
+
+```{r, include = F}
+mangrove_recipe <- mangrove_df_c |> 
+  select(c(year_of_plantation,
+           x_coordinate,
+           y_coordinate,
+           species,
+           dbh = dbh_cm_19,
+           height_m = ht_m_21,
+           crown_dia_m,
+           total_c,
+           total_c_t_ha_34)) |> 
+  na.omit() |> 
+  recipe(total_c_t_ha_34 ~ .) |> 
+  step_integer(year_of_plantation,
+               x_coordinate,
+               species, 
+               zero_based = TRUE) |> 
+  prep() |> 
+  bake(new_data = NULL)
+
+# Obtain correlation matrix
+tree_matrix <- cor(mangrove_recipe)
+```
+
+```{r, echo= F}
+# Make a correlation plot between the variables
+corrplot(tree_matrix, 
+         method = "shade", 
+         shade.col = NA, 
+         tl.col = "black", 
+         tl.srt = 45, 
+         addCoef.col = "white", 
+         cl.pos = "n", 
+         order = "original")
+```
+
+### P-Value Results - Site C
+
+#### Pakistan Institute
+
+```{r, include = F}
+
+selected_columns <- c("year_of_plantation",
+           "x_coordinate",
+           "y_coordinate",
+           "species",
+           "dbh",
+           "height_m",
+           "crown_dia_m",
+           "total_c",
+           "total_c_t_ha_34")
+
+# Apply to the preprocessed data
+p_value_matrix_signif <- calculate_p_values_signif(mangrove_recipe, selected_columns)
+
+# Print the matrix with significance codes
+print(p_value_matrix_signif)
+
+```
+
+```{r, echo = F}
+
+colored_df <- as.data.frame.matrix(p_value_matrix_signif)
+
+colored_df[3,1] <- cell_spec(colored_df[3,1], "html", background = "orange")
+colored_df[1,3] <- cell_spec(colored_df[1,3], "html", background = "orange")
+colored_df[2,1] <- cell_spec(colored_df[2,1], "html", background = "lightyellow")
+colored_df[1,2] <- cell_spec(colored_df[1,2], "html", background = "lightyellow")
+
+# Now, print the colored matrix as a table with the additional cells colored
+kable(colored_df, "html", 
+      align = "c",
+      escape = FALSE, booktabs = TRUE, caption = "P-Value Significance Matrix. SITE C") %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"),
+                full_width = F)
+
+```
+
+### Conclusions
+
+-   The demo data frame helped me understand how the sample size varies with the type of variance in each stratum. The relationship isn't linear, and the sample sizes are highly sensitive to the standard deviation (SD) of each stratum. This raises a follow up question: how can we create effective strata that will lead to an optimal sample size saving costs and effort?
+
+-   The Power Calculation was the most respondent to variance, offering a reasonable sample sizes for achieving desired power (conservative).
+
+-   The Central Limit Theorem provides a simpler, big-picture view with a trend of having smaller sample sizes compared to power calculation.
+
+-   The A/R Methodological tool (VM0033) gave us good results within the expected limits for the demo sample data set, but it does require complete data for the weighting parameter ('wi'), size per strata, total project area, and sample plot size.
+
+-   CIFOR tool, is the simplest method but gave us the highest variance in sample sizing. I recommend it when data to use other methods are missing.
+
+-   For the real data sets we got reasonable sample size from power calculation and CLT. The A/R tool results unfortunately did not worked as expected due to the weighting strata size.
+
+-   Win Rock tool is very easy to use. It does need the data for sizes and weighting which is asked in specifically in the A/R Methodology. Is a conservative tool.
+
+-   Confusion matrices are valuable for guiding field data collection, highlighting important variables.
+
+    -   High correlation observed between carbon stock and crown size in all three matrices.
+
+    -   For Site A, the plot size was inversely related to total tree carbon per ha. This may indicate bias in the carbon calculation.
+
+    -   The diameter at breast height (dbh) showed the highest correlation with carbon stock for the third matrix, along with an intresting X coordinate factor giving us a higher correlated relationship with carbon stock than Y coordinate.
+
+### Key Takeaways
+
+1.  Understanding the correlation between stratification and variance for sample size is key. Larger areas with greater variance will need more samples, highlighting the importance of having the correct stratification to create relatively homogeneous areas, minimizing the variance from the beginning of the project.
+
+2.  Running correlation matrices and t-tests, we can help you oversee what are the key parameters to consider in the stratification. In this case, we saw that it is essential to consider clusters based on crown size, plot size, height, and diameter at breast height (DBH).
+
+3.  For Site A, there was an inverse relationship between plot size and total tree carbon per hectare, indicating that plot size does influence the calculations. The key takeaway here that plot sizes do influence in the calculation, and its useful to have different plot sizes measurements to run analysis and feed the continuous improvement plan for the project.
+
+4.  An interesting point from the A/R Tool shows that in large strata, once you approach the sample size cap, expanding the area further slightly increases the sample size. For example, expanding from 1,000 ha to 100,000 ha has a smaller % effect on sample size than increasing from 100 ha to 500 ha. This needs to be considered in the stratification process.
+
+5.  The use of other methods is useful when:
+
+    a) If you are going to a new site and have a small data sets, you can calculate the sample size with CIFOR or CLT and kick off the initial analysis for a monitoring campaign.
+
+    b) Comparing the sample sizes between methods vs. theoretical analysis can help make decisions to stakeholders more easy or safe.
+
+    c) Developing a more detailed monitoring campaign plan based on the initial data available. For carbon projects is common to not have all data fields available, which this methods can be beneficial to have different options.
